@@ -9,6 +9,7 @@ export default function StudentMobileDemo() {
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [deviceMode, setDeviceMode] = useState<'phone' | 'tablet'>('phone');
   const [tabletPage, setTabletPage] = useState<'home' | 'courses' | 'ar-lab' | 'projects' | 'achievements'>('home');
+  const [phoneSubPage, setPhoneSubPage] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<Array<{ role: 'user' | 'ai'; content: string }>>([
     {
       role: 'ai',
@@ -126,6 +127,136 @@ export default function StudentMobileDemo() {
 
           {/* Main Content Area - Dynamic Switching */}
           <div className="px-5 space-y-6">
+            {/* Sub Page Display */}
+            {phoneSubPage && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="fixed inset-0 bg-slate-50 z-40 overflow-y-auto pb-20"
+              >
+                <div className="sticky top-0 bg-white border-b px-5 py-3 flex items-center gap-3 z-10">
+                  <button onClick={() => setPhoneSubPage(null)} className="p-2 hover:bg-slate-100 rounded-full">
+                    ←
+                  </button>
+                  <h3 className="font-bold text-lg">{phoneSubPage}</h3>
+                </div>
+                <div className="p-5">
+                  {phoneSubPage === '课程详情' && (
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white">
+                        <div className="text-4xl mb-3">🐍</div>
+                        <h4 className="text-xl font-bold mb-2">Python 编程基础</h4>
+                        <p className="text-sm text-blue-100">掌握 Python 核心语法和编程思维</p>
+                      </div>
+                      <div className="bg-white rounded-xl p-4 border">
+                        <h5 className="font-bold mb-3">课程进度</h5>
+                        <div className="mb-2">
+                          <div className="flex justify-between text-xs mb-1">
+                            <span>总体进度</span>
+                            <span className="font-semibold text-blue-600">75%</span>
+                          </div>
+                          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-600 rounded-full" style={{ width: '75%' }}></div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-500">已完成 15/20 课时</p>
+                      </div>
+                      <div className="space-y-2">
+                        <h5 className="font-bold text-sm">课程章节</h5>
+                        {[
+                          { title: '变量与数据类型', duration: '15分钟', completed: true },
+                          { title: '条件判断', duration: '20分钟', completed: true },
+                          { title: '循环结构', duration: '25分钟', completed: true },
+                          { title: '函数定义', duration: '30分钟', completed: false, current: true },
+                          { title: '列表与字典', duration: '25分钟', completed: false }
+                        ].map((chapter, i) => (
+                          <div key={i} className={`bg-white rounded-xl p-3 border flex items-center justify-between ${chapter.current ? 'border-blue-500 bg-blue-50' : ''}`}>
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${chapter.completed ? 'bg-green-100 text-green-600' : chapter.current ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
+                                {chapter.completed ? '✓' : i + 1}
+                              </div>
+                              <div>
+                                <p className="text-xs font-medium">{chapter.title}</p>
+                                <p className="text-[10px] text-slate-500">{chapter.duration}</p>
+                              </div>
+                            </div>
+                            {chapter.current && <Play className="h-4 w-4 text-blue-600" />}
+                          </div>
+                        ))}
+                      </div>
+                      <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors">
+                        继续学习
+                      </button>
+                    </div>
+                  )}
+                  {phoneSubPage === '项目详情' && (
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white">
+                        <div className="text-4xl mb-3">💧</div>
+                        <h4 className="text-xl font-bold mb-2">自动浇花系统</h4>
+                        <p className="text-sm text-green-100">基于土壤湿度传感器的智能灌溉</p>
+                      </div>
+                      <div className="bg-white rounded-xl p-4 border">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-xs font-medium text-slate-600">项目状态</span>
+                          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">已完成</span>
+                        </div>
+                        <div className="mb-2">
+                          <div className="flex justify-between text-xs mb-1">
+                            <span>完成度</span>
+                            <span className="font-semibold text-green-600">100%</span>
+                          </div>
+                          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-green-600 rounded-full" style={{ width: '100%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <h5 className="font-bold text-sm">所需材料</h5>
+                        {['ESP32 开发板', '土壤湿度传感器', '继电器模块', '水泵', '杜邦线'].map((item, i) => (
+                          <div key={i} className="bg-white rounded-xl p-3 border flex items-center gap-3">
+                            <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xs">✓</div>
+                            <span className="text-xs">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <button className="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-green-700 transition-colors">
+                        查看代码
+                      </button>
+                    </div>
+                  )}
+                  {phoneSubPage === '成就详情' && (
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-6 text-white text-center">
+                        <Award className="h-16 w-16 mx-auto mb-3 opacity-80" />
+                        <h4 className="text-xl font-bold mb-1">STEM 探索者 Lv.5</h4>
+                        <p className="text-sm text-orange-100">经验值 850/1000</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { name: '首次实验', icon: '🎯', earned: true, desc: '完成第一个实验' },
+                          { name: '代码大师', icon: '💻', earned: true, desc: '编写100行代码' },
+                          { name: '硬件专家', icon: '🔧', earned: true, desc: '连接5个传感器' },
+                          { name: '团队合作', icon: '👥', earned: true, desc: '参与协作项目' },
+                          { name: '创新思维', icon: '💡', earned: false, desc: '提出创新方案' },
+                          { name: '坚持不懈', icon: '🔥', earned: false, desc: '连续学习7天' }
+                        ].map((badge, i) => (
+                          <div key={i} className={`bg-white rounded-xl p-4 border text-center ${badge.earned ? '' : 'opacity-50'}`}>
+                            <div className="text-3xl mb-2">{badge.icon}</div>
+                            <p className="text-xs font-bold mb-1">{badge.name}</p>
+                            <p className="text-[10px] text-slate-500">{badge.desc}</p>
+                            {badge.earned && <p className="text-[10px] text-green-600 mt-2 font-medium">已获得</p>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Home Tab */}
             {activeTab === 'home' && (
               <>
                 {/* Hardware Status Card */}
@@ -150,14 +281,18 @@ export default function StudentMobileDemo() {
                 {/* AI Recommendation */}
                 <div>
                   <h3 className="font-bold text-primary text-sm mb-3">AI 推荐项目</h3>
-                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
+                  <motion.div
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setPhoneSubPage('项目详情')}
+                    className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden cursor-pointer"
+                  >
                     <Zap className="absolute -right-2 -bottom-2 h-20 w-20 text-white/10" />
                     <h4 className="font-bold text-base mb-1">智能感应小夜灯</h4>
                     <p className="text-[10px] text-indigo-100 mb-3 line-clamp-2">利用光敏电阻实现环境光自适应控制。</p>
                     <button className="bg-white text-indigo-600 text-xs font-bold px-4 py-2 rounded-full flex items-center">
                       <Play className="h-3 w-3 mr-1 fill-current" /> 开始实验
                     </button>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Quick Actions Grid */}
@@ -182,6 +317,7 @@ export default function StudentMobileDemo() {
               </>
             )}
 
+            {/* Learn Tab */}
             {activeTab === 'learn' && (
               <div className="space-y-5">
                 {/* Daily Challenge */}
@@ -195,10 +331,20 @@ export default function StudentMobileDemo() {
                 </div>
 
                 <h3 className="font-bold text-primary text-sm">我的课程表</h3>
-                {[{ name: 'Arduino 基础语法', p: 100 }, { name: '传感器数据采集', p: 75 }, { name: '无线通信协议 (BLE)', p: 65 }, { name: 'Python 硬件编程', p: 30 }].map((course, i) => (
-                  <div key={i} className="bg-white p-3 rounded-xl border shadow-sm flex items-center space-x-3">
+                {[
+                  { name: 'Arduino 基础语法', p: 100, emoji: '🤖' },
+                  { name: '传感器数据采集', p: 75, emoji: '📡' },
+                  { name: '无线通信协议 (BLE)', p: 65, emoji: '📶' },
+                  { name: 'Python 硬件编程', p: 30, emoji: '🐍' }
+                ].map((course, i) => (
+                  <motion.div
+                    key={i}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setPhoneSubPage('课程详情')}
+                    className="bg-white p-3 rounded-xl border shadow-sm flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow"
+                  >
                     <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-lg">
-                      {i % 2 === 0 ? '🤖' : '📡'}
+                      {course.emoji}
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between text-xs mb-1">
@@ -209,7 +355,7 @@ export default function StudentMobileDemo() {
                         <div className="bg-accent h-1.5 rounded-full" style={{ width: `${course.p}%` }}></div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
 
                 {/* Knowledge Graph Entry */}
@@ -272,7 +418,11 @@ export default function StudentMobileDemo() {
                   <h3 className="font-bold text-primary">李明</h3>
                   <p className="text-[10px] text-gray-500">STEM 探索者 Lv.5</p>
                 </div>
-                <div className="grid grid-cols-3 gap-2 text-center">
+                <motion.div
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setPhoneSubPage('成就详情')}
+                  className="grid grid-cols-3 gap-2 text-center cursor-pointer"
+                >
                   <div className="bg-white p-2 rounded-lg border">
                     <div className="font-bold text-accent">12</div>
                     <div className="text-[9px] text-gray-500">完成项目</div>
@@ -285,7 +435,7 @@ export default function StudentMobileDemo() {
                     <div className="font-bold text-accent">5</div>
                     <div className="text-[9px] text-gray-500">数字勋章</div>
                   </div>
-                </div>
+                </motion.div>
                 <div className="bg-white rounded-xl border text-left overflow-hidden">
                   {['我的硬件设备', '区块链证书', '学习报告', '系统设置'].map((item, i) => (
                     <div key={i} className="p-3 border-b last:border-0 flex justify-between items-center text-xs hover:bg-slate-50 cursor-pointer">
