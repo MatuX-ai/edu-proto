@@ -1,15 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, Box, Code, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Cpu, Box, Code, Zap } from 'lucide-react';
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="w-full py-20 md:py-32 lg:py-48 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-slate-900 to-slate-800"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+          <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        </div>
         <div className="container px-4 md:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -102,8 +106,11 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-xl overflow-hidden border shadow-lg">
-              <img src="/images/tech-stack.jpg" alt="Tech Stack" className="w-full h-full object-cover" />
+            <div className="rounded-xl overflow-hidden border shadow-lg bg-gradient-to-br from-slate-800 to-slate-900 p-8 flex items-center justify-center">
+              <div className="text-center">
+                <Cpu className="h-24 w-24 text-accent mx-auto mb-4" />
+                <p className="text-slate-300">技术架构示意图</p>
+              </div>
             </div>
           </div>
         </div>

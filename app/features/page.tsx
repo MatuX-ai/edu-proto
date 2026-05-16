@@ -111,8 +111,11 @@ export default function FeaturesPage() {
       </div>
 
       <div className="mt-20 grid gap-8 lg:grid-cols-2 items-center">
-        <div className="rounded-2xl overflow-hidden border shadow-lg">
-          <img src="/images/stem-collaboration.jpg" alt="STEM Collaboration" className="w-full h-full object-cover" />
+        <div className="rounded-2xl overflow-hidden border shadow-lg bg-gradient-to-br from-slate-100 to-slate-200 p-8 flex items-center justify-center min-h-[300px]">
+          <div className="text-center">
+            <Box className="h-24 w-24 text-accent mx-auto mb-4" />
+            <p className="text-slate-500">STEM 协作场景示意图</p>
+          </div>
         </div>
         <div className="space-y-6">
           <h2 className="text-3xl font-bold text-primary">为什么选择 MatuX？</h2>
