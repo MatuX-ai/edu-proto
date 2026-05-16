@@ -65,8 +65,8 @@ export default function AboutPage() {
               transition={{ delay: index * 0.1 }}
               className="flex flex-col items-center text-center p-6 rounded-2xl border bg-white shadow-sm hover:shadow-md transition-all"
             >
-              <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-slate-100 bg-gradient-to-br from-accent to-blue-600 flex items-center justify-center">
-                <span className="text-white text-2xl font-bold">{member.name.charAt(0)}</span>
+              <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-slate-100">
+                <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
               </div>
               <h3 className="text-xl font-bold text-primary">{member.name}</h3>
               <p className="text-accent font-medium text-sm mb-3">{member.role}</p>

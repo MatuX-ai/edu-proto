@@ -409,13 +409,14 @@ export default function StudentMobileDemo() {
         </motion.div>
       ) : (
         /* Tablet Mode */
-        <motion.div
-          key="tablet"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="relative w-[1024px] h-[768px] bg-black rounded-[2rem] shadow-2xl border-[12px] border-slate-800 overflow-hidden"
-        >
+        <div className="overflow-x-auto w-full flex justify-center">
+          <motion.div
+            key="tablet"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="relative w-[1024px] h-[768px] bg-black rounded-[2rem] shadow-2xl border-[12px] border-slate-800 overflow-hidden flex-shrink-0"
+          >
           {/* Tablet Status Bar */}
           <div className="h-8 bg-slate-900 flex justify-between items-center px-6 text-xs text-white">
             <span>{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
@@ -656,6 +657,7 @@ export default function StudentMobileDemo() {
             ))}
           </div>
         </motion.div>
+        </div>
       )}
     </div>
   );
