@@ -8,6 +8,7 @@ export default function StudentMobileDemo() {
   const [activeTab, setActiveTab] = useState('home');
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [deviceMode, setDeviceMode] = useState<'phone' | 'tablet'>('phone');
+  const [tabletPage, setTabletPage] = useState<'home' | 'courses' | 'ar-lab' | 'projects' | 'achievements'>('home');
   const [chatMessages, setChatMessages] = useState<Array<{ role: 'user' | 'ai'; content: string }>>([
     {
       role: 'ai',
@@ -429,6 +430,15 @@ export default function StudentMobileDemo() {
 
           {/* Tablet Content */}
           <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 overflow-y-auto p-8 pb-24">
+            <AnimatePresence mode="wait">
+              {tabletPage === 'home' && (
+                <motion.div
+                  key="home"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
             {/* Welcome Section */}
             <div className="mb-8">
               <h2 className="text-4xl font-bold text-slate-900 mb-2">你好，同学 👋</h2>
@@ -438,15 +448,16 @@ export default function StudentMobileDemo() {
             {/* Quick Actions Grid */}
             <div className="grid grid-cols-4 gap-5 mb-8">
               {[
-                { icon: Code, label: '我的课程', color: 'from-blue-500 to-blue-600', emoji: '📚' },
-                { icon: Camera, label: 'AR 实验室', color: 'from-purple-500 to-purple-600', emoji: '🥽' },
-                { icon: Box, label: '实战项目', color: 'from-green-500 to-green-600', emoji: '🚀' },
-                { icon: Award, label: '学习成就', color: 'from-orange-500 to-orange-600', emoji: '🏆' }
+                { icon: Code, label: '我的课程', color: 'from-blue-500 to-blue-600', emoji: '📚', page: 'courses' },
+                { icon: Camera, label: 'AR 实验室', color: 'from-purple-500 to-purple-600', emoji: '🥽', page: 'ar-lab' },
+                { icon: Box, label: '实战项目', color: 'from-green-500 to-green-600', emoji: '🚀', page: 'projects' },
+                { icon: Award, label: '学习成就', color: 'from-orange-500 to-orange-600', emoji: '🏆', page: 'achievements' }
               ].map((item, i) => (
                 <motion.button
                   key={i}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => setTabletPage(item.page as 'courses' | 'ar-lab' | 'projects' | 'achievements')}
                   className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all flex flex-col items-center gap-3"
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-3xl`}>
@@ -542,6 +553,230 @@ export default function StudentMobileDemo() {
                 ))}
               </div>
             </div>
+                </motion.div>
+              )}
+
+              {/* Courses Page */}
+              {tabletPage === 'courses' && (
+                <motion.div
+                  key="courses"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">我的课程 📚</h2>
+                    <button onClick={() => setTabletPage('home')} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                      ← 返回首页
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    {[
+                      { title: 'Python 编程基础', progress: 75, total: 20, completed: 15, emoji: '🐍', color: 'from-blue-500 to-blue-600' },
+                      { title: 'Arduino 硬件开发', progress: 100, total: 15, completed: 15, emoji: '🔌', color: 'from-green-500 to-green-600' },
+                      { title: '机器学习入门', progress: 30, total: 25, completed: 8, emoji: '🤖', color: 'from-purple-500 to-purple-600' },
+                      { title: '3D 建模与设计', progress: 50, total: 18, completed: 9, emoji: '🎨', color: 'from-pink-500 to-pink-600' },
+                      { title: '物联网应用开发', progress: 10, total: 22, completed: 2, emoji: '📡', color: 'from-indigo-500 to-indigo-600' },
+                      { title: '机器人控制原理', progress: 0, total: 20, completed: 0, emoji: '⚙️', color: 'from-orange-500 to-orange-600' }
+                    ].map((course, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -4 }}
+                        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+                      >
+                        <div className={`h-32 bg-gradient-to-br ${course.color} flex items-center justify-center text-5xl`}>
+                          {course.emoji}
+                        </div>
+                        <div className="p-5">
+                          <h4 className="font-bold text-slate-900 mb-2">{course.title}</h4>
+                          <div className="mb-3">
+                            <div className="flex justify-between text-xs mb-1">
+                              <span className="text-slate-600">进度</span>
+                              <span className="font-semibold text-blue-600">{course.progress}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full" style={{ width: `${course.progress}%` }}></div>
+                            </div>
+                          </div>
+                          <p className="text-xs text-slate-500 mb-3">已完成 {course.completed}/{course.total} 课时</p>
+                          <button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-xl font-semibold text-sm hover:shadow-lg transition-all">
+                            {course.progress === 100 ? '复习课程' : '继续学习'}
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* AR Lab Page */}
+              {tabletPage === 'ar-lab' && (
+                <motion.div
+                  key="ar-lab"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">AR 实验室 🥽</h2>
+                    <button onClick={() => setTabletPage('home')} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                      ← 返回首页
+                    </button>
+                  </div>
+                  <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-8 text-white text-center">
+                    <Camera className="h-20 w-20 mx-auto mb-4 opacity-80" />
+                    <h3 className="text-2xl font-bold mb-2">AR 实验环境</h3>
+                    <p className="text-purple-100 mb-6">通过增强现实技术，在真实环境中进行虚拟实验</p>
+                    <button className="bg-white text-purple-600 px-8 py-3 rounded-xl font-bold hover:shadow-lg transition-all">
+                      启动 AR 相机
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-5">
+                    {[
+                      { title: '电路仿真实验', desc: '虚拟搭建电路并测试', emoji: '⚡', users: 234 },
+                      { title: '机械结构组装', desc: '3D 模型拆解与组装', emoji: '🔧', users: 189 },
+                      { title: '化学反应模拟', desc: '安全的化学实验体验', emoji: '🧪', users: 156 }
+                    ].map((lab, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -4 }}
+                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all text-center"
+                      >
+                        <div className="text-4xl mb-3">{lab.emoji}</div>
+                        <h4 className="font-bold text-slate-900 mb-2">{lab.title}</h4>
+                        <p className="text-xs text-slate-500 mb-3">{lab.desc}</p>
+                        <p className="text-xs text-purple-600 font-medium">{lab.users} 人正在实验</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Projects Page */}
+              {tabletPage === 'projects' && (
+                <motion.div
+                  key="projects"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">实战项目 🚀</h2>
+                    <button onClick={() => setTabletPage('home')} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                      ← 返回首页
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    {[
+                      { title: '智能温控风扇', status: '进行中', progress: 65, emoji: '🌬️', difficulty: '中级' },
+                      { title: '自动浇花系统', status: '已完成', progress: 100, emoji: '💧', difficulty: '初级' },
+                      { title: '语音控制小车', status: '进行中', progress: 40, emoji: '🚗', difficulty: '高级' },
+                      { title: '环境监测站', status: '未开始', progress: 0, emoji: '🌡️', difficulty: '中级' }
+                    ].map((project, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -4 }}
+                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all"
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="text-4xl">{project.emoji}</div>
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            project.status === '已完成' ? 'bg-green-100 text-green-700' :
+                            project.status === '进行中' ? 'bg-blue-100 text-blue-700' :
+                            'bg-slate-100 text-slate-600'
+                          }`}>
+                            {project.status}
+                          </span>
+                        </div>
+                        <h4 className="font-bold text-slate-900 mb-2">{project.title}</h4>
+                        <p className="text-xs text-slate-500 mb-3">难度：{project.difficulty}</p>
+                        {project.progress > 0 && (
+                          <div className="mb-3">
+                            <div className="flex justify-between text-xs mb-1">
+                              <span className="text-slate-600">完成度</span>
+                              <span className="font-semibold text-blue-600">{project.progress}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full" style={{ width: `${project.progress}%` }}></div>
+                            </div>
+                          </div>
+                        )}
+                        <button className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-2 rounded-xl font-semibold text-sm hover:shadow-lg transition-all">
+                          {project.status === '未开始' ? '开始项目' : '继续开发'}
+                        </button>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Achievements Page */}
+              {tabletPage === 'achievements' && (
+                <motion.div
+                  key="achievements"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">学习成就 🏆</h2>
+                    <button onClick={() => setTabletPage('home')} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                      ← 返回首页
+                    </button>
+                  </div>
+                  <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-6 text-white">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-orange-100 text-sm mb-1">当前等级</p>
+                        <h3 className="text-3xl font-bold">STEM 探索者 Lv.5</h3>
+                      </div>
+                      <Award className="h-16 w-16 opacity-80" />
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span>经验值</span>
+                        <span>850 / 1000</span>
+                      </div>
+                      <div className="w-full h-3 bg-white/30 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full" style={{ width: '85%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 gap-4">
+                    {[
+                      { name: '首次实验', icon: '🎯', earned: true },
+                      { name: '代码大师', icon: '💻', earned: true },
+                      { name: '硬件专家', icon: '🔧', earned: true },
+                      { name: '团队合作', icon: '👥', earned: true },
+                      { name: '创新思维', icon: '💡', earned: false },
+                      { name: '坚持不懈', icon: '🔥', earned: false },
+                      { name: '知识分享', icon: '📚', earned: false },
+                      { name: '完美主义者', icon: '⭐', earned: false }
+                    ].map((badge, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.05 }}
+                        className={`bg-white rounded-2xl p-4 text-center shadow-md ${
+                          badge.earned ? '' : 'opacity-50 grayscale'
+                        }`}
+                      >
+                        <div className="text-3xl mb-2">{badge.icon}</div>
+                        <p className="text-xs font-medium text-slate-900">{badge.name}</p>
+                        {badge.earned && <p className="text-[10px] text-green-600 mt-1">已获得</p>}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Floating AI Bubble Button - Inside Tablet Frame */}
@@ -639,20 +874,37 @@ export default function StudentMobileDemo() {
           {/* Tablet Dock */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-xl border border-white/30 flex gap-4">
             {[
-              { icon: Box, label: '首页' },
-              { icon: Code, label: '课程' },
-              { icon: Camera, label: 'AR实验' },
-              { icon: Box, label: '项目' },
-              { icon: User, label: '我的' }
+              { icon: Box, label: '首页', action: () => setTabletPage('home') },
+              { icon: Code, label: '课程', action: () => setTabletPage('courses') },
+              { icon: Camera, label: 'AR实验', action: () => setTabletPage('ar-lab') },
+              { icon: Box, label: '项目', action: () => setTabletPage('projects') },
+              { icon: Award, label: '成就', action: () => setTabletPage('achievements') }
             ].map((item, i) => (
               <motion.button
                 key={i}
                 whileHover={{ scale: 1.15, y: -8 }}
                 whileTap={{ scale: 1.05 }}
-                className="w-14 h-14 rounded-xl flex items-center justify-center hover:bg-black/5 transition-colors"
+                onClick={item.action}
+                className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${
+                  (i === 0 && tabletPage === 'home') ||
+                  (i === 1 && tabletPage === 'courses') ||
+                  (i === 2 && tabletPage === 'ar-lab') ||
+                  (i === 3 && tabletPage === 'projects') ||
+                  (i === 4 && tabletPage === 'achievements')
+                    ? 'bg-blue-100'
+                    : 'hover:bg-black/5'
+                }`}
                 title={item.label}
               >
-                <item.icon className="h-7 w-7 text-slate-700" />
+                <item.icon className={`h-7 w-7 ${
+                  (i === 0 && tabletPage === 'home') ||
+                  (i === 1 && tabletPage === 'courses') ||
+                  (i === 2 && tabletPage === 'ar-lab') ||
+                  (i === 3 && tabletPage === 'projects') ||
+                  (i === 4 && tabletPage === 'achievements')
+                    ? 'text-blue-600'
+                    : 'text-slate-700'
+                }`} />
               </motion.button>
             ))}
           </div>
