@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="w-full py-20 md:py-32 lg:py-48 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/90"></div>
         <div className="container px-4 md:px-6 relative z-10">
           <motion.div
@@ -103,7 +103,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="rounded-xl overflow-hidden border shadow-lg">
-              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80" alt="Tech Stack" className="w-full h-full object-cover" />
+              <img src="/images/tech-stack.jpg" alt="Tech Stack" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
