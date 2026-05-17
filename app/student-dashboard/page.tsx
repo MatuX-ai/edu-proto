@@ -307,6 +307,65 @@ export default function StudentMobileDemo() {
                       </div>
                     </div>
                   )}
+                  {phoneSubPage === '系统设置' && (
+                    <div className="space-y-4">
+                      <div className="bg-white rounded-xl border overflow-hidden">
+                        <div className="p-4 border-b">
+                          <h5 className="font-bold text-sm mb-1">账号信息</h5>
+                          <p className="text-xs text-slate-500">管理你的个人资料</p>
+                        </div>
+                        <div className="divide-y">
+                          <div className="p-4 flex justify-between items-center">
+                            <span className="text-sm">昵称</span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm text-slate-600">李明</span>
+                              <span className="text-slate-400">&gt;</span>
+                            </div>
+                          </div>
+                          <div className="p-4 flex justify-between items-center">
+                            <span className="text-sm">学校</span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm text-slate-600">北京市实验小学</span>
+                              <span className="text-slate-400">&gt;</span>
+                            </div>
+                          </div>
+                          <div className="p-4 flex justify-between items-center">
+                            <span className="text-sm">班级</span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm text-slate-600">五年级1班</span>
+                              <span className="text-slate-400">&gt;</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="bg-white rounded-xl border overflow-hidden">
+                        <div className="p-4 border-b">
+                          <h5 className="font-bold text-sm mb-1">通知设置</h5>
+                          <p className="text-xs text-slate-500">自定义消息提醒</p>
+                        </div>
+                        <div className="divide-y">
+                          {[
+                            { label: '课程提醒', enabled: true },
+                            { label: '作业截止', enabled: true },
+                            { label: '成就获得', enabled: true },
+                            { label: '社区互动', enabled: false }
+                          ].map((item, i) => (
+                            <div key={i} className="p-4 flex justify-between items-center">
+                              <span className="text-sm">{item.label}</span>
+                              <div className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors ${item.enabled ? 'bg-accent' : 'bg-slate-300'}`}>
+                                <div className={`w-4 h-4 bg-white rounded-full shadow transition-transform ${item.enabled ? 'translate-x-6' : ''}`}></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button className="w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold text-sm hover:bg-red-100 transition-colors">
+                        退出登录
+                      </button>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -492,11 +551,24 @@ export default function StudentMobileDemo() {
                   </div>
                 </motion.div>
                 <div className="bg-white rounded-xl border text-left overflow-hidden">
-                  {['我的硬件设备', '区块链证书', '学习报告', '系统设置'].map((item, i) => (
-                    <div key={i} className="p-3 border-b last:border-0 flex justify-between items-center text-xs hover:bg-slate-50 cursor-pointer">
-                      <span>{item}</span>
+                  {[
+                    { label: '我的硬件设备', icon: '🔌', action: () => setPhoneSubPage('硬件设备') },
+                    { label: '区块链证书', icon: '📜', action: () => setPhoneSubPage('证书管理') },
+                    { label: '学习报告', icon: '📊', action: () => setPhoneSubPage('学习报告') },
+                    { label: '系统设置', icon: '⚙️', action: () => setPhoneSubPage('系统设置') }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={item.action}
+                      className="p-3 border-b last:border-0 flex justify-between items-center text-xs hover:bg-slate-50 cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>{item.icon}</span>
+                        <span>{item.label}</span>
+                      </div>
                       <span className="text-gray-400">&gt;</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
