@@ -79,7 +79,19 @@ export default function StudentDashboard() {
       </div>
 
       {/* Device Frame */}
-      <DeviceFrame mode={deviceMode}>
+      <DeviceFrame 
+        mode={deviceMode}
+        bottomNav={
+          <BottomNav 
+            mode={deviceMode} 
+            activeTab={activeTab}
+            onTabChange={(tab) => {
+              setActiveTab(tab);
+              if (deviceMode === 'phone') setPhoneSubPage(null);
+            }}
+          />
+        }
+      >
         {/* 手机模式内容 */}
         {deviceMode === 'phone' && (
           <>
@@ -176,16 +188,6 @@ export default function StudentDashboard() {
             </motion.button>
           </>
         )}
-        
-        {/* Bottom Navigation - 移到DeviceFrame内部 */}
-        <BottomNav 
-          mode={deviceMode} 
-          activeTab={deviceMode === 'phone' ? activeTab : activeTab}
-          onTabChange={(tab) => {
-            setActiveTab(tab);
-            if (deviceMode === 'phone') setPhoneSubPage(null);
-          }}
-        />
       </DeviceFrame>
 
       {/* AI Chat Modal */}
