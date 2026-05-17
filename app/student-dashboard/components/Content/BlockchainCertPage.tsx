@@ -265,7 +265,7 @@ export function BlockchainCertPage({ mode }: BlockchainCertPageProps) {
                 'from-purple-100 to-indigo-100'
               } flex items-center justify-center text-7xl relative`}>
                 {cert.emoji}
-                {!cert.inProgress && (
+                {!cert.inProgress && cert.txHash && (
                   <div className="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur rounded-lg p-2">
                     <div className="text-[10px] text-slate-600 truncate">Tx: {cert.txHash.slice(0, 20)}...</div>
                   </div>
