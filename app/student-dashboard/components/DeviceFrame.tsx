@@ -72,9 +72,12 @@ export function DeviceFrame({ mode, children, statusBar }: DeviceFrameProps) {
         </div>
       )}
 
-      {/* Screen Content */}
-      <div className={`w-full h-full ${isPhone ? 'bg-slate-50' : 'bg-gradient-to-br from-slate-50 to-slate-100'} overflow-y-auto no-scrollbar ${isPhone ? 'pb-20' : 'p-8 pb-24'}`}>
-        {children}
+      {/* Screen Content Container - 使用flex布局确保BottomNav固定在底部 */}
+      <div className="relative w-full h-full flex flex-col">
+        {/* Scrollable Content Area */}
+        <div className={`flex-1 ${isPhone ? 'bg-slate-50' : 'bg-gradient-to-br from-slate-50 to-slate-100'} overflow-y-auto no-scrollbar ${isPhone ? '' : 'p-8'}`}>
+          {children}
+        </div>
       </div>
     </motion.div>
   );

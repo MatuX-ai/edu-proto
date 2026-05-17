@@ -142,7 +142,7 @@ export default function StudentDashboard() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShowAIAssistant(true)}
-              className="absolute bottom-20 right-4 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full shadow-xl flex items-center justify-center text-white z-30"
+              className="absolute bottom-24 right-4 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full shadow-xl flex items-center justify-center text-white z-30"
             >
               <Bot className="h-6 w-6" />
             </motion.button>
@@ -176,17 +176,17 @@ export default function StudentDashboard() {
             </motion.button>
           </>
         )}
+        
+        {/* Bottom Navigation - 移到DeviceFrame内部 */}
+        <BottomNav 
+          mode={deviceMode} 
+          activeTab={deviceMode === 'phone' ? activeTab : activeTab}
+          onTabChange={(tab) => {
+            setActiveTab(tab);
+            if (deviceMode === 'phone') setPhoneSubPage(null);
+          }}
+        />
       </DeviceFrame>
-
-      {/* Bottom Navigation */}
-      <BottomNav 
-        mode={deviceMode} 
-        activeTab={deviceMode === 'phone' ? activeTab : activeTab}
-        onTabChange={(tab) => {
-          setActiveTab(tab);
-          if (deviceMode === 'phone') setPhoneSubPage(null);
-        }}
-      />
 
       {/* AI Chat Modal */}
       <AIChatModal
