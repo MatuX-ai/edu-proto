@@ -479,7 +479,7 @@ export default function StudentMobileDemo() {
                         </p>
                       </div>
                       <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400">
-                        <div className="text-slate-500 mb-2">// 示例代码</div>
+                        <div className="text-slate-500 mb-2">{/* 示例代码 */}</div>
                         <div><span className="text-purple-400">#include</span> <span className="text-yellow-300">&lt;Servo.h&gt;</span></div>
                         <div className="mt-2"></div>
                         <div>Servo myServo;</div>
@@ -489,7 +489,7 @@ export default function StudentMobileDemo() {
                         <div>&#125;</div>
                         <div className="mt-2"></div>
                         <div><span className="text-purple-400">void</span> <span className="text-blue-400">loop</span>() &#123;</div>
-                        <div className="pl-4">myServo.<span className="text-blue-400">write</span>(90); <span className="text-slate-500">// 转到90度</span></div>
+                        <div className="pl-4">myServo.<span className="text-blue-400">write</span>(90); {/* 转到90度 */}</div>
                         <div className="pl-4"><span className="text-blue-400">delay</span>(1000);</div>
                         <div>&#125;</div>
                       </div>
