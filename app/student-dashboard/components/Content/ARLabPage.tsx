@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Camera, Box, Zap } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 
 interface ARLabPageProps {
   mode: DeviceMode;

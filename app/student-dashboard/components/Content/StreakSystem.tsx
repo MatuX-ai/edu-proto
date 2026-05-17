@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Flame, Trophy, Star } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 
 interface StreakSystemProps {
   mode: DeviceMode;

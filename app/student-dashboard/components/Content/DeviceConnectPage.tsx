@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bluetooth, Wifi, CheckCircle, AlertCircle, RefreshCw, Zap } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 import { useState } from 'react';
 
 interface DeviceConnectPageProps {

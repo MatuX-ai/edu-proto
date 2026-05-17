@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { User, Award } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 
 interface CommunityPageProps {
   mode: DeviceMode;

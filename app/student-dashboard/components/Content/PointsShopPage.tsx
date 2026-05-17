@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ShoppingCart, Star, Trophy, Gift } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 
 interface PointsShopPageProps {
   mode: DeviceMode;

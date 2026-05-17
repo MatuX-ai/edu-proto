@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Activity, Thermometer, Droplets, Zap, Mic, Volume2 } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 import { useState, useEffect } from 'react';
 
 interface SensorMonitorPageProps {

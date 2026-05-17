@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Award, Shield, ExternalLink, Share2, Download } from 'lucide-react';
-import { DeviceMode } from '../types';
+import { DeviceMode } from '../../types';
 
 interface BlockchainCertPageProps {
   mode: DeviceMode;
