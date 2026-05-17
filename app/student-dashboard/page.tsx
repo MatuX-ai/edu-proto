@@ -171,7 +171,12 @@ export default function StudentMobileDemo() {
                           { title: '函数定义', duration: '30分钟', completed: false, current: true },
                           { title: '列表与字典', duration: '25分钟', completed: false }
                         ].map((chapter, i) => (
-                          <div key={i} className={`bg-white rounded-xl p-3 border flex items-center justify-between ${chapter.current ? 'border-blue-500 bg-blue-50' : ''}`}>
+                          <motion.div
+                            key={i}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => chapter.current && setPhoneSubPage('代码编辑器')}
+                            className={`bg-white rounded-xl p-3 border flex items-center justify-between ${chapter.current ? 'border-blue-500 bg-blue-50 cursor-pointer' : ''}`}
+                          >
                             <div className="flex items-center gap-3">
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${chapter.completed ? 'bg-green-100 text-green-600' : chapter.current ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
                                 {chapter.completed ? '✓' : i + 1}
@@ -182,7 +187,7 @@ export default function StudentMobileDemo() {
                               </div>
                             </div>
                             {chapter.current && <Play className="h-4 w-4 text-blue-600" />}
-                          </div>
+                          </motion.div>
                         ))}
                       </div>
                       <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors">
@@ -249,6 +254,56 @@ export default function StudentMobileDemo() {
                             {badge.earned && <p className="text-[10px] text-green-600 mt-2 font-medium">已获得</p>}
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  )}
+                  {phoneSubPage === '代码编辑器' && (
+                    <div className="space-y-4">
+                      <div className="bg-slate-900 rounded-xl overflow-hidden">
+                        <div className="bg-slate-800 px-4 py-2 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                          </div>
+                          <span className="text-xs text-slate-400">main.py</span>
+                        </div>
+                        <div className="p-4 font-mono text-sm text-green-400 overflow-x-auto">
+                          <div className="text-slate-500"># 函数定义示例</div>
+                          <div><span className="text-purple-400">def</span> <span className="text-blue-400">greet</span>(name):</div>
+                          <div className="pl-4"><span className="text-purple-400">return</span> <span className="text-yellow-300">f&quot;你好, &#123;name&#125;!&quot;</span></div>
+                          <div className="mt-2"></div>
+                          <div><span className="text-slate-500"># 调用函数</span></div>
+                          <div>message = <span className="text-blue-400">greet</span>(<span className="text-yellow-300">&quot;李明&quot;</span>)</div>
+                          <div><span className="text-blue-400">print</span>(message)</div>
+                          <div className="mt-2 text-slate-500 animate-pulse">|</div>
+                        </div>
+                      </div>
+                      <div className="bg-white rounded-xl p-4 border">
+                        <h5 className="font-bold text-sm mb-3">运行结果</h5>
+                        <div className="bg-slate-100 rounded-lg p-3 font-mono text-sm">
+                          <div className="text-green-600">你好, 李明!</div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button className="py-3 bg-slate-100 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors">
+                          💾 保存代码
+                        </button>
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          className="py-3 bg-green-600 text-white rounded-xl font-bold text-sm hover:bg-green-700 transition-colors"
+                        >
+                          ▶️ 运行代码
+                        </motion.button>
+                      </div>
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                        <h5 className="font-bold text-sm text-blue-900 mb-2">💡 学习提示</h5>
+                        <ul className="text-xs text-blue-800 space-y-1">
+                          <li>• def 关键字用于定义函数</li>
+                          <li>• 函数名后面要加括号和冒号</li>
+                          <li>• 函数体需要缩进（通常4个空格）</li>
+                          <li>• return 语句返回结果</li>
+                        </ul>
                       </div>
                     </div>
                   )}
