@@ -8,7 +8,8 @@ export default function StudentMobileDemo() {
   const [activeTab, setActiveTab] = useState('home');
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [deviceMode, setDeviceMode] = useState<'phone' | 'tablet'>('phone');
-  const [tabletPage, setTabletPage] = useState<'home' | 'courses' | 'ar-lab' | 'projects' | 'achievements'>('home');
+  const [tabletPage, setTabletPage] = useState<string>('home');
+  const [tabletSubPage, setTabletSubPage] = useState<string | null>(null);
   const [phoneSubPage, setPhoneSubPage] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<Array<{ role: 'user' | 'ai'; content: string }>>([
     {
@@ -59,29 +60,29 @@ export default function StudentMobileDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col items-center justify-center py-12 px-4">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-primary">MatuX 移动端体验</h1>
-        <p className="text-gray-500 mt-2">随时随地探索 STEM 世界</p>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">MatuX 移动端体验</h1>
+        <p className="text-slate-600 text-lg">随时随地探索 STEM 世界</p>
 
         {/* Device Switcher */}
-        <div className="mt-6 inline-flex bg-white rounded-full p-1 shadow-md border">
+        <div className="mt-6 inline-flex bg-white rounded-2xl p-1.5 shadow-lg border border-slate-200">
           <button
             onClick={() => setDeviceMode('phone')}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
               deviceMode === 'phone'
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-gray-600 hover:text-primary'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md scale-105'
+                : 'text-slate-600 hover:text-blue-600 hover:bg-slate-50'
             }`}
           >
             📱 手机模式
           </button>
           <button
             onClick={() => setDeviceMode('tablet')}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
               deviceMode === 'tablet'
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-gray-600 hover:text-primary'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md scale-105'
+                : 'text-slate-600 hover:text-blue-600 hover:bg-slate-50'
             }`}
           >
             📟 平板模式
@@ -117,12 +118,16 @@ export default function StudentMobileDemo() {
           {/* App Header */}
           <div className="px-5 py-4 flex justify-between items-center">
             <div>
-              <h2 className="text-xl font-bold text-primary">Hi, 李明 👋</h2>
-              <p className="text-xs text-gray-500">准备好开始今天的实验了吗？</p>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Hi, 李明 👋</h2>
+              <p className="text-xs text-slate-500 mt-1">准备好开始今天的实验了吗？</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-              <User className="h-5 w-5 text-accent" />
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg cursor-pointer"
+            >
+              <User className="h-6 w-6 text-white" />
+            </motion.div>
           </div>
 
           {/* Main Content Area - Dynamic Switching */}
@@ -366,6 +371,141 @@ export default function StudentMobileDemo() {
                       </button>
                     </div>
                   )}
+                  {phoneSubPage === '知识图谱' && (
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-white text-center">
+                        <Globe className="h-16 w-16 mx-auto mb-3 opacity-80" />
+                        <h4 className="text-xl font-bold mb-2">STEM 知识图谱</h4>
+                        <p className="text-sm text-indigo-100">探索电子、机械与编程的联系</p>
+                      </div>
+                      <div className="space-y-3">
+                        <h5 className="font-bold text-sm">📡 电子学分支</h5>
+                        {[
+                          { name: '电路基础', progress: 100, locked: false },
+                          { name: '传感器应用', progress: 75, locked: false },
+                          { name: '无线通信', progress: 30, locked: false },
+                          { name: '嵌入式系统', progress: 0, locked: true }
+                        ].map((item, i) => (
+                          <motion.div
+                            key={i}
+                            whileTap={{ scale: 0.98 }}
+                            className={`bg-white rounded-xl p-3 border flex items-center justify-between ${item.locked ? 'opacity-50' : 'cursor-pointer'}`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${item.progress === 100 ? 'bg-green-100 text-green-600' : item.progress > 0 ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
+                                {item.locked ? '🔒' : item.progress === 100 ? '✓' : `${item.progress}%`}
+                              </div>
+                              <span className="text-xs font-medium">{item.name}</span>
+                            </div>
+                            {!item.locked && <span className="text-slate-400">&gt;</span>}
+                          </motion.div>
+                        ))}
+                      </div>
+                      <div className="space-y-3">
+                        <h5 className="font-bold text-sm">⚙️ 机械学分支</h5>
+                        {[
+                          { name: '简单机械', progress: 100, locked: false },
+                          { name: '传动系统', progress: 60, locked: false },
+                          { name: '3D建模', progress: 0, locked: true }
+                        ].map((item, i) => (
+                          <motion.div
+                            key={i}
+                            whileTap={{ scale: 0.98 }}
+                            className={`bg-white rounded-xl p-3 border flex items-center justify-between ${item.locked ? 'opacity-50' : 'cursor-pointer'}`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${item.progress === 100 ? 'bg-green-100 text-green-600' : item.progress > 0 ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
+                                {item.locked ? '🔒' : item.progress === 100 ? '✓' : `${item.progress}%`}
+                              </div>
+                              <span className="text-xs font-medium">{item.name}</span>
+                            </div>
+                            {!item.locked && <span className="text-slate-400">&gt;</span>}
+                          </motion.div>
+                        ))}
+                      </div>
+                      <div className="space-y-3">
+                        <h5 className="font-bold text-sm">💻 编程分支</h5>
+                        {[
+                          { name: 'Python基础', progress: 75, locked: false },
+                          { name: 'Arduino编程', progress: 100, locked: false },
+                          { name: '机器学习', progress: 30, locked: false },
+                          { name: 'Web开发', progress: 0, locked: true }
+                        ].map((item, i) => (
+                          <motion.div
+                            key={i}
+                            whileTap={{ scale: 0.98 }}
+                            className={`bg-white rounded-xl p-3 border flex items-center justify-between ${item.locked ? 'opacity-50' : 'cursor-pointer'}`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${item.progress === 100 ? 'bg-green-100 text-green-600' : item.progress > 0 ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
+                                {item.locked ? '🔒' : item.progress === 100 ? '✓' : `${item.progress}%`}
+                              </div>
+                              <span className="text-xs font-medium">{item.name}</span>
+                            </div>
+                            {!item.locked && <span className="text-slate-400">&gt;</span>}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {phoneSubPage === '每日挑战' && (
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-6 text-white">
+                        <div className="flex items-center justify-between mb-3">
+                          <Zap className="h-8 w-8" />
+                          <span className="text-xs bg-white/20 px-3 py-1 rounded-full">剩余 2h 15m</span>
+                        </div>
+                        <h4 className="text-xl font-bold mb-2">PWM 舵机控制</h4>
+                        <p className="text-sm text-orange-100 mb-4">使用 PWM 信号控制舵机转动到指定角度</p>
+                        <div className="flex gap-2 text-xs">
+                          <span className="bg-white/20 px-2 py-1 rounded">难度：中级</span>
+                          <span className="bg-white/20 px-2 py-1 rounded">奖励：50积分</span>
+                        </div>
+                      </div>
+                      <div className="bg-white rounded-xl p-4 border">
+                        <h5 className="font-bold text-sm mb-3">📋 挑战要求</h5>
+                        <ul className="text-xs text-slate-700 space-y-2">
+                          <li>✓ 理解 PWM 信号原理</li>
+                          <li>✓ 掌握舵机接线方法</li>
+                          <li>✓ 编写控制代码</li>
+                          <li>✓ 实现精确角度控制</li>
+                        </ul>
+                      </div>
+                      <div className="bg-white rounded-xl p-4 border">
+                        <h5 className="font-bold text-sm mb-3">💡 提示</h5>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          PWM（脉冲宽度调制）通过改变高电平的时间占比来控制舵机角度。
+                          通常 0.5ms 对应 0°，2.5ms 对应 180°。
+                        </p>
+                      </div>
+                      <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400">
+                        <div className="text-slate-500 mb-2">// 示例代码</div>
+                        <div><span className="text-purple-400">#include</span> <span className="text-yellow-300">&lt;Servo.h&gt;</span></div>
+                        <div className="mt-2"></div>
+                        <div>Servo myServo;</div>
+                        <div className="mt-2"></div>
+                        <div><span className="text-purple-400">void</span> <span className="text-blue-400">setup</span>() &#123;</div>
+                        <div className="pl-4">myServo.<span className="text-blue-400">attach</span>(9);</div>
+                        <div>&#125;</div>
+                        <div className="mt-2"></div>
+                        <div><span className="text-purple-400">void</span> <span className="text-blue-400">loop</span>() &#123;</div>
+                        <div className="pl-4">myServo.<span className="text-blue-400">write</span>(90); <span className="text-slate-500">// 转到90度</span></div>
+                        <div className="pl-4"><span className="text-blue-400">delay</span>(1000);</div>
+                        <div>&#125;</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button className="py-3 bg-slate-100 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors">
+                          💾 保存代码
+                        </button>
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          className="py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all"
+                        >
+                          🚀 提交挑战
+                        </motion.button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -374,7 +514,10 @@ export default function StudentMobileDemo() {
             {activeTab === 'home' && (
               <>
                 {/* Hardware Status Card */}
-                <div className="bg-slate-900 rounded-2xl p-4 text-white shadow-lg">
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-5 text-white shadow-xl"
+                >
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center space-x-2">
                       <Cpu className="h-5 w-5 text-accent" />
@@ -390,41 +533,52 @@ export default function StudentMobileDemo() {
                       <Wifi className="h-3 w-3 text-blue-400" /> <span>-42dBm</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* AI Recommendation */}
                 <div>
-                  <h3 className="font-bold text-primary text-sm mb-3">AI 推荐项目</h3>
+                  <h3 className="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></span>
+                    AI 推荐项目
+                  </h3>
                   <motion.div
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setPhoneSubPage('项目详情')}
-                    className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden cursor-pointer"
+                    className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden cursor-pointer group"
                   >
                     <Zap className="absolute -right-2 -bottom-2 h-20 w-20 text-white/10" />
                     <h4 className="font-bold text-base mb-1">智能感应小夜灯</h4>
                     <p className="text-[10px] text-indigo-100 mb-3 line-clamp-2">利用光敏电阻实现环境光自适应控制。</p>
-                    <button className="bg-white text-indigo-600 text-xs font-bold px-4 py-2 rounded-full flex items-center">
-                      <Play className="h-3 w-3 mr-1 fill-current" /> 开始实验
+                    <button className="bg-white/95 backdrop-blur text-indigo-600 text-xs font-bold px-5 py-2.5 rounded-full flex items-center gap-1.5 hover:bg-white hover:shadow-lg transition-all group-hover:scale-105">
+                      <Play className="h-3.5 w-3.5 fill-current" /> 开始实验
                     </button>
                   </motion.div>
                 </div>
 
                 {/* Quick Actions Grid */}
                 <div>
-                  <h3 className="font-bold text-primary text-sm mb-3">常用工具</h3>
-                  <div className="grid grid-cols-4 gap-3">
+                  <h3 className="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></span>
+                    常用工具
+                  </h3>
+                  <div className="grid grid-cols-4 gap-4">
                     {[
-                      { icon: Code, label: '代码', color: 'bg-blue-100 text-blue-600' },
-                      { icon: Box, label: '3D模型', color: 'bg-orange-100 text-orange-600' },
-                      { icon: Camera, label: 'AR扫描', color: 'bg-green-100 text-green-600' },
-                      { icon: MessageSquare, label: 'AI助手', color: 'bg-purple-100 text-purple-600' }
+                      { icon: Code, label: '代码', color: 'text-blue-600', bg: 'from-blue-50 to-blue-100' },
+                      { icon: Box, label: '3D模型', color: 'text-orange-600', bg: 'from-orange-50 to-orange-100' },
+                      { icon: Camera, label: 'AR扫描', color: 'text-green-600', bg: 'from-green-50 to-green-100' },
+                      { icon: MessageSquare, label: 'AI助手', color: 'text-purple-600', bg: 'from-purple-50 to-purple-100' }
                     ].map((item, i) => (
-                      <div key={i} className="flex flex-col items-center space-y-2">
-                        <div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center shadow-sm`}>
-                          <item.icon className="h-6 w-6" />
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.08, y: -4 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex flex-col items-center gap-2.5 cursor-pointer"
+                      >
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.bg} flex items-center justify-center shadow-md hover:shadow-xl transition-all`}>
+                          <item.icon className={`h-7 w-7 ${item.color}`} />
                         </div>
-                        <span className="text-[10px] font-medium text-gray-600">{item.label}</span>
-                      </div>
+                        <span className="text-[11px] font-semibold text-slate-700">{item.label}</span>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
@@ -435,14 +589,18 @@ export default function StudentMobileDemo() {
             {activeTab === 'learn' && (
               <div className="space-y-5">
                 {/* Daily Challenge */}
-                <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 text-white shadow-md">
+                <motion.div
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setPhoneSubPage('每日挑战')}
+                  className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 text-white shadow-md cursor-pointer"
+                >
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="font-bold text-sm flex items-center"><Zap className="h-4 w-4 mr-1"/> 每日挑战</h3>
                     <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">剩余 2h</span>
                   </div>
                   <p className="text-xs text-orange-50 mb-3">使用 PWM 信号控制舵机转动到指定角度。</p>
                   <button className="w-full bg-white text-orange-600 text-xs font-bold py-2 rounded-lg">接受挑战</button>
-                </div>
+                </motion.div>
 
                 <h3 className="font-bold text-primary text-sm">我的课程表</h3>
                 {[
@@ -473,7 +631,11 @@ export default function StudentMobileDemo() {
                 ))}
 
                 {/* Knowledge Graph Entry */}
-                <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex items-center justify-between">
+                <motion.div
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setPhoneSubPage('知识图谱')}
+                  className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex items-center justify-between cursor-pointer"
+                >
                   <div>
                     <h4 className="font-bold text-indigo-900 text-xs">STEM 知识图谱</h4>
                     <p className="text-[10px] text-indigo-600 mt-1">探索电子、机械与编程的联系</p>
@@ -481,7 +643,7 @@ export default function StudentMobileDemo() {
                   <div className="w-8 h-8 bg-indigo-200 rounded-full flex items-center justify-center text-indigo-700">
                     <Globe className="h-4 w-4" />
                   </div>
-                </div>
+                </motion.div>
               </div>
             )}
 
@@ -498,7 +660,12 @@ export default function StudentMobileDemo() {
 
                 <h3 className="font-bold text-primary text-sm">创客广场</h3>
                 {[1, 2, 3].map((_, i) => (
-                  <div key={i} className="bg-white rounded-xl border shadow-sm overflow-hidden">
+                  <motion.div
+                    key={i}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setPhoneSubPage('帖子详情')}
+                    className="bg-white rounded-xl border shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
+                  >
                     <div className="h-28 bg-slate-200 flex items-center justify-center text-gray-400 text-xs relative">
                       [项目作品展示图]
                       <div className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-2 py-0.5 rounded-full flex items-center">
@@ -518,7 +685,7 @@ export default function StudentMobileDemo() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}
@@ -669,19 +836,30 @@ export default function StudentMobileDemo() {
           </AnimatePresence>
 
           {/* Bottom Navigation Bar */}
-          <div className="absolute bottom-0 w-full h-16 bg-white border-t flex justify-around items-center px-2 pb-2">
+          <div className="absolute bottom-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-center px-2 pb-2 shadow-2xl">
             {['home', 'learn', 'community', 'profile'].map((tab) => (
-              <button
+              <motion.button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex flex-col items-center space-y-1 ${activeTab === tab ? 'text-accent' : 'text-gray-400'}`}
+                whileTap={{ scale: 0.9 }}
+                className={`flex flex-col items-center gap-1.5 py-2 px-4 rounded-xl transition-all ${
+                  activeTab === tab ? 'bg-gradient-to-br from-blue-50 to-purple-50' : 'hover:bg-slate-50'
+                }`}
               >
-                {tab === 'home' && <Box className="h-5 w-5" />}
-                {tab === 'learn' && <Code className="h-5 w-5" />}
-                {tab === 'community' && <MessageSquare className="h-5 w-5" />}
-                {tab === 'profile' && <User className="h-5 w-5" />}
-                <span className="text-[9px] font-medium capitalize">{tab}</span>
-              </button>
+                <div className={`relative ${activeTab === tab ? 'text-blue-600' : 'text-slate-400'}`}>
+                  {tab === 'home' && <Box className="h-6 w-6" />}
+                  {tab === 'learn' && <Code className="h-6 w-6" />}
+                  {tab === 'community' && <MessageSquare className="h-6 w-6" />}
+                  {tab === 'profile' && <User className="h-6 w-6" />}
+                  {activeTab === tab && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"
+                    />
+                  )}
+                </div>
+                <span className={`text-[10px] font-semibold capitalize ${activeTab === tab ? 'text-blue-600' : 'text-slate-400'}`}>{tab}</span>
+              </motion.button>
             ))}
           </div>
         </motion.div>
@@ -708,6 +886,262 @@ export default function StudentMobileDemo() {
           {/* Tablet Content */}
           <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 overflow-y-auto p-8 pb-24">
             <AnimatePresence mode="wait">
+              {/* Task Detail Page */}
+              {tabletSubPage === 'task-detail' && (
+                <motion.div
+                  key="task-detail"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  {/* Breadcrumb Navigation */}
+                  <div className="flex items-center gap-2 text-sm text-slate-600 mb-4">
+                    <button onClick={() => setTabletSubPage(null)} className="hover:text-blue-600 transition-colors">
+                      首页
+                    </button>
+                    <span>/</span>
+                    <span className="text-slate-900 font-medium">任务详情</span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">Python 基础语法 - 变量与数据类型</h2>
+                    <div className="flex gap-3">
+                      <button className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                        💾 保存进度
+                      </button>
+                      <button onClick={() => setTabletSubPage(null)} className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:shadow-lg transition-all text-sm font-medium">
+                        ← 返回首页
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Video Section */}
+                  <div className="bg-black rounded-2xl overflow-hidden aspect-video relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center text-white">
+                        <Play className="h-16 w-16 mx-auto mb-4 opacity-80" />
+                        <p className="text-lg">点击播放教学视频</p>
+                        <p className="text-sm text-gray-400 mt-2">时长: 15:30</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Task Info Grid */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-white rounded-xl p-4 shadow-md">
+                      <p className="text-sm text-slate-600 mb-1">预计时长</p>
+                      <p className="text-2xl font-bold text-blue-600">30分钟</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md">
+                      <p className="text-sm text-slate-600 mb-1">难度等级</p>
+                      <p className="text-2xl font-bold text-green-600">初级</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md">
+                      <p className="text-sm text-slate-600 mb-1">完成进度</p>
+                      <p className="text-2xl font-bold text-purple-600">75%</p>
+                    </div>
+                  </div>
+
+                  {/* Step Guide */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">📋 学习步骤</h3>
+                    <div className="space-y-4">
+                      {[
+                        { step: 1, title: '观看教学视频', status: 'completed', desc: '了解变量的基本概念和数据类型' },
+                        { step: 2, title: '阅读文档资料', status: 'completed', desc: '深入学习 Python 变量命名规则' },
+                        { step: 3, title: '完成在线练习', status: 'current', desc: '通过互动练习巩固知识点' },
+                        { step: 4, title: '提交作业', status: 'pending', desc: '完成课后作业并提交' }
+                      ].map((item, i) => (
+                        <div key={i} className={`flex items-start gap-4 p-4 rounded-xl border-2 ${
+                          item.status === 'completed' ? 'border-green-200 bg-green-50' :
+                          item.status === 'current' ? 'border-blue-200 bg-blue-50' :
+                          'border-slate-200'
+                        }`}>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                            item.status === 'completed' ? 'bg-green-500 text-white' :
+                            item.status === 'current' ? 'bg-blue-500 text-white' :
+                            'bg-slate-200 text-slate-600'
+                          }`}>
+                            {item.status === 'completed' ? '✓' : item.step}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-slate-900 mb-1">{item.title}</h4>
+                            <p className="text-sm text-slate-600">{item.desc}</p>
+                          </div>
+                          {item.status === 'current' && (
+                            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                              开始练习
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">💻 在线练习</h3>
+                    <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-4">
+                      <div className="text-slate-500 mb-2"># 请完成以下代码，定义一个变量存储你的姓名</div>
+                      <div><span className="text-purple-400">my_name</span> = <span className="text-yellow-300">&quot;______&quot;</span></div>
+                      <div className="mt-2"></div>
+                      <div className="text-slate-500"># 打印问候语</div>
+                      <div><span className="text-blue-400">print</span>(<span className="text-yellow-300">f&quot;你好, &#123;my_name&#125;!&quot;</span>)</div>
+                    </div>
+                    <div className="flex gap-3">
+                      <button className="flex-1 py-3 bg-slate-100 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors">
+                        💡 查看提示
+                      </button>
+                      <button className="flex-1 py-3 bg-green-600 text-white rounded-xl font-semibold text-sm hover:bg-green-700 transition-colors">
+                        ✓ 提交答案
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Course Recommendation Detail */}
+              {tabletSubPage === 'course-recommendation' && (
+                <motion.div
+                  key="course-recommendation"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  {/* Breadcrumb */}
+                  <div className="flex items-center gap-2 text-sm text-slate-600 mb-4">
+                    <button onClick={() => setTabletSubPage(null)} className="hover:text-blue-600 transition-colors">
+                      首页
+                    </button>
+                    <span>/</span>
+                    <span className="text-slate-900 font-medium">课程详情</span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-slate-900">机器人编程进阶 🤖</h2>
+                    <button onClick={() => setTabletSubPage(null)} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all text-sm font-medium">
+                      ← 返回首页
+                    </button>
+                  </div>
+
+                  {/* Course Header */}
+                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="text-6xl mb-4">🤖</div>
+                        <h3 className="text-2xl font-bold mb-3">机器人编程进阶</h3>
+                        <p className="text-indigo-100 mb-4">学习传感器应用和自动控制原理，打造智能机器人系统</p>
+                        <div className="flex gap-4 text-sm">
+                          <span className="bg-white/20 px-3 py-1 rounded-full">中级</span>
+                          <span className="bg-white/20 px-3 py-1 rounded-full">12课时</span>
+                          <span className="bg-white/20 px-3 py-1 rounded-full">约24小时</span>
+                        </div>
+                      </div>
+                      <button className="px-6 py-3 bg-white text-purple-600 rounded-xl font-bold hover:shadow-lg transition-all">
+                        立即报名
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Course Stats */}
+                  <div className="grid grid-cols-4 gap-4">
+                    {[
+                      { label: '学员数', value: '1,234', icon: '👥' },
+                      { label: '评分', value: '4.8', icon: '⭐' },
+                      { label: '完成率', value: '85%', icon: '✅' },
+                      { label: '项目数', value: '6', icon: '🚀' }
+                    ].map((stat, i) => (
+                      <div key={i} className="bg-white rounded-xl p-4 shadow-md text-center">
+                        <div className="text-2xl mb-2">{stat.icon}</div>
+                        <div className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</div>
+                        <div className="text-sm text-slate-600">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Course Outline */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">📚 课程大纲</h3>
+                    <div className="space-y-3">
+                      {[
+                        { chapter: 1, title: '传感器基础', lessons: 3, duration: '2小时', free: true },
+                        { chapter: 2, title: '电机控制原理', lessons: 4, duration: '3小时', free: false },
+                        { chapter: 3, title: 'PID控制算法', lessons: 3, duration: '2.5小时', free: false },
+                        { chapter: 4, title: '路径规划', lessons: 2, duration: '2小时', free: false }
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-center justify-between p-4 rounded-xl border hover:border-blue-300 transition-colors cursor-pointer">
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center font-bold text-blue-600">
+                              {item.chapter}
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-slate-900">{item.title}</h4>
+                              <p className="text-sm text-slate-600">{item.lessons} 节课 · {item.duration}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            {item.free && <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">免费试听</span>}
+                            <span className="text-slate-400">&gt;</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Instructor Info */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">👨‍🏫 讲师介绍</h3>
+                    <div className="flex items-start gap-4">
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl">
+                        👨‍💻
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-lg text-slate-900 mb-1">张教授</h4>
+                        <p className="text-sm text-slate-600 mb-2">清华大学计算机系副教授，机器人研究专家</p>
+                        <p className="text-sm text-slate-600 mb-3">10年教学经验，培养超过5000名学生，出版教材3本</p>
+                        <div className="flex gap-2">
+                          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">机器人学</span>
+                          <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">人工智能</span>
+                          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs">自动控制</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Reviews */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">💬 学员评价 (128)</h3>
+                    <div className="space-y-4">
+                      {[
+                        { name: '王同学', rating: 5, comment: '课程内容非常实用，老师讲解清晰易懂！', date: '2天前' },
+                        { name: '李同学', rating: 5, comment: '项目实战环节很有帮助，学到了很多实际技能。', date: '1周前' }
+                      ].map((review, i) => (
+                        <div key={i} className="border-b last:border-0 pb-4 last:pb-0">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-sm">
+                                {review.name[0]}
+                              </div>
+                              <span className="font-medium text-slate-900">{review.name}</span>
+                            </div>
+                            <span className="text-sm text-slate-500">{review.date}</span>
+                          </div>
+                          <div className="flex mb-2">
+                            {[...Array(review.rating)].map((_, j) => (
+                              <span key={j} className="text-yellow-400">⭐</span>
+                            ))}
+                          </div>
+                          <p className="text-sm text-slate-700">{review.comment}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
               {tabletPage === 'home' && (
                 <motion.div
                   key="home"
@@ -749,12 +1183,19 @@ export default function StudentMobileDemo() {
             <div className="mb-8">
               <h3 className="text-xl font-bold text-slate-900 mb-4">今日学习任务</h3>
               <div className="bg-white rounded-2xl p-4 shadow-md space-y-3">
-                {[
+                {[  
                   { title: 'Python 基础语法 - 变量与数据类型', duration: '30分钟', type: '视频课程', progress: 75, completed: false },
                   { title: 'Arduino 入门 - LED 控制实验', duration: '45分钟', type: '实践操作', progress: 100, completed: true },
                   { title: '机器学习基础 - 监督学习概念', duration: '25分钟', type: '互动测验', progress: 30, completed: false }
                 ].map((task, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.01 }}
+                    onClick={() => !task.completed && setTabletSubPage('task-detail')}
+                    className={`flex items-center gap-4 p-4 rounded-xl transition-colors ${
+                      task.completed ? 'bg-slate-50' : 'hover:bg-blue-50 cursor-pointer'
+                    }`}
+                  >
                     <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                       task.completed ? 'bg-green-500 border-green-500 text-white' : 'border-slate-300'
                     }`}>
@@ -770,7 +1211,7 @@ export default function StudentMobileDemo() {
                       </div>
                       <span className="text-xs font-semibold text-blue-600 min-w-[35px] text-right">{task.progress}%</span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -809,7 +1250,8 @@ export default function StudentMobileDemo() {
                   <motion.div
                     key={i}
                     whileHover={{ y: -4 }}
-                    className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+                    onClick={() => setTabletSubPage('course-recommendation')}
+                    className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer"
                   >
                     <div className={`h-40 bg-gradient-to-br ${course.gradient} flex items-center justify-center text-6xl`}>
                       {course.emoji}
@@ -834,7 +1276,7 @@ export default function StudentMobileDemo() {
               )}
 
               {/* Courses Page */}
-              {tabletPage === 'courses' && (
+              {tabletPage === 'courses' && !tabletSubPage && (
                 <motion.div
                   key="courses"
                   initial={{ opacity: 0, x: 20 }}
@@ -861,7 +1303,8 @@ export default function StudentMobileDemo() {
                       <motion.div
                         key={i}
                         whileHover={{ y: -4 }}
-                        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+                        onClick={() => setTabletSubPage(`course-learn-${i}`)}
+                        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer"
                       >
                         <div className={`h-32 bg-gradient-to-br ${course.color} flex items-center justify-center text-5xl`}>
                           {course.emoji}
@@ -888,8 +1331,181 @@ export default function StudentMobileDemo() {
                 </motion.div>
               )}
 
+              {/* Course Learning Workspace */}
+              {tabletPage === 'courses' && tabletSubPage?.startsWith('course-learn') && (
+                <motion.div
+                  key="course-workspace"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-full flex flex-col"
+                >
+                  {/* Breadcrumb */}
+                  <div className="flex items-center gap-2 text-sm text-slate-600 mb-4">
+                    <button onClick={() => setTabletSubPage(null)} className="hover:text-blue-600 transition-colors">
+                      课程列表
+                    </button>
+                    <span>/</span>
+                    <span className="text-slate-900 font-medium">Python 编程基础</span>
+                    <span>/</span>
+                    <span className="text-blue-600">第4章：函数定义</span>
+                  </div>
+
+                  {/* Main Workspace - Three Column Layout */}
+                  <div className="flex-1 grid grid-cols-12 gap-4 min-h-0">
+                    {/* Left Sidebar - Chapter List */}
+                    <div className="col-span-3 bg-white rounded-2xl p-4 shadow-md overflow-y-auto">
+                      <h3 className="font-bold text-slate-900 mb-4">📚 章节目录</h3>
+                      <div className="space-y-2">
+                        {[
+                          { chapter: 1, title: '变量与数据类型', completed: true, duration: '15分钟' },
+                          { chapter: 2, title: '条件判断', completed: true, duration: '20分钟' },
+                          { chapter: 3, title: '循环结构', completed: true, duration: '25分钟' },
+                          { chapter: 4, title: '函数定义', current: true, duration: '30分钟' },
+                          { chapter: 5, title: '列表与字典', duration: '25分钟' },
+                          { chapter: 6, title: '文件操作', duration: '20分钟' }
+                        ].map((item, i) => (
+                          <div
+                            key={i}
+                            className={`p-3 rounded-xl cursor-pointer transition-all ${
+                              item.current ? 'bg-blue-50 border-2 border-blue-500' :
+                              item.completed ? 'bg-green-50 hover:bg-green-100' :
+                              'bg-slate-50 hover:bg-slate-100'
+                            }`}
+                          >
+                            <div className="flex items-start gap-2">
+                              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                                item.completed ? 'bg-green-500 text-white' :
+                                item.current ? 'bg-blue-500 text-white' :
+                                'bg-slate-300 text-slate-600'
+                              }`}>
+                                {item.completed ? '✓' : item.chapter}
+                              </div>
+                              <div className="flex-1">
+                                <p className={`text-sm font-medium ${item.current ? 'text-blue-900' : 'text-slate-900'}`}>
+                                  {item.title}
+                                </p>
+                                <p className="text-xs text-slate-500 mt-1">{item.duration}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Center - Content Area */}
+                    <div className="col-span-6 bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+                      {/* Video Player */}
+                      <div className="bg-black aspect-video relative">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center text-white">
+                            <Play className="h-16 w-16 mx-auto mb-4 opacity-80" />
+                            <p className="text-lg">第4章：函数定义</p>
+                            <p className="text-sm text-gray-400 mt-2">15:30 / 30:00</p>
+                          </div>
+                        </div>
+                        {/* Video Controls */}
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                          <div className="w-full h-1 bg-white/30 rounded-full mb-2">
+                            <div className="h-full bg-blue-500 rounded-full" style={{ width: '50%' }}></div>
+                          </div>
+                          <div className="flex items-center justify-between text-white">
+                            <div className="flex items-center gap-3">
+                              <button className="hover:text-blue-400">⏮</button>
+                              <button className="hover:text-blue-400 text-xl">▶</button>
+                              <button className="hover:text-blue-400">⏭</button>
+                              <span className="text-sm">15:30 / 30:00</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <button className="hover:text-blue-400">⚙️</button>
+                              <button className="hover:text-blue-400">⛶</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Content Tabs */}
+                      <div className="flex-1 p-6 overflow-y-auto">
+                        <div className="flex gap-4 border-b mb-4">
+                          <button className="px-4 py-2 border-b-2 border-blue-600 text-blue-600 font-medium">
+                            📖 理论讲解
+                          </button>
+                          <button className="px-4 py-2 text-slate-600 hover:text-blue-600">
+                            💻 代码示例
+                          </button>
+                          <button className="px-4 py-2 text-slate-600 hover:text-blue-600">
+                            ✏️ 互动练习
+                          </button>
+                          <button className="px-4 py-2 text-slate-600 hover:text-blue-600">
+                            📝 小结测验
+                          </button>
+                        </div>
+
+                        <div className="prose max-w-none">
+                          <h4 className="text-xl font-bold text-slate-900 mb-4">函数的定义与使用</h4>
+                          <p className="text-slate-700 mb-4">
+                            函数是一段可重复使用的代码块，可以接受输入参数并返回结果。使用函数可以让代码更加模块化、易于维护。
+                          </p>
+                          <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-4">
+                            <div className="text-purple-400">def</div>
+                            <div className="pl-4"><span className="text-blue-400">greet</span>(name):</div>
+                            <div className="pl-8"><span className="text-purple-400">return</span> <span className="text-yellow-300">f&quot;你好, &#123;name&#125;!&quot;</span></div>
+                          </div>
+                          <p className="text-slate-700">
+                            在这个例子中，我们定义了一个名为 greet 的函数，它接受一个参数 name，并返回一个问候语字符串。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Sidebar - Notes & AI Assistant */}
+                    <div className="col-span-3 space-y-4">
+                      {/* Progress Card */}
+                      <div className="bg-white rounded-2xl p-4 shadow-md">
+                        <h4 className="font-bold text-slate-900 mb-3">📊 学习进度</h4>
+                        <div className="mb-2">
+                          <div className="flex justify-between text-xs mb-1">
+                            <span>本章进度</span>
+                            <span className="font-semibold text-blue-600">50%</span>
+                          </div>
+                          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-600 rounded-full" style={{ width: '50%' }}></div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">已学习 15/30 分钟</p>
+                      </div>
+
+                      {/* Quick Notes */}
+                      <div className="bg-white rounded-2xl p-4 shadow-md flex-1">
+                        <h4 className="font-bold text-slate-900 mb-3">📝 我的笔记</h4>
+                        <textarea
+                          className="w-full h-32 p-3 border rounded-lg text-sm resize-none focus:outline-none focus:border-blue-500"
+                          placeholder="在这里记录学习笔记..."
+                        ></textarea>
+                        <button className="w-full mt-2 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                          💾 保存笔记
+                        </button>
+                      </div>
+
+                      {/* AI Help */}
+                      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white">
+                        <h4 className="font-bold mb-2">🤖 AI 助手</h4>
+                        <p className="text-xs text-indigo-100 mb-3">有疑问？随时问我！</p>
+                        <button
+                          onClick={() => setShowAIAssistant(true)}
+                          className="w-full py-2 bg-white text-purple-600 rounded-lg text-sm font-bold hover:shadow-lg transition-all"
+                        >
+                          提问 AI 老师
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* AR Lab Page */}
-              {tabletPage === 'ar-lab' && (
+              {tabletPage === 'ar-lab' && !tabletSubPage && (
                 <motion.div
                   key="ar-lab"
                   initial={{ opacity: 0, x: 20 }}
@@ -921,7 +1537,8 @@ export default function StudentMobileDemo() {
                       <motion.div
                         key={i}
                         whileHover={{ y: -4 }}
-                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all text-center"
+                        onClick={() => setTabletSubPage(`ar-experiment-${i}`)}
+                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all text-center cursor-pointer"
                       >
                         <div className="text-4xl mb-3">{lab.emoji}</div>
                         <h4 className="font-bold text-slate-900 mb-2">{lab.title}</h4>
@@ -934,7 +1551,7 @@ export default function StudentMobileDemo() {
               )}
 
               {/* Projects Page */}
-              {tabletPage === 'projects' && (
+              {tabletPage === 'projects' && !tabletSubPage && (
                 <motion.div
                   key="projects"
                   initial={{ opacity: 0, x: 20 }}
@@ -959,7 +1576,8 @@ export default function StudentMobileDemo() {
                       <motion.div
                         key={i}
                         whileHover={{ y: -4 }}
-                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all"
+                        onClick={() => setTabletSubPage(`project-workspace-${i}`)}
+                        className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer"
                       >
                         <div className="flex items-start justify-between mb-4">
                           <div className="text-4xl">{project.emoji}</div>
@@ -994,7 +1612,7 @@ export default function StudentMobileDemo() {
               )}
 
               {/* Achievements Page */}
-              {tabletPage === 'achievements' && (
+              {tabletPage === 'achievements' && !tabletSubPage && (
                 <motion.div
                   key="achievements"
                   initial={{ opacity: 0, x: 20 }}
@@ -1041,8 +1659,9 @@ export default function StudentMobileDemo() {
                       <motion.div
                         key={i}
                         whileHover={{ scale: 1.05 }}
+                        onClick={() => badge.earned && setTabletSubPage(`badge-detail-${i}`)}
                         className={`bg-white rounded-2xl p-4 text-center shadow-md ${
-                          badge.earned ? '' : 'opacity-50 grayscale'
+                          badge.earned ? 'cursor-pointer hover:shadow-lg' : 'opacity-50 grayscale'
                         }`}
                       >
                         <div className="text-3xl mb-2">{badge.icon}</div>
@@ -1151,11 +1770,11 @@ export default function StudentMobileDemo() {
           {/* Tablet Dock */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-xl border border-white/30 flex gap-4">
             {[
-              { icon: Box, label: '首页', action: () => setTabletPage('home') },
-              { icon: Code, label: '课程', action: () => setTabletPage('courses') },
-              { icon: Camera, label: 'AR实验', action: () => setTabletPage('ar-lab') },
-              { icon: Box, label: '项目', action: () => setTabletPage('projects') },
-              { icon: Award, label: '成就', action: () => setTabletPage('achievements') }
+              { icon: Box, label: '首页', action: () => { setTabletPage('home'); setTabletSubPage(null); } },
+              { icon: Code, label: '课程', action: () => { setTabletPage('courses'); setTabletSubPage(null); } },
+              { icon: Camera, label: 'AR实验', action: () => { setTabletPage('ar-lab'); setTabletSubPage(null); } },
+              { icon: Box, label: '项目', action: () => { setTabletPage('projects'); setTabletSubPage(null); } },
+              { icon: Award, label: '成就', action: () => { setTabletPage('achievements'); setTabletSubPage(null); } }
             ].map((item, i) => (
               <motion.button
                 key={i}
