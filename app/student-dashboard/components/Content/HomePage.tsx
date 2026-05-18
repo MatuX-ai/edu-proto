@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Cpu, Battery, Wifi, Zap, Box, Code, Camera, MessageSquare, Play, User, Award, Globe } from 'lucide-react';
+import { Cpu, Battery, Wifi, Zap, Box, Code, Camera, MessageSquare, Play, Award } from 'lucide-react';
 import { DeviceMode } from '../../types';
 
 interface HomePageProps {
@@ -16,26 +16,6 @@ export function HomePage({ mode, onNavigate }: HomePageProps) {
   if (isPhone) {
     return (
       <div className="px-5 space-y-6">
-        {/* Daily Check-in Banner */}
-        <motion.div
-          whileTap={{ scale: 0.98 }}
-          className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-4 text-white flex items-center justify-between cursor-pointer hover:shadow-lg transition-all"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">
-              📅
-            </div>
-            <div>
-              <h4 className="font-bold text-sm mb-0.5">每日签到</h4>
-              <p className="text-xs text-orange-100">连续签到 3 天</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold">+10</div>
-            <div className="text-[10px] text-orange-100">积分</div>
-          </div>
-        </motion.div>
-
         {/* Hardware Status Card */}
         <motion.div
           whileHover={{ y: -2 }}

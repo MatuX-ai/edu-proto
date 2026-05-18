@@ -40,7 +40,7 @@ export function ProfilePage({ mode, onNavigate }: ProfilePageProps) {
 
   if (isPhone) {
     return (
-      <div className="space-y-6 text-center pt-4 px-5">
+      <div className="space-y-6 text-center pt-4 px-5 pb-24">
         {/* 用户信息 */}
         <div className="flex flex-col items-center">
           <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mb-2">

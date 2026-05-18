@@ -298,13 +298,6 @@ export function PointsShopPage({ mode }: PointsShopPageProps) {
           <div className="flex items-start gap-2">
             <span className="text-lg">✓</span>
             <div>
-              <div className="font-semibold">每日签到</div>
-              <div className="text-xs opacity-80">+10分/天</div>
-            </div>
-          </div>
-          <div className="flex items-start gap-2">
-            <span className="text-lg">✓</span>
-            <div>
               <div className="font-semibold">连胜奖励</div>
               <div className="text-xs opacity-80">+20~100分</div>
             </div>

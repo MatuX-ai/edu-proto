@@ -35,7 +35,7 @@ export function BottomNav({ mode, activeTab, onTabChange }: BottomNavProps) {
 
   if (isPhone) {
     return (
-      <div className="absolute bottom-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-center px-2 pb-2 shadow-2xl">
+      <div className="absolute bottom-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-center px-2 shadow-2xl">
         {tabs.map((tab) => (
           <motion.button
             key={tab.id}
@@ -66,7 +66,7 @@ export function BottomNav({ mode, activeTab, onTabChange }: BottomNavProps) {
   // 平板 Dock 样式
   return (
     <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-xl rounded-2xl px-4 py-2.5 shadow-xl border border-white/30 flex gap-2">
-      {tabs.map((tab, i) => (
+      {tabs.map((tab) => (
         <motion.button
           key={tab.id}
           whileHover={{ scale: 1.1, y: -6 }}
