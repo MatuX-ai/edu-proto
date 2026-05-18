@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client';
 
 import { motion } from 'framer-motion';
@@ -10,52 +7,7 @@ import { useState } from 'react';
 export default function InstitutionDashboardPage() {
   const [activeTab, setActiveTab] = useState<'training' | 'k12' | 'vocational' | 'education-bureau'>('training');
 
-  // 类型定义
-  type StemIntegrationData = {
-    hours: number;
-    modules: number;
-    projects: number;
-  };
 
-  type Assessment = {
-    type: string;
-    date: string;
-    participants: number;
-  };
-
-  type Competition = {
-    name: string;
-    team: string;
-    stage: string;
-    prize: string;
-  };
-
-  type Patent = {
-    title: string;
-    type: string;
-    status: string;
-    date: string;
-  };
-
-  type BountyProject = {
-    company: string;
-    title: string;
-    reward: string;
-    applicants: number;
-    deadline: string;
-  };
-
-  type Initiative = {
-    name: string;
-    progress: number;
-    target: string;
-  };
-
-  type StemCoverage = {
-    total: number;
-    withStem: number;
-    coverage: string;
-  };
 
   // 不同机构类型的数据配置
   const institutionTypes = {
@@ -656,7 +608,7 @@ export default function InstitutionDashboardPage() {
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-700 mb-2"> upcoming 评估</h4>
-                {(currentData as any).curriculumDesign.academicAffairs.assessments.map((assessment: Assessment, i: number) => (
+                {(currentData as any).curriculumDesign.academicAffairs.assessments.map((assessment: any, i: number) => (
                   <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg mb-2">
                     <div>
                       <div className="font-medium text-sm">{assessment.type}</div>
@@ -704,7 +656,7 @@ export default function InstitutionDashboardPage() {
             </div>
             <div className="space-y-3">
               <h4 className="text-sm font-semibold text-slate-700">进行中赛事</h4>
-              {(currentData as any).competitionManagement.activeCompetitions.map((comp: Competition, i: number) => (
+              {(currentData as any).competitionManagement.activeCompetitions.map((comp: any, i: number) => (
                 <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                   <div>
                     <div className="font-medium text-sm">{comp.name}</div>
@@ -744,7 +696,7 @@ export default function InstitutionDashboardPage() {
               </div>
             </div>
             <div className="space-y-2">
-              {(currentData as any).patentRegistration.recentPatents.slice(0, 3).map((patent: Patent, i: number) => (
+              {(currentData as any).patentRegistration.recentPatents.slice(0, 3).map((patent: any, i: number) => (
                 <div key={i} className="p-2 bg-slate-50 rounded-lg">
                   <div className="text-xs font-medium truncate">{patent.title}</div>
                   <div className="text-xs text-slate-500">{patent.type} · {patent.status}</div>
@@ -767,7 +719,7 @@ export default function InstitutionDashboardPage() {
               企业联动 - 悬赏开发方案
             </h3>
             <div className="grid gap-4 md:grid-cols-2">
-              {(currentData as any).enterpriseCollaboration.bountyProjects.map((project: BountyProject, i: number) => (
+              {(currentData as any).enterpriseCollaboration.bountyProjects.map((project: any, i: number) => (
                 <div key={i} className="p-4 border rounded-lg hover:border-accent transition-colors">
                   <div className="flex items-start justify-between mb-2">
                     <div>
@@ -853,7 +805,7 @@ export default function InstitutionDashboardPage() {
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-700 mb-2">主要 initiatives</h4>
-                {(currentData as any).regionalPlanning.initiatives.map((initiative: Initiative, i: number) => (
+                {(currentData as any).regionalPlanning.initiatives.map((initiative: any, i: number) => (
                   <div key={i} className="mb-3">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm font-medium">{initiative.name}</span>
