@@ -81,7 +81,7 @@ const faqCategories = [
 
 export default function FAQPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<string | null>(null);
 
   const filteredFAQs = faqCategories.map(category => ({
     ...category,
