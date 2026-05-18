@@ -17,14 +17,12 @@ export default function Footer() {
 
           {/* Product Links */}
           <div>
-            <h4 className="font-semibold text-primary mb-4">产品</h4>
+            <h4 className="font-semibold text-primary mb-4">开源资源</h4>
             <ul className="space-y-2 text-sm">
+              <li><Link href="/community" className="text-gray-600 hover:text-accent transition-colors">开源社区</Link></li>
+              <li><Link href="/course-library" className="text-gray-600 hover:text-accent transition-colors">开源课件库</Link></li>
               <li><Link href="/features" className="text-gray-600 hover:text-accent transition-colors">核心功能</Link></li>
               <li><Link href="/tech" className="text-gray-600 hover:text-accent transition-colors">技术亮点</Link></li>
-              <li><Link href="/journey" className="text-gray-600 hover:text-accent transition-colors">用户流程</Link></li>
-              <li><Link href="/teacher-dashboard" className="text-gray-600 hover:text-accent transition-colors">教师端</Link></li>
-              <li><Link href="/institution-dashboard" className="text-gray-600 hover:text-accent transition-colors">机构端</Link></li>
-              <li><Link href="/student-dashboard" className="text-gray-600 hover:text-accent transition-colors">学生端</Link></li>
             </ul>
           </div>
 
