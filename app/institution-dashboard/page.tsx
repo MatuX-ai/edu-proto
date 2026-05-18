@@ -37,7 +37,7 @@ export default function InstitutionDashboardPage() {
         { label: '未完成任务', value: '2', icon: AlertCircle }
       ],
       functionCards: [
-        { title: '发起培训', subtitle: '2位学员', icon: Presentation, color: 'from-purple-500 to-purple-600', bg: 'bg-purple-500' },
+        { title: '发起培训', subtitle: '2位学员', icon: Presentation, color: 'from-blue-500 to-blue-600', bg: 'bg-blue-500' },
         { title: '课程管理', subtitle: '1,234节课程', icon: BookOpen, color: 'from-yellow-400 to-yellow-500', bg: 'bg-yellow-400' },
         { title: '培训活动', subtitle: '组织活动12场', icon: Users2, color: 'from-orange-400 to-orange-500', bg: 'bg-orange-400' },
         { title: '监控中心', subtitle: '连接视频源15个', icon: Monitor, color: 'from-blue-400 to-blue-500', bg: 'bg-blue-400' },
@@ -55,7 +55,7 @@ export default function InstitutionDashboardPage() {
         currentTemp: '15°C'
       },
       quickTools: [
-        { title: '报名统计', icon: Users2, color: 'bg-purple-500' },
+        { title: '报名统计', icon: Users2, color: 'bg-blue-500' },
         { title: '查询会议', icon: Calendar, color: 'bg-orange-500' },
         { title: '远程辅导', icon: Video, color: 'bg-blue-400' },
         { title: '直播管理', icon: Monitor, color: 'bg-green-400' },
@@ -71,7 +71,7 @@ export default function InstitutionDashboardPage() {
         { label: '在职教师', value: '36', icon: Users }
       ],
       functionCards: [
-        { title: '课程编排', subtitle: '120节课程', icon: Calendar, color: 'from-purple-500 to-purple-600', bg: 'bg-purple-500' },
+        { title: '课程编排', subtitle: '120节课程', icon: Calendar, color: 'from-blue-500 to-blue-600', bg: 'bg-blue-500' },
         { title: '学生管理', subtitle: '864名学生', icon: Users, color: 'from-yellow-400 to-yellow-500', bg: 'bg-yellow-400' },
         { title: '考试安排', subtitle: '本月3场考试', icon: FileText, color: 'from-orange-400 to-orange-500', bg: 'bg-orange-400' },
         { title: '教学监控', subtitle: '24间教室', icon: Monitor, color: 'from-blue-400 to-blue-500', bg: 'bg-blue-400' },
@@ -89,7 +89,7 @@ export default function InstitutionDashboardPage() {
         currentTemp: '22°C'
       },
       quickTools: [
-        { title: '课程表', icon: Calendar, color: 'bg-purple-500' },
+        { title: '课程表', icon: Calendar, color: 'bg-blue-500' },
         { title: '作业管理', icon: FileText, color: 'bg-orange-500' },
         { title: '家长沟通', icon: MessageSquare, color: 'bg-blue-400' },
         { title: '校园公告', icon: Megaphone, color: 'bg-green-400' },
@@ -105,7 +105,7 @@ export default function InstitutionDashboardPage() {
         { label: '校企合作', value: '45', icon: Handshake }
       ],
       functionCards: [
-        { title: '实训管理', subtitle: '15个实训基地', icon: Monitor, color: 'from-purple-500 to-purple-600', bg: 'bg-purple-500' },
+        { title: '实训管理', subtitle: '15个实训基地', icon: Monitor, color: 'from-blue-500 to-blue-600', bg: 'bg-blue-500' },
         { title: '竞赛组织', subtitle: '本月4场赛事', icon: Trophy, color: 'from-yellow-400 to-yellow-500', bg: 'bg-yellow-400' },
         { title: '校企合作', subtitle: '45家合作企业', icon: Handshake, color: 'from-orange-400 to-orange-500', bg: 'bg-orange-400' },
         { title: '专利管理', subtitle: '28项申请中', icon: FileText, color: 'from-blue-400 to-blue-500', bg: 'bg-blue-400' },
@@ -123,7 +123,7 @@ export default function InstitutionDashboardPage() {
         currentTemp: '24°C'
       },
       quickTools: [
-        { title: '赛事报名', icon: Trophy, color: 'bg-purple-500' },
+        { title: '赛事报名', icon: Trophy, color: 'bg-blue-500' },
         { title: '项目认领', icon: TargetIcon, color: 'bg-orange-500' },
         { title: '专利申报', icon: FileText, color: 'bg-blue-400' },
         { title: '企业合作', icon: Handshake, color: 'bg-green-400' },
@@ -139,7 +139,7 @@ export default function InstitutionDashboardPage() {
         { label: '教育投入', value: '¥2.8M', icon: DollarSign }
       ],
       functionCards: [
-        { title: '学校管理', subtitle: '156所学校', icon: Building2, color: 'from-purple-500 to-purple-600', bg: 'bg-purple-500' },
+        { title: '学校管理', subtitle: '156所学校', icon: Building2, color: 'from-blue-500 to-blue-600', bg: 'bg-blue-500' },
         { title: '资源分配', subtitle: '均衡配置', icon: TargetIcon, color: 'from-yellow-400 to-yellow-500', bg: 'bg-yellow-400' },
         { title: '质量监控', subtitle: '全覆盖监测', icon: Monitor, color: 'from-orange-400 to-orange-500', bg: 'bg-orange-400' },
         { title: '数据统计', subtitle: '多维度分析', icon: BarChart3, color: 'from-blue-400 to-blue-500', bg: 'bg-blue-400' },
@@ -157,7 +157,7 @@ export default function InstitutionDashboardPage() {
         currentTemp: '23°C'
       },
       quickTools: [
-        { title: '学校档案', icon: Building2, color: 'bg-purple-500' },
+        { title: '学校档案', icon: Building2, color: 'bg-blue-500' },
         { title: '教师统计', icon: Users, color: 'bg-orange-500' },
         { title: '资金投入', icon: DollarSign, color: 'bg-blue-400' },
         { title: '质量报告', icon: FileText, color: 'bg-green-400' },
@@ -172,10 +172,36 @@ export default function InstitutionDashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center py-8 px-4">
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-2">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent mb-2">
           MatuX 机构管理后台
         </h1>
         <p className="text-slate-600">全功能机构运营管理平台</p>
+      </div>
+
+      {/* Organization Type Selector - Outside Frame */}
+      <div className="flex gap-3 mb-6">
+        {([
+          { key: 'training', label: '培训机构', icon: Briefcase },
+          { key: 'k12', label: 'K12学校', icon: School },
+          { key: 'vocational', label: '职业学校', icon: GraduationCap },
+          { key: 'education-bureau', label: '教育局', icon: Landmark }
+        ] as const).map((tab) => {
+          const TabIconComponent = tab.icon;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl whitespace-nowrap transition-all ${
+                activeTab === tab.key
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-200 scale-105'
+                  : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
+              }`}
+            >
+              <TabIconComponent className="h-5 w-5" />
+              <span className="text-sm font-medium">{tab.label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Tablet Device Frame */}
@@ -195,12 +221,12 @@ export default function InstitutionDashboardPage() {
         </div>
 
         {/* Main Dashboard Content */}
-        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
+        <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
           {/* Sidebar - Fixed inside the frame */}
           <motion.div
             initial={{ x: -80 }}
             animate={{ x: 0 }}
-            className="absolute w-20 bg-gradient-to-b from-purple-500 to-purple-700 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl"
+            className="absolute w-20 bg-gradient-to-b from-blue-600 to-blue-800 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl"
           >
             {/* Logo */}
             <div className="mb-8">
@@ -251,21 +277,21 @@ export default function InstitutionDashboardPage() {
                 <input
                   type="text"
                   placeholder="搜索功能、课程、教师..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white rounded-lg border border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 outline-none transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white rounded-lg border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                 />
               </div>
             </div>
             
             <div className="flex items-center gap-4">
-              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-purple-300 transition-all">
+              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
                 <Settings className="h-5 w-5 text-gray-600" />
               </button>
-              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-purple-300 transition-all">
+              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
                 <Bell className="h-5 w-5 text-gray-600" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
               </button>
               <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-gray-200">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs font-bold">管</span>
                 </div>
                 <span className="text-sm font-medium text-gray-700">管理员</span>
@@ -308,32 +334,6 @@ export default function InstitutionDashboardPage() {
             </div>
           </motion.div>
 
-          {/* Type Selector Tabs */}
-          <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-            {([
-              { key: 'training', label: '培训机构', icon: Briefcase },
-              { key: 'k12', label: 'K12学校', icon: School },
-              { key: 'vocational', label: '职业学校', icon: GraduationCap },
-              { key: 'education-bureau', label: '教育局', icon: Landmark }
-            ] as const).map((tab) => {
-              const TabIconComponent = tab.icon;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg whitespace-nowrap transition-all ${
-                    activeTab === tab.key
-                      ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-200'
-                      : 'bg-white text-gray-600 hover:bg-purple-50 border border-gray-200'
-                  }`}
-                >
-                  <TabIconComponent className="h-4 w-4" />
-                  <span className="text-sm font-medium">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
           {/* Main Grid Layout */}
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Left Column - Media & Dashboard */}
@@ -358,11 +358,11 @@ export default function InstitutionDashboardPage() {
                         key={i}
                         className={`relative p-4 rounded-xl transition-all ${
                           isActive
-                            ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-200'
-                            : 'bg-gray-50 hover:bg-purple-50 border border-gray-200'
+                            ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-200'
+                            : 'bg-gray-50 hover:bg-blue-50 border border-gray-200'
                         }`}
                       >
-                        <IconComponent className={`h-6 w-6 mb-3 ${isActive ? 'text-white' : 'text-purple-500'}`} />
+                        <IconComponent className={`h-6 w-6 mb-3 ${isActive ? 'text-white' : 'text-blue-500'}`} />
                         <div className={`text-sm font-medium mb-1 ${isActive ? 'text-white' : 'text-gray-800'}`}>
                           {card.title}
                         </div>
@@ -384,10 +384,10 @@ export default function InstitutionDashboardPage() {
               >
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <Zap className="h-5 w-5 text-purple-500" />
+                    <Zap className="h-5 w-5 text-blue-500" />
                     数据中心
                   </h3>
-                  <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-purple-400">
+                  <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-blue-400">
                     <option>企业概览</option>
                     <option>数据分析</option>
                   </select>
