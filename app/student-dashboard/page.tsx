@@ -111,7 +111,7 @@ export default function StudentDashboard() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="absolute inset-0 bg-slate-50 z-40 overflow-y-auto pb-20"
+                    className="absolute inset-0 bg-slate-50 z-40 overflow-y-auto pb-24 pr-1"
                   >
                     <div className="sticky top-0 bg-white border-b px-5 py-3 flex items-center gap-3 z-10">
                       <button onClick={() => setPhoneSubPage(null)} className="p-2 hover:bg-slate-100 rounded-full">
@@ -144,7 +144,7 @@ export default function StudentDashboard() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShowAIAssistant(true)}
-              className="absolute bottom-24 right-4 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full shadow-xl flex items-center justify-center text-white z-30"
+              className="absolute bottom-28 right-4 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full shadow-xl flex items-center justify-center text-white z-30"
             >
               <Bot className="h-6 w-6" />
             </motion.button>

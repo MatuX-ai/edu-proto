@@ -24,28 +24,33 @@ export function CommunityPage({ mode }: CommunityPageProps) {
         </div>
 
         <h3 className="font-bold text-blue-600 text-sm">创客广场</h3>
-        {[1, 2, 3].map((_, i) => (
+        {[
+          { image: '/images/projects/auto-watering-system.svg', author: '王同学', title: '基于 ESP32 的自动浇花系统', desc: '通过土壤湿度传感器实时监测，当数值低于阈值时自动开启水泵...', tags: ['#物联网', '#自动化'], likes: 128 },
+          { image: '/images/projects/smart-fan.svg', author: '李同学', title: '智能温控风扇系统', desc: '基于温度传感器自动调节风扇转速，实现智能节能控制...', tags: ['#智能家居', '#节能'], likes: 96 },
+          { image: '/images/projects/voice-car.svg', author: '张同学', title: '语音控制智能小车', desc: '通过语音识别模块实现小车的前进、后退、转弯等控制...', tags: ['#机器人', '#语音识别'], likes: 145 }
+        ].map((project, i) => (
           <motion.div
             key={i}
             whileTap={{ scale: 0.98 }}
             className="bg-white rounded-xl border shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
           >
-            <div className="h-28 bg-slate-200 flex items-center justify-center text-gray-400 text-xs relative">
-              [项目作品展示图]
+            <div className="h-28 bg-slate-100 relative overflow-hidden">
+              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
               <div className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-2 py-0.5 rounded-full flex items-center">
-                <User className="h-2 w-2 mr-1" /> 王同学
+                <User className="h-2 w-2 mr-1" /> {project.author}
               </div>
             </div>
             <div className="p-3">
-              <h4 className="font-bold text-xs mb-1">基于 ESP32 的自动浇花系统</h4>
-              <p className="text-[10px] text-gray-500 mb-2 line-clamp-2">通过土壤湿度传感器实时监测，当数值低于阈值时自动开启水泵...</p>
+              <h4 className="font-bold text-xs mb-1">{project.title}</h4>
+              <p className="text-[10px] text-gray-500 mb-2 line-clamp-2">{project.desc}</p>
               <div className="flex justify-between items-center">
                 <div className="flex space-x-2">
-                  <span className="text-[9px] bg-slate-100 px-2 py-0.5 rounded text-gray-600">#物联网</span>
-                  <span className="text-[9px] bg-slate-100 px-2 py-0.5 rounded text-gray-600">#自动化</span>
+                  {project.tags.map((tag, j) => (
+                    <span key={j} className="text-[9px] bg-slate-100 px-2 py-0.5 rounded text-gray-600">{tag}</span>
+                  ))}
                 </div>
                 <div className="flex items-center space-x-1 text-gray-400">
-                  <Award className="h-3 w-3" /> <span className="text-[9px]">128</span>
+                  <Award className="h-3 w-3" /> <span className="text-[9px]">{project.likes}</span>
                 </div>
               </div>
             </div>
