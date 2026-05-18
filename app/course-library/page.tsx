@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Download, Search, Filter, Star, Clock, Users, FileText } from 'lucide-react';
+import { BookOpen, Download, Search, Filter, Star, Clock, Users, FileText, Cpu, Zap, Network, Layers } from 'lucide-react';
 import { useState } from 'react';
 
 export default function CourseLibraryPage() {
@@ -10,93 +10,108 @@ export default function CourseLibraryPage() {
 
   const categories = [
     { id: 'all', name: '全部' },
-    { id: 'programming', name: '编程开发' },
-    { id: 'hardware', name: '硬件开发' },
-    { id: 'ai', name: '人工智能' },
-    { id: 'robotics', name: '机器人' },
-    { id: 'science', name: '科学实验' }
+    { id: 'tutorial', name: '教程库' },
+    { id: 'transition', name: '过渡项目' },
+    { id: 'courseware', name: '课件库' },
+    { id: 'hardware', name: '硬件项目' }
   ];
 
   const courses = [
     {
-      title: 'Python 编程基础教程',
-      category: 'programming',
-      author: 'MatuX 团队',
-      downloads: 1250,
-      rating: 4.8,
-      updated: '2024-01-15',
-      description: '适合初学者的 Python 编程入门课程，包含 20 个实践项目',
-      tags: ['Python', '入门', '实战']
+      title: '生态系统能量流动 - OpenSciEd 单元',
+      category: 'tutorial',
+      author: 'OpenSciEd 团队',
+      downloads: 2580,
+      rating: 4.9,
+      updated: '2026-05-10',
+      description: '6周现象驱动探究项目，通过实验理解生态系统中的能量传递规律',
+      tags: ['生物学', '生态', '实验'],
+      duration: '6周',
+      price: '免费'
     },
     {
-      title: 'Arduino 智能硬件开发',
+      title: '欧姆定律可视化模拟 - Blockly 编程',
+      category: 'transition',
+      author: 'MatuX 团队',
+      downloads: 1850,
+      rating: 4.8,
+      updated: '2026-05-08',
+      description: '用图形化编程模拟物理公式，变量控制电压电流，直观理解抽象概念',
+      tags: ['物理', '编程', '可视化'],
+      duration: '2周',
+      price: '免费'
+    },
+    {
+      title: '大学物理：微积分推导 - OpenStax',
+      category: 'courseware',
+      author: 'OpenStax 团队',
+      downloads: 3200,
+      rating: 4.9,
+      updated: '2026-05-12',
+      description: '深入讲解运动学、动力学的微积分推导，掌握核心理论基础',
+      tags: ['物理', '数学', '理论'],
+      duration: '8周',
+      price: '免费'
+    },
+    {
+      title: '智能气象站 - ESP32 + 传感器',
       category: 'hardware',
       author: '陈老师',
-      downloads: 980,
+      downloads: 1560,
       rating: 4.9,
-      updated: '2024-01-10',
-      description: '从零开始学习 Arduino 硬件开发，打造智能家居系统',
-      tags: ['Arduino', '物联网', '硬件']
+      updated: '2026-05-15',
+      description: '预算¥35，ESP32采集温湿度数据，Python绘制实时曲线，手机WebUSB烧录',
+      tags: ['物联网', '传感器', '数据分析'],
+      duration: '3周',
+      price: '¥35'
     },
     {
-      title: '机器学习入门与实践',
-      category: 'ai',
-      author: '李老师',
-      downloads: 856,
-      rating: 4.7,
-      updated: '2024-01-08',
-      description: '深入浅出讲解机器学习算法，配合实际案例演练',
-      tags: ['AI', '机器学习', '算法']
-    },
-    {
-      title: 'Scratch 创意编程',
-      category: 'programming',
-      author: '王老师',
-      downloads: 1580,
-      rating: 4.9,
-      updated: '2024-01-12',
-      description: '通过 Scratch 培养编程思维，创作互动故事和游戏',
-      tags: ['Scratch', '儿童编程', '创意']
-    },
-    {
-      title: '机器人搭建与编程',
-      category: 'robotics',
-      author: '张老师',
-      downloads: 720,
-      rating: 4.8,
-      updated: '2024-01-05',
-      description: '学习机器人结构设计、传感器应用和运动控制编程',
-      tags: ['机器人', '机械', '控制']
-    },
-    {
-      title: '物理化学实验课',
-      category: 'science',
-      author: '刘老师',
-      downloads: 650,
-      rating: 4.6,
-      updated: '2024-01-03',
-      description: '趣味物理化学实验，培养科学探究精神',
-      tags: ['物理', '化学', '实验']
-    },
-    {
-      title: 'Web 前端开发实战',
-      category: 'programming',
-      author: '赵老师',
-      downloads: 1120,
-      rating: 4.8,
-      updated: '2024-01-14',
-      description: 'HTML/CSS/JavaScript 完整教程，构建现代 Web 应用',
-      tags: ['Web', '前端', 'JavaScript']
-    },
-    {
-      title: '3D 打印设计与制作',
+      title: '光合作用模拟器 - Arduino 项目',
       category: 'hardware',
-      author: '孙老师',
-      downloads: 540,
+      author: '李老师',
+      downloads: 1280,
+      rating: 4.8,
+      updated: '2026-05-13',
+      description: '预算¥42，光敏电阻+LED模拟氧气释放，Arduino采集光照数据并分析',
+      tags: ['生物', 'Arduino', '实验'],
+      duration: '2周',
+      price: '¥42'
+    },
+    {
+      title: '化学方程式平衡 - 知识图谱关联',
+      category: 'courseware',
+      author: '王老师',
+      downloads: 2100,
       rating: 4.7,
-      updated: '2024-01-07',
-      description: '学习 3D 建模软件，设计并打印实用物品',
-      tags: ['3D打印', '设计', '制造']
+      updated: '2026-05-11',
+      description: '基于 Neo4j 知识图谱，关联化学反应原理与数学配平方法',
+      tags: ['化学', '知识图谱', 'AI'],
+      duration: '4周',
+      price: '免费'
+    },
+    {
+      title: '智能避障小车 - 综合硬件项目',
+      category: 'hardware',
+      author: '张老师',
+      downloads: 1920,
+      rating: 4.9,
+      updated: '2026-05-14',
+      description: '预算¥48，Arduino Uno+超声波+舵机，整合物理传感+编程控制+工程设计',
+      tags: ['机器人', 'Arduino', '工程'],
+      duration: '4周',
+      price: '¥48'
+    },
+    {
+      title: '统计数据分析 - Python 实战',
+      category: 'transition',
+      author: '赵老师',
+      downloads: 1650,
+      rating: 4.8,
+      updated: '2026-05-09',
+      description: '从气象站数据出发，学习 Pandas 数据处理和 Matplotlib 可视化',
+      tags: ['数学', 'Python', '数据科学'],
+      duration: '3周',
+      price: '免费'
     }
   ];
 
@@ -121,24 +136,87 @@ export default function CourseLibraryPage() {
         </p>
       </motion.div>
 
+      {/* Learning Path Visualization */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+        className="mb-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-xl p-8 border"
+      >
+        <h2 className="text-2xl font-bold text-center mb-6">连贯学习路径</h2>
+        <p className="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+          基于知识图谱与 AI 的 STEM 教育创新方案，从现象驱动到理论深度的完整学习链路
+        </p>
+        
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            { step: '1', icon: BookOpen, title: '教程库单元', desc: '现象驱动实践', subdesc: 'OpenSciEd 6周探究项目', color: 'blue' },
+            { step: '2', icon: Zap, title: '过渡项目', desc: 'Blockly 编程模拟', subdesc: '可视化理解抽象概念', color: 'purple' },
+            { step: '3', icon: Layers, title: '课件库章节', desc: '理论深化', subdesc: 'OpenStax 大学教材预习', color: 'pink' },
+            { step: '4', icon: Cpu, title: '硬件综合项目', desc: '跨学科应用', subdesc: 'Arduino/ESP32 实战', color: 'green' }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + i * 0.1 }}
+              className="relative bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all"
+            >
+              <div className={`absolute -top-3 -left-3 w-8 h-8 bg-${item.color}-500 rounded-full flex items-center justify-center text-white font-bold`}>
+                {item.step}
+              </div>
+              <item.icon className={`h-10 w-10 mx-auto mb-3 text-${item.color}-500`} />
+              <h3 className="font-bold text-center mb-2">{item.title}</h3>
+              <p className="text-sm text-center text-gray-700 font-medium mb-1">{item.desc}</p>
+              <p className="text-xs text-center text-gray-500">{item.subdesc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Knowledge Graph Features */}
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="bg-white/80 backdrop-blur rounded-lg p-4 flex items-start gap-3">
+            <Network className="h-6 w-6 text-blue-500 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="font-semibold text-sm mb-1">知识图谱驱动</h4>
+              <p className="text-xs text-gray-600">Neo4j 构建关联网络，跨学科准确率 ≥90%</p>
+            </div>
+          </div>
+          <div className="bg-white/80 backdrop-blur rounded-lg p-4 flex items-start gap-3">
+            <Zap className="h-6 w-6 text-purple-500 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="font-semibold text-sm mb-1">AI 自适应路径</h4>
+              <p className="text-xs text-gray-600">PPO 强化学习推荐，MiniCPM 虚拟导师实时解答</p>
+            </div>
+          </div>
+          <div className="bg-white/80 backdrop-blur rounded-lg p-4 flex items-start gap-3">
+            <Cpu className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="font-semibold text-sm mb-1">低成本硬件联动</h4>
+              <p className="text-xs text-gray-600">预算 ≤¥50，WebUSB 手机直连烧录</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Stats */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: 0.35 }}
         className="grid gap-6 md:grid-cols-4 mb-12"
       >
         {[
-          { icon: BookOpen, label: '课件总数', value: '256', color: 'blue' },
-          { icon: Download, label: '总下载量', value: '15.8K', color: 'green' },
-          { icon: Users, label: '贡献教师', value: '89', color: 'purple' },
-          { icon: Star, label: '平均评分', value: '4.8', color: 'yellow' }
+          { icon: BookOpen, label: '资源总数', value: '500+', color: 'blue' },
+          { icon: Download, label: '总下载量', value: '25K+', color: 'green' },
+          { icon: Users, label: '贡献者', value: '120+', color: 'purple' },
+          { icon: Star, label: 'GitHub Stars', value: '1000+', color: 'yellow' }
         ].map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 + i * 0.1 }}
+            transition={{ delay: 0.35 + i * 0.1 }}
             className="p-6 rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow text-center"
           >
             <stat.icon className={`h-8 w-8 mx-auto mb-3 text-${stat.color}-500`} />
@@ -234,14 +312,17 @@ export default function CourseLibraryPage() {
               </div>
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
-                <span>{course.updated}</span>
+                <span>{course.duration}</span>
               </div>
             </div>
             
             <div className="flex items-center justify-between pt-4 border-t">
-              <div className="flex items-center gap-1 text-sm text-gray-600">
-                <Download className="h-4 w-4" />
-                <span>{course.downloads} 次下载</span>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1 text-sm text-gray-600">
+                  <Download className="h-4 w-4" />
+                  <span>{course.downloads} 次下载</span>
+                </div>
+                <div className="text-xs font-medium text-accent">{course.price}</div>
               </div>
               <button className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium">
                 查看详情
@@ -269,32 +350,32 @@ export default function CourseLibraryPage() {
               <div className="flex-1 text-center md:text-left">
                 <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
                   <Star className="h-5 w-5 text-yellow-300 fill-yellow-300" />
-                  <span className="text-sm font-medium">推荐资源</span>
+                  <span className="text-sm font-medium">开源项目推荐</span>
                 </div>
-                <h2 className="text-3xl font-bold mb-3">OpenSciEdu 开放科学教育平台</h2>
+                <h2 className="text-3xl font-bold mb-3">OpenMTSciEd - STEM连贯学习路径引擎</h2>
                 <p className="text-lg opacity-90 mb-4">
-                  探索更多优质 STEM 教育资源，获取完整的课程体系和教学工具
+                  全球共建&quot;STEM 知识地图&quot;，让资源匮乏地区的学生也能享受前沿教育
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                   <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
-                    📚 完整课程体系
+                    🕸️ 知识图谱驱动
                   </span>
                   <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
-                    🎯 教学工具包
+                    🤖 AI 自适应路径
                   </span>
                   <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
-                    👥 教师社区
+                    🔌 低成本硬件联动
                   </span>
                 </div>
               </div>
               <div className="flex-shrink-0">
                 <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 group-hover:bg-white/30 transition-colors">
-                  <BookOpen className="h-12 w-12" />
+                  <Network className="h-12 w-12" />
                 </div>
               </div>
             </div>
             <div className="mt-6 flex items-center justify-center md:justify-start gap-2 text-sm font-medium">
-              <span>立即访问</span>
+              <span>访问开源项目</span>
               <svg
                 className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                 fill="none"
