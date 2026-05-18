@@ -20,9 +20,9 @@ export default function Navbar() {
           <Link href="/features" className="transition-colors hover:text-accent">核心功能</Link>
           <Link href="/tech" className="transition-colors hover:text-accent">技术亮点</Link>
           <Link href="/journey" className="transition-colors hover:text-accent">用户流程</Link>
-          <Link href="/about" className="transition-colors hover:text-accent">关于我们</Link>
+          <Link href="/teacher-dashboard" className="transition-colors hover:text-accent">教师端</Link>
+          <Link href="/institution-dashboard" className="transition-colors hover:text-accent">机构端</Link>
           <Link href="/student-dashboard" className="transition-colors hover:text-accent">学生端</Link>
-          <Link href="/demo" className="transition-colors hover:text-accent">在线演示</Link>
         </div>
 
         <div className="hidden md:flex items-center space-x-3">
@@ -46,11 +46,11 @@ export default function Navbar() {
           <Link href="/features" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>核心功能</Link>
           <Link href="/tech" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>技术亮点</Link>
           <Link href="/journey" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>用户流程</Link>
-          <Link href="/about" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>关于我们</Link>
+          <Link href="/teacher-dashboard" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>教师端</Link>
+          <Link href="/institution-dashboard" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>机构端</Link>
           <Link href="/student-dashboard" className="block py-2 font-medium text-accent" onClick={() => setIsMenuOpen(false)}>学生端</Link>
-          <Link href="/demo" className="block py-2 font-medium text-accent" onClick={() => setIsMenuOpen(false)}>在线演示</Link>
           <Link
-            href="/demo"
+            href="/teacher-dashboard"
             className="block w-full text-center rounded-md bg-primary text-primary-foreground py-2.5 font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
