@@ -517,7 +517,7 @@ export default function InstitutionDashboardPage() {
               社媒管理
             </h3>
             <div className="space-y-4">
-              {(currentData as any).salaryManagement.socialMedia.platforms.map((platform: any, i: number) => (
+              {(currentData as any).socialMedia.platforms.map((platform: any, i: number) => (
                 <div key={i} className="p-3 bg-slate-50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-medium text-sm">{platform.name}</span>
@@ -591,24 +591,24 @@ export default function InstitutionDashboardPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">总课程数</div>
-                  <div className="text-xl font-bold">{(currentData as any).curriculumDesign.academicAffairs.schedule.totalClasses}</div>
+                  <div className="text-xl font-bold">{(currentData as any).academicAffairs.schedule.totalClasses}</div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">STEM 课程</div>
-                  <div className="text-xl font-bold text-accent">{(currentData as any).curriculumDesign.academicAffairs.schedule.stemClasses}</div>
+                  <div className="text-xl font-bold text-accent">{(currentData as any).academicAffairs.schedule.stemClasses}</div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">实验课</div>
-                  <div className="text-xl font-bold text-purple-600">{(currentData as any).curriculumDesign.academicAffairs.schedule.labSessions}</div>
+                  <div className="text-xl font-bold text-purple-600">{(currentData as any).academicAffairs.schedule.labSessions}</div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">项目课</div>
-                  <div className="text-xl font-bold text-green-600">{(currentData as any).curriculumDesign.academicAffairs.schedule.projectWorks}</div>
+                  <div className="text-xl font-bold text-green-600">{(currentData as any).academicAffairs.schedule.projectWorks}</div>
                 </div>
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-700 mb-2"> upcoming 评估</h4>
-                {(currentData as any).curriculumDesign.academicAffairs.assessments.map((assessment: any, i: number) => (
+                {(currentData as any).academicAffairs.assessments.map((assessment: any, i: number) => (
                   <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg mb-2">
                     <div>
                       <div className="font-medium text-sm">{assessment.type}</div>
@@ -796,11 +796,11 @@ export default function InstitutionDashboardPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">总预算</div>
-                  <div className="text-xl font-bold text-accent">{(currentData as any).regionalPlanning.resourceAllocation.budget.total}</div>
+                  <div className="text-xl font-bold text-accent">{(currentData as any).resourceAllocation.budget.total}</div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-lg">
                   <div className="text-xs text-slate-500">设备投入</div>
-                  <div className="text-xl font-bold">{(currentData as any).regionalPlanning.resourceAllocation.budget.equipment}</div>
+                  <div className="text-xl font-bold">{(currentData as any).resourceAllocation.budget.equipment}</div>
                 </div>
               </div>
               <div>
