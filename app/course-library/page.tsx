@@ -136,6 +136,136 @@ export default function CourseLibraryPage() {
         </p>
       </motion.div>
 
+      {/* Positioning Statement */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="mb-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100"
+      >
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">STEM 教育课程定位</h2>
+          <p className="text-base text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            本课程库专注于 <span className="font-semibold text-accent">STEM 教育</span>（科学、技术、工程、数学），
+            而非传统学科类应试教育。我们强调通过项目式学习、现象驱动探究和跨学科融合，
+            培养学生的科学思维、创新能力和实践技能。
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
+          <div className="bg-white/80 rounded-lg p-5">
+            <h3 className="font-semibold text-green-700 mb-3 flex items-center gap-2">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              STEM 教育特征
+            </h3>
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li>• 跨学科融合（科学+技术+工程+数学）</li>
+              <li>• 项目式学习（PBL）导向</li>
+              <li>• 现象驱动，真实问题情境</li>
+              <li>• 动手实践与实验探究</li>
+              <li>• 培养创新思维和问题解决能力</li>
+            </ul>
+          </div>
+          
+          <div className="bg-white/80 rounded-lg p-5">
+            <h3 className="font-semibold text-red-700 mb-3 flex items-center gap-2">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+              非传统学科教育
+            </h3>
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li>• 不针对升学考试或应试训练</li>
+              <li>• 不以标准化测试为评价标准</li>
+              <li>• 不局限于单一学科知识体系</li>
+              <li>• 不强调死记硬背和机械练习</li>
+              <li>• 不依赖传统课堂讲授模式</li>
+            </ul>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Courseware Sources */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mb-12 bg-white rounded-xl p-8 border shadow-sm"
+      >
+        <h2 className="text-2xl font-bold text-gray-900 text-center mb-3">课件主要来源</h2>
+        <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+          所有课件均来自开源教育资源，遵循开放共享原则，支持全球教育公平
+        </p>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              title: 'OpenSciEd',
+              type: '教程库单元',
+              desc: '免费开源的科学教育课程，由 NGSS 标准驱动',
+              color: 'blue',
+              features: ['6周探究项目', '现象驱动', 'K-12年级覆盖']
+            },
+            {
+              title: 'OpenStax',
+              type: '课件库章节',
+              desc: '莱斯大学开源教材，大学水平高质量内容',
+              color: 'purple',
+              features: ['大学教材预习', '免费授权', '同行评审']
+            },
+            {
+              title: 'Blockly / Scratch',
+              type: '过渡项目',
+              desc: '图形化编程工具，可视化理解抽象概念',
+              color: 'green',
+              features: ['Blockly 编程', '可视化模拟', '降低门槛']
+            },
+            {
+              title: 'Arduino / ESP32',
+              type: '硬件项目',
+              desc: '开源硬件平台，低成本跨学科实践',
+              color: 'orange',
+              features: ['预算 ≤¥50', 'WebUSB 烧录', '物联网应用']
+            }
+          ].map((source, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 + i * 0.1 }}
+              className="group border rounded-lg p-6 hover:shadow-md transition-all hover:border-accent"
+            >
+              <div className={`inline-block px-3 py-1 bg-${source.color}-100 text-${source.color}-700 text-xs font-medium rounded-full mb-3`}>
+                {source.type}
+              </div>
+              <h3 className={`text-lg font-bold mb-2 text-${source.color}-700 group-hover:text-accent transition-colors`}>
+                {source.title}
+              </h3>
+              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                {source.desc}
+              </p>
+              <ul className="space-y-1">
+                {source.features.map((feature, j) => (
+                  <li key={j} className="text-xs text-gray-500 flex items-center gap-1">
+                    <span className={`w-1.5 h-1.5 bg-${source.color}-500 rounded-full flex-shrink-0`} />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="mt-8 bg-gray-50 rounded-lg p-5 text-center">
+          <p className="text-sm text-gray-700">
+            <span className="font-semibold">所有课件均遵循开放授权协议</span>（如 CC BY-SA 4.0）
+            ，支持自由使用、修改和分享，欢迎全球教育工作者共同贡献
+          </p>
+        </div>
+      </motion.div>
+
       {/* Learning Path Visualization */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
