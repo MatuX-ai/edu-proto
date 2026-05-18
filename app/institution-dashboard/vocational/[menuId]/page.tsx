@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
 import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
-import StatsOverviewPage from '../../components/pages/stats-overview-page';
+import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import DigitalTwinLabPage from '../../components/pages/digital-twin-lab-page';
+import DigitalTwinPage from '../../components/pages/digital-twin-page';
 import ProjectKanbanPage from '../../components/pages/project-kanban-page';
 import SkillWalletPage from '../../components/pages/skill-wallet-page';
 import ProjectWorkshopPage from '../../components/pages/project-workshop-page';
@@ -27,10 +28,12 @@ export default function VocationalMenuPage({ params }: { params: { menuId: strin
         <DashboardContent config={config} />
       ) : menuId === 'project-workshop' ? (
         <ProjectWorkshopPage />
+      ) : menuId === 'training-base' ? (
+        <DigitalTwinPage />
       ) : menuItem.pageType === 'table' && mockData ? (
         <DataTablePage title={mockData.title} columns={mockData.columns} rows={mockData.rows} />
       ) : menuItem.pageType === 'stats' ? (
-        <StatsOverviewPage title={menuItem.label} />
+        <EnhancedStatsPage title={menuItem.label} type="bar" />
       ) : menuItem.pageType === 'digital-twin' ? (
         <DigitalTwinLabPage />
       ) : menuItem.pageType === 'kanban' ? (

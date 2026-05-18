@@ -36,19 +36,19 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
 
       {/* Main Dashboard Content */}
       <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-        {/* Sidebar */}
+        {/* Sidebar - Glassmorphism */}
         <motion.div
           initial={{ x: -80 }}
           animate={{ x: 0 }}
-          className={`absolute w-20 bg-gradient-to-b from-${config.themeColor}-600 to-${config.themeColor}-800 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl`}
+          className={`absolute w-24 bg-gradient-to-b from-${config.themeColor}-700 to-${config.themeColor}-900 h-full left-0 top-0 z-50 flex flex-col items-center py-8 shadow-2xl backdrop-blur-xl border-r border-white/10`}
         >
-          <div className="mb-8">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
-              <Home className="h-6 w-6 text-white" />
+          <div className="mb-10">
+            <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-inner hover:bg-white/20 transition-all cursor-pointer">
+              <Home className="h-7 w-7 text-white" />
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col gap-3 w-full px-3">
+          <div className="flex-1 flex flex-col gap-4 w-full px-4">
             {config.sidebarItems.map((item: SidebarItem) => {
               const IconComponent = item.icon;
               const isActive = currentActive === item.id;
@@ -56,31 +56,31 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                 <Link
                   key={item.id}
                   href={`/institution-dashboard/${config.type}/${item.id}`}
-                  className={`relative w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${
+                  className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 group ${
                     isActive
-                      ? 'bg-white/25 shadow-lg scale-105'
-                      : 'hover:bg-white/10'
+                      ? 'bg-white/20 shadow-lg shadow-black/10 scale-105 border border-white/20'
+                      : 'hover:bg-white/10 hover:scale-105'
                   }`}
                 >
-                  <IconComponent className={`h-5 w-5 ${isActive ? 'text-white' : 'text-white/70'}`} />
+                  <IconComponent className={`h-6 w-6 transition-colors ${isActive ? 'text-white' : 'text-white/60 group-hover:text-white'}`} />
                   {isActive && (
-                    <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-full" />
+                    <div className="absolute -right-[22px] top-1/2 -translate-y-1/2 w-1.5 h-8 bg-white rounded-l-full" />
                   )}
                 </Link>
               );
             })}
           </div>
 
-          <div className="mt-auto px-3 w-full">
-            <button className="w-full aspect-square rounded-xl hover:bg-white/10 flex items-center justify-center transition-all">
-              <LogOut className="h-5 w-5 text-white/70" />
+          <div className="mt-auto px-4 w-full">
+            <button className="w-full aspect-square rounded-2xl hover:bg-white/10 flex items-center justify-center transition-all border border-transparent hover:border-white/10">
+              <LogOut className="h-6 w-6 text-white/60 hover:text-white" />
             </button>
           </div>
         </motion.div>
 
         {/* Main Content Area */}
         <motion.div 
-          className="ml-20 h-full overflow-y-auto p-6"
+          className={`ml-24 h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}

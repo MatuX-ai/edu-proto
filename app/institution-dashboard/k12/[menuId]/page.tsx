@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
 import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
-import StatsOverviewPage from '../../components/pages/stats-overview-page';
+import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import AcademicManagementPage from '../../components/pages/academic-management-page';
+import GradeAnalysisPage from '../../components/pages/grade-analysis-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
 export default function K12MenuPage({ params }: { params: { menuId: string } }) {
@@ -24,10 +25,12 @@ export default function K12MenuPage({ params }: { params: { menuId: string } }) 
         <DashboardContent config={config} />
       ) : menuId === 'academic' ? (
         <AcademicManagementPage />
+      ) : menuId === 'grades' ? (
+        <GradeAnalysisPage />
       ) : menuItem.pageType === 'table' && mockData ? (
         <DataTablePage title={mockData.title} columns={mockData.columns} rows={mockData.rows} />
       ) : menuItem.pageType === 'stats' ? (
-        <StatsOverviewPage title={menuItem.label} />
+        <EnhancedStatsPage title={menuItem.label} type="pie" />
       ) : (
         <div className="flex items-center justify-center h-64 text-gray-500">
           该功能页面正在开发中...

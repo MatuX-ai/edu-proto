@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
 import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
-import StatsOverviewPage from '../../components/pages/stats-overview-page';
+import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import LiveControlPage from '../../components/pages/live-control-page';
-import CourseManagementPage from '../../components/pages/course-management-page';
+import ScheduleFormPage from '../../components/pages/schedule-form-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
 export default function TrainingMenuPage({ params }: { params: { menuId: string } }) {
@@ -25,8 +25,6 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
     <DashboardLayout config={config} activeMenu={menuId}>
       {menuId === 'dashboard' ? (
         <DashboardContent config={config} />
-      ) : menuId === 'courses' ? (
-        <CourseManagementPage />
       ) : menuItem.pageType === 'table' && mockData ? (
         <DataTablePage 
           title={mockData.title} 
@@ -34,9 +32,11 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
           rows={mockData.rows} 
         />
       ) : menuItem.pageType === 'stats' ? (
-        <StatsOverviewPage title={menuItem.label} />
+        <EnhancedStatsPage title={menuItem.label} type="bar" />
       ) : menuItem.pageType === 'live' ? (
         <LiveControlPage />
+      ) : menuItem.pageType === 'form' && menuId === 'schedule' ? (
+        <ScheduleFormPage />
       ) : (
         <div className="flex items-center justify-center h-64 text-gray-500">
           该功能页面正在开发中...
