@@ -251,6 +251,68 @@ export default function CourseLibraryPage() {
         ))}
       </div>
 
+      {/* Marketing Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7 }}
+        className="mt-12"
+      >
+        <a
+          href="https://opensciedu.matux.tech/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+        >
+          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-accent rounded-lg p-8 text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                  <Star className="h-5 w-5 text-yellow-300 fill-yellow-300" />
+                  <span className="text-sm font-medium">推荐资源</span>
+                </div>
+                <h2 className="text-3xl font-bold mb-3">OpenSciEdu 开放科学教育平台</h2>
+                <p className="text-lg opacity-90 mb-4">
+                  探索更多优质 STEM 教育资源，获取完整的课程体系和教学工具
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+                    📚 完整课程体系
+                  </span>
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+                    🎯 教学工具包
+                  </span>
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+                    👥 教师社区
+                  </span>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 group-hover:bg-white/30 transition-colors">
+                  <BookOpen className="h-12 w-12" />
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flex items-center justify-center md:justify-start gap-2 text-sm font-medium">
+              <span>立即访问</span>
+              <svg
+                className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </div>
+          </div>
+        </a>
+      </motion.div>
+
       {/* Call to Action */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
