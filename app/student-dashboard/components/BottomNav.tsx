@@ -35,7 +35,7 @@ export function BottomNav({ mode, activeTab, onTabChange }: BottomNavProps) {
 
   if (isPhone) {
     return (
-      <div className="absolute bottom-0 w-full h-16 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-center px-2 shadow-2xl">
+      <div className="absolute bottom-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-end px-2 pb-2 shadow-2xl">
         {tabs.map((tab) => (
           <motion.button
             key={tab.id}
