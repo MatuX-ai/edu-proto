@@ -7,6 +7,8 @@ import DataTablePage from '../../components/pages/data-table-page';
 import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import LiveControlPage from '../../components/pages/live-control-page';
 import ScheduleFormPage from '../../components/pages/schedule-form-page';
+import ReportsPage from '../../components/pages/reports-page';
+import SettingsPage from '../../components/pages/settings-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
 export default function TrainingMenuPage({ params }: { params: { menuId: string } }) {
@@ -37,6 +39,10 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
         <LiveControlPage />
       ) : menuItem.pageType === 'form' && menuId === 'schedule' ? (
         <ScheduleFormPage />
+      ) : menuId === 'reports' ? (
+        <ReportsPage institutionType="培训机构" />
+      ) : menuId === 'settings' ? (
+        <SettingsPage />
       ) : (
         <div className="flex items-center justify-center h-64 text-gray-500">
           该功能页面正在开发中...

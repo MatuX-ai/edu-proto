@@ -1,16 +1,18 @@
 'use client';
 
-import { Briefcase, School, GraduationCap, Landmark } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import DashboardLayout from './components/dashboard-layout';
-import DashboardContent from './components/dashboard-content';
-import { InstitutionType, institutionConfigs } from './config/institution-config';
+import { InstitutionType } from './config/institution-config';
 
 export default function InstitutionDashboardPage() {
   const router = useRouter();
-  // 默认展示培训机构，实际项目中可根据用户权限或路由参数动态切换
+  // 默认跳转到培训机构 dashboard
   const currentType: InstitutionType = 'training'; 
-  const config = institutionConfigs[currentType];
+  
+  // 自动跳转到默认机构类型的 dashboard
+  if (typeof window !== 'undefined') {
+    router.push(`/institution-dashboard/${currentType}/dashboard`);
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center py-8 px-4">
@@ -19,38 +21,8 @@ export default function InstitutionDashboardPage() {
         <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent mb-2">
           MatuX 机构管理后台
         </h1>
-        <p className="text-slate-600">全功能机构运营管理平台</p>
+        <p className="text-slate-600">正在跳转...</p>
       </div>
-
-      {/* Organization Type Selector - Outside Frame */}
-      <div className="flex gap-3 mb-6">
-        {([
-          { key: 'training', label: '培训机构', icon: Briefcase },
-          { key: 'k12', label: 'K12学校', icon: School },
-          { key: 'vocational', label: '职业学校', icon: GraduationCap },
-          { key: 'bureau', label: '教育局', icon: Landmark }
-        ] as const).map((tab) => {
-          const TabIconComponent = tab.icon;
-          return (
-            <button
-              key={tab.key}
-              onClick={() => router.push(`/institution-dashboard/${tab.key}`)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl whitespace-nowrap transition-all ${
-                currentType === tab.key
-                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-200 scale-105'
-                  : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
-              }`}
-            >
-              <TabIconComponent className="h-5 w-5" />
-              <span className="text-sm font-medium">{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <DashboardLayout config={config}>
-        <DashboardContent config={config} />
-      </DashboardLayout>
     </div>
   );
 }

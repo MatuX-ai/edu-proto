@@ -2,7 +2,8 @@ import type { LucideIcon } from 'lucide-react';
 import { 
   LayoutDashboard, Megaphone, BookOpen, Users2, DollarSign, 
   BarChart3, Settings, Calendar, FileText, Monitor, Trophy, Handshake, 
-  Target as TargetIcon, AwardIcon, Building2
+  Target as TargetIcon, AwardIcon, Building2, Briefcase, Lightbulb, Cpu,
+  MapPin, GraduationCap, TrendingUp
 } from 'lucide-react';
 
 export type InstitutionType = 'training' | 'k12' | 'vocational' | 'bureau';
@@ -113,192 +114,212 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   },
   k12: {
     type: 'k12',
-    title: 'K12 STEM 智慧校园',
-    subtitle: '融合科学、技术、工程与数学，打造未来创新教育体系',
+    title: 'K12 STEM 第二课堂平台',
+    subtitle: '专注STEM兴趣培养，打造灵活多样的课外创新教育体系',
     bannerImage: '/images/stem-collaboration.jpg',
     themeColor: 'green',
     sidebarItems: [
       ...commonSidebarItems.slice(0, 1),
-      { id: 'academic', label: '教务管理', icon: Calendar, pageType: 'table' },
-      { id: 'class-circle', label: '班级圈', icon: Users2, pageType: 'stats' },
-      { id: 'grades', label: '成绩统计', icon: BarChart3, pageType: 'stats' },
-      { id: 'safety', label: '校园安全', icon: Settings, pageType: 'form' },
-      { id: 'resources', label: '资源库', icon: BookOpen, pageType: 'table' },
-      ...commonSidebarItems.slice(1),
+      { id: 'stem-courses', label: '课程管理', icon: BookOpen, pageType: 'form' },
+      { id: 'student-participation', label: '学生参与', icon: Users2, pageType: 'stats' },
+      { id: 'portfolio-gallery', label: '作品库', icon: FileText, pageType: 'table' },
+      { id: 'learning-community', label: '学习社区', icon: Handshake, pageType: 'form' },
+      { id: 'competitions', label: '竞赛活动', icon: Trophy, pageType: 'table' },
+      { id: 'resources', label: '资源设备', icon: Monitor, pageType: 'table' },
+      { id: 'parent-interaction', label: '家校互动', icon: Handshake, pageType: 'form' },
+      { id: 'reports', label: '数据报表', icon: BarChart3 },
+      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
-      academic: {
-        title: '教务管理中心',
-        columns: ['课程名称', '授课教师', '上课时间', '教室', '状态'],
+      'stem-courses': {
+        title: 'STEM课程管理中心',
+        columns: ['课程名称', '类型', '时间段', '适合年级', '报名人数', '状态'],
         rows: [
-          ['高一数学', '王老师', '周一 08:00', 'A-101', '正常'],
-          ['高二物理', '李老师', '周二 10:00', 'B-205', '正常'],
-          ['高三化学', '张老师', '周三 14:00', 'C-301', '考试'],
-          ['初一英语', '赵老师', '周四 08:00', 'D-102', '正常'],
-          ['初二历史', '孙老师', '周五 10:00', 'E-203', '调课'],
-          ['初三政治', '周老师', '周一 14:00', 'F-304', '正常'],
+          ['Arduino 创意编程', '硬件编程', '周一 15:30-17:00', '初一-初二', '18/20', '进行中'],
+          ['Python 游戏开发', '软件编程', '周三 15:30-17:00', '初二-初三', '15/15', '已满员'],
+          ['3D 打印设计', '创客制作', '周五 15:30-17:00', '初一-初三', '12/16', '进行中'],
+          ['机器人竞赛培训', '竞赛辅导', '周六 09:00-11:00', '初二-高三', '20/20', '已满员'],
+          ['AI 视觉识别入门', '人工智能', '周日 14:00-16:00', '高一-高二', '8/12', '待开课'],
+        ]
+      },
+      'student-participation': {
+        title: '学生参与情况统计',
+        columns: ['学生姓名', '参与课程数', '完成项目数', '获得徽章', '活跃度'],
+        rows: [
+          ['李明', '3', '5', '8', '95%'],
+          ['王芳', '2', '3', '5', '88%'],
+          ['张伟', '4', '7', '12', '92%'],
+          ['赵丽', '1', '2', '3', '75%'],
+          ['陈强', '3', '4', '6', '85%'],
+        ]
+      },
+      'portfolio-gallery': {
+        title: '学生作品库',
+        columns: ['作品名称', '作者', '类型', '完成时间', '点赞数', '状态'],
+        rows: [
+          ['智能浇花系统', '李明', '硬件项目', '2024-05-10', '45', '已展示'],
+          ['Python贪吃蛇游戏', '王芳', '软件项目', '2024-05-08', '38', '已展示'],
+          ['3D打印笔筒', '张伟', '设计作品', '2024-05-05', '52', '已展示'],
+          ['人脸识别门禁', '陈强', 'AI项目', '2024-05-03', '67', '精选'],
+          ['机器人避障车', '刘洋', '机器人', '2024-04-28', '41', '已展示'],
+        ]
+      },
+      'learning-community': {
+        title: '学习社区动态',
+        columns: ['标题', '发布者', '类型', '发布时间', '回复数', '状态'],
+        rows: [
+          ['分享我的Arduino项目经验', '李明', '经验分享', '2小时前', '12', '活跃'],
+          ['求助：Python列表问题', '王芳', '问题求助', '5小时前', '8', '已解决'],
+          ['推荐一个好用的3D建模软件', '张伟', '资源分享', '1天前', '15', '活跃'],
+          ['本周学习心得总结', '赵丽', '学习心得', '2天前', '6', '正常'],
+          ['邀请组队参加机器人竞赛', '陈强', '团队招募', '3天前', '20', '热门'],
+        ]
+      },
+      competitions: {
+        title: 'STEM竞赛活动管理',
+        columns: ['竞赛名称', '类型', '时间', '参赛人数', '状态'],
+        rows: [
+          ['全国青少年科技创新大赛', '综合类', '2024-05-20', '12', '报名中'],
+          ['市级机器人竞赛', '机器人', '2024-06-15', '8', '培训中'],
+          ['编程马拉松挑战赛', '编程类', '2024-07-10', '15', '筹备中'],
+          ['3D打印创意设计赛', '设计类', '2024-08-05', '6', '未开始'],
         ]
       },
       resources: {
-        title: '教学资源库',
-        columns: ['资源名称', '类型', '上传者', '下载次数', '操作'],
+        title: '资源设备管理',
+        columns: ['资源名称', '类型', '数量', '可用状态', '操作'],
         rows: [
-          ['期中试卷.docx', '文档', '教务处', '128', '下载'],
-          ['函数讲解.mp4', '视频', '王老师', '85', '播放'],
-          ['物理实验.pptx', '演示文稿', '李老师', '64', '下载'],
-          ['英语听力.mp3', '音频', '赵老师', '156', '播放'],
-          ['化学公式.pdf', '文档', '张老师', '92', '下载'],
-        ]
-      },
-      grades: {
-        title: '成绩统计分析',
-        columns: ['班级', '科目', '平均分', '最高分', '最低分', '操作'],
-        rows: [
-          ['高一(1)班', '数学', '85.6', '98', '72', '详情'],
-          ['高一(1)班', '英语', '82.3', '95', '68', '详情'],
-          ['高二(2)班', '物理', '78.9', '92', '65', '详情'],
-          ['高三(3)班', '化学', '88.2', '96', '75', '详情'],
+          ['Arduino Uno开发板', '硬件设备', '25', '20可用', '借用'],
+          ['树莓派4B', '硬件设备', '15', '12可用', '借用'],
+          ['3D打印机耗材', '耗材', '50卷', '充足', '查看'],
+          ['Python编程教程', '数字资源', '不限', '在线', '访问'],
+          ['机器人套件', '硬件设备', '10套', '8可用', '借用'],
         ]
       }
     },
     stats: [
-      { label: 'STEM 实验室', value: '8', icon: Building2 },
-      { label: '创客教师', value: '24', icon: Users2 }
+      { label: '活跃课程', value: '24', icon: BookOpen },
+      { label: '参与学生', value: '356', icon: Users2 }
     ],
     functionCards: [
-      { title: '课程编排', subtitle: '120节 STEAM 课程', icon: Calendar, color: 'from-green-500 to-green-600' },
-      { title: '学生管理', subtitle: '864名创客学员', icon: Users2, color: 'from-teal-400 to-teal-500' },
-      { title: '竞赛安排', subtitle: '本月3场科技赛', icon: FileText, color: 'from-indigo-400 to-indigo-500' },
-      { title: '实验监控', subtitle: '24间智能教室', icon: Monitor, color: 'from-cyan-400 to-cyan-500' },
+      { title: '课程编排', subtitle: '24门兴趣课程', icon: Calendar, color: 'from-green-500 to-green-600' },
+      { title: '学生管理', subtitle: '356名学员', icon: Users2, color: 'from-teal-400 to-teal-500' },
+      { title: '竞赛安排', subtitle: '本月3场赛事', icon: Trophy, color: 'from-indigo-400 to-indigo-500' },
+      { title: '设备管理', subtitle: '15间实验室', icon: Monitor, color: 'from-cyan-400 to-cyan-500' },
     ],
     mediaCards: [
-      { title: '教案管理', desc: '跨学科项目式教案', icon: FileText },
-      { title: '智能排课', desc: 'AI辅助 STEAM 排课', icon: Calendar },
-      { title: '数据分析', desc: '多维学习行为分析', icon: BarChart3 },
-      { title: '资源中心', desc: '开源硬件与编程素材', icon: BookOpen }
+      { title: '课程发布', desc: 'STEM兴趣课程管理', icon: BookOpen },
+      { title: '作品展示', desc: '学生项目成果展示', icon: FileText },
+      { title: '社区互动', desc: '学习交流与分享', icon: Handshake },
+      { title: '数据分析', desc: '参与度与成长分析', icon: BarChart3 }
     ],
     quickTools: [
       { title: '课程表', icon: Calendar, color: 'bg-green-500' },
-      { title: '项目管理', icon: FileText, color: 'bg-teal-500' },
-      { title: '家校沟通', icon: Users2, color: 'bg-indigo-400' },
-      { title: '校园公告', icon: Megaphone, color: 'bg-cyan-400' },
-      { title: '教学评估', icon: AwardIcon, color: 'bg-yellow-400' },
+      { title: '报名管理', icon: Users2, color: 'bg-teal-500' },
+      { title: '作品上传', icon: FileText, color: 'bg-indigo-400' },
+      { title: '社区发帖', icon: Handshake, color: 'bg-cyan-400' },
+      { title: '家长通知', icon: Handshake, color: 'bg-yellow-400' },
     ]
   },
   vocational: {
     type: 'vocational',
-    title: '产教融合实训中心',
-    subtitle: '对接企业真实项目，培养高技能应用型人才',
+    title: '产教融合与创新创业中心',
+    subtitle: 'STEM辅修赋能，校企协同育人，孵化未来创客',
     bannerImage: '/images/tech-stack.jpg',
     themeColor: 'orange',
     sidebarItems: [
       ...commonSidebarItems.slice(0, 1),
+      { id: 'stem-auxiliary', label: 'STEM辅修中心', icon: Cpu, pageType: 'skill-wallet' },
+      { id: 'industry-coop', label: '产学研合作', icon: Briefcase, pageType: 'kanban' },
+      { id: 'incubator', label: '创业孵化器', icon: Lightbulb, pageType: 'form' },
       { id: 'training-base', label: '实训基地', icon: Monitor, pageType: 'digital-twin' },
-      { id: 'project-workshop', label: '项目工坊', icon: TargetIcon, pageType: 'kanban' },
-      { id: 'employment', label: '就业跟踪', icon: Handshake, pageType: 'table' },
-      { id: 'patents', label: '专利管理', icon: FileText, pageType: 'form' },
-      { id: 'competitions', label: '竞赛中心', icon: Trophy, pageType: 'skill-wallet' },
+      { id: 'patents', label: '专利管理', icon: FileText, pageType: 'table' },
       ...commonSidebarItems.slice(1),
     ],
     mockData: {
-      employment: {
-        title: '毕业生就业去向统计',
-        columns: ['姓名', '专业', '就职企业', '岗位', '薪资水平'],
+      patents: {
+        title: '知识产权与专利申报',
+        columns: ['专利名称', '申请人', '类型', '申请日期', '状态'],
         rows: [
-          ['赵六', '软件工程', '腾讯科技', '前端开发', '15k'],
-          ['孙七', '数字媒体', '字节跳动', 'UI设计', '12k'],
-          ['周八', '物联网工程', '华为技术', '嵌入式工程师', '18k'],
-          ['吴九', '大数据技术', '阿里巴巴', '数据分析师', '16k'],
-          ['郑十', '人工智能', '百度智能云', '算法助理', '20k'],
+          ['一种基于AI的工业分拣装置', '张三团队', '发明专利', '2026-04-15', '实质审查'],
+          ['便携式多功能教学机器人', '李四', '实用新型', '2026-03-20', '已授权'],
+          ['虚拟现实实训交互系统', '王五团队', '软件著作权', '2026-05-01', '登记中'],
         ]
       }
     },
     stats: [
-      { label: '专业系部', value: '8', icon: Building2 },
-      { label: '校企合作', value: '45', icon: Handshake }
+      { label: '辅修参与率', value: '68%', icon: Cpu },
+      { label: '校企合作项目', value: '45', icon: Briefcase }
     ],
     functionCards: [
-      { title: '实训管理', subtitle: '15个实训基地', icon: Monitor, color: 'from-orange-500 to-orange-600' },
-      { title: '竞赛组织', subtitle: '本月4场赛事', icon: Trophy, color: 'from-red-400 to-red-500' },
-      { title: '校企合作', subtitle: '45家合作企业', icon: Handshake, color: 'from-amber-400 to-amber-500' },
-      { title: '专利管理', subtitle: '28项申请中', icon: FileText, color: 'from-brown-400 to-brown-500' },
+      { title: 'STEM辅修', subtitle: '跨专业微证书', icon: Cpu, color: 'from-blue-500 to-blue-600' },
+      { title: '企业悬赏', subtitle: '12个真实项目', icon: Briefcase, color: 'from-orange-500 to-orange-600' },
+      { title: '创业孵化', subtitle: '8个在孵团队', icon: Lightbulb, color: 'from-yellow-500 to-yellow-600' },
+      { title: '数字孪生', subtitle: '15个实训基地', icon: Monitor, color: 'from-purple-400 to-purple-500' },
     ],
     mediaCards: [
-      { title: '项目实训', desc: '企业真实项目', icon: TargetIcon },
-      { title: '技能认证', desc: '职业资格认证', icon: AwardIcon },
-      { title: '就业指导', desc: '就业跟踪服务', icon: Handshake },
-      { title: '创新创业', desc: '创新项目孵化', icon: Megaphone }
+      { title: '技能认证', desc: '微证书与学分转换', icon: AwardIcon },
+      { title: '项目对接', desc: '企业真实需求', icon: TargetIcon },
+      { title: '导师指导', desc: '行业专家一对一', icon: Users2 },
+      { title: '成果转化', desc: '专利与产品落地', icon: FileText }
     ],
     quickTools: [
-      { title: '赛事报名', icon: Trophy, color: 'bg-orange-500' },
-      { title: '项目认领', icon: TargetIcon, color: 'bg-red-500' },
-      { title: '专利申报', icon: FileText, color: 'bg-amber-400' },
-      { title: '企业合作', icon: Handshake, color: 'bg-brown-400' },
-      { title: '技能证书', icon: AwardIcon, color: 'bg-yellow-400' },
+      { title: '发布悬赏', icon: Briefcase, color: 'bg-orange-500' },
+      { title: '申请孵化', icon: Lightbulb, color: 'bg-yellow-500' },
+      { title: '技能认证', icon: AwardIcon, color: 'bg-blue-500' },
+      { title: '设备借用', icon: Monitor, color: 'bg-cyan-400' },
+      { title: '专利申报', icon: FileText, color: 'bg-indigo-400' },
     ]
   },
   bureau: {
     type: 'bureau',
-    title: '区域教育治理平台',
-    subtitle: '数据驱动教育决策，促进区域教育优质均衡发展',
+    title: '区域 STEM 教育治理中心',
+    subtitle: '数据驱动教育决策，促进区域 STEM 教育优质均衡发展',
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'indigo',
     sidebarItems: [
       ...commonSidebarItems.slice(0, 1),
+      { id: 'stem-competitions', label: 'STEM 赛事管理', icon: Trophy, pageType: 'kanban' },
+      { id: 'awards-evaluation', label: '评选表彰系统', icon: AwardIcon, pageType: 'form' },
+      { id: 'quality-monitoring', label: '质量监测大屏', icon: TrendingUp, pageType: 'stats' },
       { id: 'schools', label: '学校名录', icon: Building2, pageType: 'table' },
-      { id: 'staffing', label: '师资调配', icon: Users2, pageType: 'stats' },
-      { id: 'funding', label: '经费监管', icon: DollarSign, pageType: 'stats' },
-      { id: 'quality', label: '质量评估', icon: AwardIcon, pageType: 'table' },
-      { id: 'policies', label: '政策发布', icon: FileText, pageType: 'policy' },
+      { id: 'resource-allocation', label: '资源均衡配置', icon: MapPin, pageType: 'stats' },
       ...commonSidebarItems.slice(1),
     ],
     mockData: {
       schools: {
-        title: '区域学校名录',
-        columns: ['学校名称', '类别', '在校人数', '评级', '操作'],
+        title: '区域学校 STEM 开展情况',
+        columns: ['学校名称', 'STEM课程数', '参与学生', '骨干教师', '评级'],
         rows: [
-          ['第一实验小学', '小学', '1200', '省级示范', '查看'],
-          ['第二中学', '初中', '2400', '市级重点', '查看'],
-          ['第三高级中学', '高中', '1800', '省级重点', '查看'],
-          ['第四完全中学', '完全中学', '3200', '国家级示范', '查看'],
-          ['第五实验小学', '小学', '980', '区级重点', '查看'],
-          ['第六中学', '初中', '1600', '市级示范', '查看'],
-        ]
-      },
-      quality: {
-        title: '教学质量评估报告',
-        columns: ['评估项目', '得分', '排名', '同比变化', '详情'],
-        rows: [
-          ['师资力量', '92.5', '第3名', '+2.1%', '报告'],
-          ['硬件设施', '88.0', '第5名', '-0.5%', '报告'],
-          ['学生满意度', '95.2', '第2名', '+3.5%', '报告'],
-          ['教学成果', '90.8', '第4名', '+1.8%', '报告'],
-          ['管理水平', '87.5', '第6名', '-1.2%', '报告'],
+          ['第一实验小学', '12', '450', '8', '省级示范'],
+          ['第二中学', '8', '620', '5', '市级重点'],
+          ['第三高级中学', '15', '890', '12', '国家级示范'],
+          ['第四完全中学', '10', '750', '7', '区级重点'],
         ]
       }
     },
     stats: [
-      { label: '管辖学校', value: '156', icon: Building2 },
-      { label: '教育投入', value: '¥2.8M', icon: DollarSign }
+      { label: '区域 STEM 参与率', value: '72%', icon: Users2 },
+      { label: '覆盖学校', value: '142', icon: Building2 }
     ],
     functionCards: [
-      { title: '学校管理', subtitle: '156所学校', icon: Building2, color: 'from-indigo-500 to-indigo-600' },
-      { title: '资源分配', subtitle: '均衡配置', icon: TargetIcon, color: 'from-purple-400 to-purple-500' },
-      { title: '质量监控', subtitle: '全覆盖监测', icon: Monitor, color: 'from-pink-400 to-pink-500' },
-      { title: '数据统计', subtitle: '多维度分析', icon: BarChart3, color: 'from-cyan-400 to-cyan-500' },
+      { title: '赛事统筹', subtitle: '年度 5 场大赛', icon: Trophy, color: 'from-yellow-500 to-yellow-600' },
+      { title: '名师评选', subtitle: 'STEM 骨干教师库', icon: GraduationCap, color: 'from-indigo-500 to-indigo-600' },
+      { title: '质量监测', subtitle: '实时数据看板', icon: TrendingUp, color: 'from-blue-400 to-blue-500' },
+      { title: '资源配置', subtitle: '设备与师资调度', icon: MapPin, color: 'from-green-400 to-green-500' },
     ],
     mediaCards: [
-      { title: '政策发布', desc: '教育政策解读', icon: FileText },
-      { title: '资源配置', desc: '资源均衡分配', icon: TargetIcon },
-      { title: '质量评估', desc: '学校质量评估', icon: AwardIcon },
-      { title: '数据分析', desc: '区域教育数据', icon: BarChart3 }
+      { title: '政策发布', desc: 'STEM 教育指导意见', icon: FileText },
+      { title: '教研培训', desc: '教师专业能力提升', icon: BookOpen },
+      { title: '成果展示', desc: '区域优秀案例汇编', icon: AwardIcon },
+      { title: '数据分析', desc: '教育质量年度报告', icon: BarChart3 }
     ],
     quickTools: [
-      { title: '学校档案', icon: Building2, color: 'bg-indigo-500' },
-      { title: '教师统计', icon: Users2, color: 'bg-purple-500' },
-      { title: '资金投入', icon: DollarSign, color: 'bg-pink-400' },
-      { title: '质量报告', icon: FileText, color: 'bg-cyan-400' },
-      { title: '政策文件', icon: BookOpen, color: 'bg-yellow-400' },
+      { title: '发布赛事', icon: Trophy, color: 'bg-yellow-500' },
+      { title: '启动评选', icon: AwardIcon, color: 'bg-indigo-500' },
+      { title: '查看报表', icon: BarChart3, color: 'bg-blue-500' },
+      { title: '资源申请', icon: MapPin, color: 'bg-green-500' },
+      { title: '公文流转', icon: FileText, color: 'bg-gray-500' },
     ]
   }
 };

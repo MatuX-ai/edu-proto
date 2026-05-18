@@ -100,40 +100,49 @@ export default function DashboardContent({ config }: DashboardContentProps) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+            className="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgb(0,0,0,0.03)] border border-gray-100/80"
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                 <Zap className={`h-5 w-5 text-${config.themeColor}-500`} />
                 {config.type === 'training' ? '本周消课统计' : config.type === 'k12' ? 'STEM 数据中心' : '运营概览'}
               </h3>
               <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-blue-400">
-                <option>{config.type === 'training' ? '按课程统计' : '实验室概览'}</option>
-                <option>{config.type === 'training' ? '按教师统计' : '项目进度'}</option>
+                <option>{config.type === 'training' ? '按课程统计' : config.type === 'k12' ? '实验室概览' : '月度报表'}</option>
+                <option>{config.type === 'training' ? '按教师统计' : config.type === 'k12' ? '项目进度' : '季度分析'}</option>
               </select>
             </div>
             
             {config.type === 'training' ? (
               // Training Institution Specific View
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                  <div className="text-sm text-blue-600 mb-1">本周总课时</div>
-                  <div className="text-3xl font-bold text-blue-800">128<span className="text-sm font-normal ml-1">节</span></div>
-                  <div className="mt-2 text-xs text-blue-500">环比增长 +12%</div>
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl p-5 border border-blue-200/50 hover:shadow-md transition-shadow">
+                  <div className="text-sm text-blue-600 mb-2 font-medium">本周总课时</div>
+                  <div className="text-4xl font-bold text-blue-800">128<span className="text-lg font-normal ml-1 text-blue-600">节</span></div>
+                  <div className="mt-3 flex items-center gap-1 text-xs text-blue-500">
+                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                    环比增长 +12%
+                  </div>
                 </div>
-                <div className="bg-green-50 rounded-xl p-4 border border-green-100">
-                  <div className="text-sm text-green-600 mb-1">满班率</div>
-                  <div className="text-3xl font-bold text-green-800">85<span className="text-sm font-normal ml-1">%</span></div>
-                  <div className="mt-2 text-xs text-green-500">资源利用率极高</div>
+                <div className="bg-gradient-to-br from-green-50 to-green-100/50 rounded-2xl p-5 border border-green-200/50 hover:shadow-md transition-shadow">
+                  <div className="text-sm text-green-600 mb-2 font-medium">满班率</div>
+                  <div className="text-4xl font-bold text-green-800">85<span className="text-lg font-normal ml-1 text-green-600">%</span></div>
+                  <div className="mt-3 flex items-center gap-1 text-xs text-green-500">
+                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                    资源利用率极高
+                  </div>
                 </div>
-                <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
-                  <div className="text-sm text-purple-600 mb-1">学员出勤率</div>
-                  <div className="text-3xl font-bold text-purple-800">96<span className="text-sm font-normal ml-1">%</span></div>
-                  <div className="mt-2 text-xs text-purple-500">仅 3 人请假</div>
+                <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl p-5 border border-purple-200/50 hover:shadow-md transition-shadow">
+                  <div className="text-sm text-purple-600 mb-2 font-medium">学员出勤率</div>
+                  <div className="text-4xl font-bold text-purple-800">96<span className="text-lg font-normal ml-1 text-purple-600">%</span></div>
+                  <div className="mt-3 flex items-center gap-1 text-xs text-purple-500">
+                    <span className="inline-block w-2 h-2 bg-yellow-500 rounded-full"></span>
+                    仅 3 人请假
+                  </div>
                 </div>
               </div>
-            ) : (
-              // Original K12/Vocational/Bureau View (Simplified for now)
+            ) : config.type === 'k12' ? (
+              // K12 STEM Data Center
               <div className="flex items-center justify-center">
                 <div className="relative w-64 h-64">
                   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
@@ -145,19 +154,19 @@ export default function DashboardContent({ config }: DashboardContentProps) {
                     />
                     <defs>
                       <linearGradient id={`gradient-${config.themeColor}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor={config.themeColor === 'green' ? '#10b981' : config.themeColor === 'blue' ? '#3b82f6' : '#f97316'} />
-                        <stop offset="100%" stopColor={config.themeColor === 'green' ? '#059669' : config.themeColor === 'blue' ? '#2563eb' : '#ea580c'} />
+                        <stop offset="0%" stopColor="#10b981" />
+                        <stop offset="100%" stopColor="#059669" />
                       </linearGradient>
                     </defs>
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-4xl font-bold text-gray-800">{config.type === 'k12' ? '85%' : '92%'}</span>
-                    <span className="text-sm text-gray-500 mt-1">{config.type === 'k12' ? '实验完成率' : '目标达成'}</span>
+                    <span className="text-4xl font-bold text-gray-800">85%</span>
+                    <span className="text-sm text-gray-500 mt-1">实验完成率</span>
                   </div>
                 </div>
                 <div className="ml-12 space-y-4">
                   <div className="text-center">
-                    <div className={`text-2xl font-bold text-${config.themeColor}-500`}>24</div>
+                    <div className="text-2xl font-bold text-green-500">24</div>
                     <div className="text-xs text-gray-500">进行中项目</div>
                   </div>
                   <div className="flex gap-8">
@@ -168,6 +177,46 @@ export default function DashboardContent({ config }: DashboardContentProps) {
                     <div className="text-center">
                       <div className="text-xl font-bold text-red-500">12</div>
                       <div className="text-xs text-gray-500">开源软件</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // Vocational & Bureau Overview
+              <div className="flex items-center justify-center">
+                <div className="relative w-64 h-64">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" strokeWidth="8" />
+                    <circle
+                      cx="50" cy="50" r="40" fill="none" stroke={`url(#gradient-${config.themeColor})`} strokeWidth="8"
+                      strokeLinecap="round" strokeDasharray="251.2" strokeDashoffset="25.12"
+                      className="transition-all duration-1000"
+                    />
+                    <defs>
+                      <linearGradient id={`gradient-${config.themeColor}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor={config.themeColor === 'orange' ? '#f97316' : '#6366f1'} />
+                        <stop offset="100%" stopColor={config.themeColor === 'orange' ? '#ea580c' : '#4f46e5'} />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-4xl font-bold text-gray-800">92%</span>
+                    <span className="text-sm text-gray-500 mt-1">目标达成</span>
+                  </div>
+                </div>
+                <div className="ml-12 space-y-4">
+                  <div className="text-center">
+                    <div className={`text-2xl font-bold text-${config.themeColor}-500`}>18</div>
+                    <div className="text-xs text-gray-500">进行中项目</div>
+                  </div>
+                  <div className="flex gap-8">
+                    <div className="text-center">
+                      <div className="text-xl font-bold text-blue-500">156</div>
+                      <div className="text-xs text-gray-500">{config.type === 'vocational' ? '合作企业' : '管辖学校'}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-bold text-red-500">45</div>
+                      <div className="text-xs text-gray-500">{config.type === 'vocational' ? '实训基地' : '在职教师'}</div>
                     </div>
                   </div>
                 </div>
