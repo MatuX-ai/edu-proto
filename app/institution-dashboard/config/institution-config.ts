@@ -50,6 +50,7 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     themeColor: 'blue',
     sidebarItems: [
       ...commonSidebarItems.slice(0, 1),
+      { id: 'dashboard', label: '仪表盘', icon: LayoutDashboard, pageType: 'dashboard' },
       { id: 'leads', label: '招生线索', icon: Users2, pageType: 'table' },
       { id: 'schedule', label: '智能排课', icon: Calendar, pageType: 'form' },
       { id: 'settlement', label: '课时结算', icon: DollarSign, pageType: 'stats' },

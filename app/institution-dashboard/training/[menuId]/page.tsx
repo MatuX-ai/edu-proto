@@ -9,6 +9,7 @@ import LiveControlPage from '../../components/pages/live-control-page';
 import ScheduleFormPage from '../../components/pages/schedule-form-page';
 import ReportsPage from '../../components/pages/reports-page';
 import SettingsPage from '../../components/pages/settings-page';
+import TrainingDashboardPage from '../../components/pages/training-dashboard-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
 export default function TrainingMenuPage({ params }: { params: { menuId: string } }) {
@@ -26,7 +27,7 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
   return (
     <DashboardLayout config={config} activeMenu={menuId}>
       {menuId === 'dashboard' ? (
-        <DashboardContent config={config} />
+        <TrainingDashboardPage config={config} />
       ) : menuItem.pageType === 'table' && mockData ? (
         <DataTablePage 
           title={mockData.title} 
