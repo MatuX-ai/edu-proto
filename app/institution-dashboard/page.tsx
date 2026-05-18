@@ -195,55 +195,54 @@ export default function InstitutionDashboardPage() {
         </div>
 
         {/* Main Dashboard Content */}
-        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 overflow-y-auto" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-          <div className="flex">
-        {/* Sidebar */}
-        <motion.div
-          initial={{ x: -80 }}
-          animate={{ x: 0 }}
-          className="w-20 bg-gradient-to-b from-purple-500 to-purple-700 min-h-screen fixed left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl"
-        >
-          {/* Logo */}
-          <div className="mb-8">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
-              <Home className="h-6 w-6 text-white" />
+        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 overflow-y-auto relative" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
+          {/* Sidebar - Fixed inside the frame */}
+          <motion.div
+            initial={{ x: -80 }}
+            animate={{ x: 0 }}
+            className="absolute w-20 bg-gradient-to-b from-purple-500 to-purple-700 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl"
+          >
+            {/* Logo */}
+            <div className="mb-8">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                <Home className="h-6 w-6 text-white" />
+              </div>
             </div>
-          </div>
 
-          {/* Navigation Items */}
-          <div className="flex-1 flex flex-col gap-3 w-full px-3">
-            {sidebarItems.map((item) => {
-              const IconComponent = item.icon;
-              const isActive = sidebarActive === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setSidebarActive(item.id)}
-                  className={`relative w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${
-                    isActive
-                      ? 'bg-white/25 shadow-lg scale-105'
-                      : 'hover:bg-white/10'
-                  }`}
-                >
-                  <IconComponent className={`h-5 w-5 ${isActive ? 'text-white' : 'text-white/70'}`} />
-                  {isActive && (
-                    <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-full" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
+            {/* Navigation Items */}
+            <div className="flex-1 flex flex-col gap-3 w-full px-3">
+              {sidebarItems.map((item) => {
+                const IconComponent = item.icon;
+                const isActive = sidebarActive === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setSidebarActive(item.id)}
+                    className={`relative w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${
+                      isActive
+                        ? 'bg-white/25 shadow-lg scale-105'
+                        : 'hover:bg-white/10'
+                    }`}
+                  >
+                    <IconComponent className={`h-5 w-5 ${isActive ? 'text-white' : 'text-white/70'}`} />
+                    {isActive && (
+                      <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-full" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
-          {/* Logout */}
-          <div className="mt-auto px-3 w-full">
-            <button className="w-full aspect-square rounded-xl hover:bg-white/10 flex items-center justify-center transition-all">
-              <LogOut className="h-5 w-5 text-white/70" />
-            </button>
-          </div>
-        </motion.div>
+            {/* Logout */}
+            <div className="mt-auto px-3 w-full">
+              <button className="w-full aspect-square rounded-xl hover:bg-white/10 flex items-center justify-center transition-all">
+                <LogOut className="h-5 w-5 text-white/70" />
+              </button>
+            </div>
+          </motion.div>
 
-        {/* Main Content */}
-        <div className="ml-20 flex-1 p-6 max-w-[1600px]">
+          {/* Main Content */}
+          <div className="ml-20 p-6">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex-1 max-w-md">
@@ -552,8 +551,7 @@ export default function InstitutionDashboardPage() {
             </div>
           </div>
         </div>
-          </div>
-        </div>
+      </div>
       </motion.div>
     </div>
   );
