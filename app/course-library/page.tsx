@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Download, Search, Filter, Star, Clock, Users, FileText, Cpu, Zap, Network, Layers } from 'lucide-react';
+import { BookOpen, Download, Search, Filter, Star, Clock, Users, Cpu, Zap, Network, Layers, Upload } from 'lucide-react';
 import { useState } from 'react';
 
 export default function CourseLibraryPage() {
@@ -399,16 +399,61 @@ export default function CourseLibraryPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="mt-12 bg-gradient-to-r from-purple-600 to-accent rounded-lg p-8 text-white text-center"
+        className="mt-12"
       >
-        <h2 className="text-3xl font-bold mb-4">分享您的课件</h2>
-        <p className="text-lg mb-6 opacity-90">
-          如果您是教育工作者，欢迎贡献您的优质课件，帮助更多学生
-        </p>
-        <button className="inline-flex items-center justify-center rounded-md font-medium bg-white text-accent hover:bg-gray-100 h-12 px-6">
-          <FileText className="h-5 w-5 mr-2" />
-          提交课件
-        </button>
+        <a
+          href="https://opensciedu.matux.tech/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+        >
+          <div className="bg-gradient-to-r from-purple-600 to-accent rounded-lg p-8 text-white shadow-lg hover:shadow-xl transition-all transform group-hover:-translate-y-1">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                  <Upload className="h-5 w-5" />
+                  <span className="text-sm font-medium">课件贡献</span>
+                </div>
+                <h2 className="text-3xl font-bold mb-3">分享您的课件到 OpenMTSciEd</h2>
+                <p className="text-lg opacity-90 mb-4">
+                  所有课件通过 OpenMTSciEd 平台统一管理，支持知识图谱关联和 AI 自适应路径
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start text-sm">
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
+                    ① 注册账号
+                  </span>
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
+                    ② 下载桌面端工具
+                  </span>
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
+                    ③ 提交课件包
+                  </span>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 group-hover:bg-white/30 transition-colors">
+                  <Network className="h-12 w-12" />
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flex items-center justify-center md:justify-start gap-2 text-sm font-medium">
+              <span>访问 OpenMTSciEd 平台</span>
+              <svg
+                className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </div>
+          </div>
+        </a>
       </motion.div>
     </div>
   );
