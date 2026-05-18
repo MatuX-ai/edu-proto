@@ -28,7 +28,9 @@ export default function StudentDashboard() {
 
   // 渲染手机子页面
   const renderPhoneSubPage = () => {
-    const SubPageComponents: Record<string, React.ComponentType<{ onNavigate: (page: string) => void }>> = {
+    if (!phoneSubPage) return null;
+    
+    const ComponentMap: Record<string, React.ComponentType<{ onNavigate: (page: string) => void }>> = {
       '课程详情': PhoneSubPages.CourseDetail,
       '项目详情': PhoneSubPages.ProjectDetail,
       '成就详情': PhoneSubPages.AchievementDetail,
@@ -38,7 +40,7 @@ export default function StudentDashboard() {
       '每日挑战': PhoneSubPages.DailyChallenge
     };
 
-    const Component = SubPageComponents[phoneSubPage || ''];
+    const Component = ComponentMap[phoneSubPage];
     if (!Component) return null;
 
     return <Component onNavigate={handleNavigate} />;
@@ -79,19 +81,7 @@ export default function StudentDashboard() {
       </div>
 
       {/* Device Frame */}
-      <DeviceFrame 
-        mode={deviceMode}
-        bottomNav={
-          <BottomNav 
-            mode={deviceMode} 
-            activeTab={activeTab}
-            onTabChange={(tab) => {
-              setActiveTab(tab);
-              if (deviceMode === 'phone') setPhoneSubPage(null);
-            }}
-          />
-        }
-      >
+      <DeviceFrame mode={deviceMode}>
         {/* 手机模式内容 */}
         {deviceMode === 'phone' && (
           <>
@@ -188,6 +178,16 @@ export default function StudentDashboard() {
             </motion.button>
           </>
         )}
+        
+        {/* Bottom Navigation - 移到DeviceFrame内部 */}
+        <BottomNav 
+          mode={deviceMode} 
+          activeTab={deviceMode === 'phone' ? activeTab : activeTab}
+          onTabChange={(tab) => {
+            setActiveTab(tab);
+            if (deviceMode === 'phone') setPhoneSubPage(null);
+          }}
+        />
       </DeviceFrame>
 
       {/* AI Chat Modal */}

@@ -1,55 +1,56 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Code, Save, Play } from 'lucide-react';
 
-export function CodeEditor() {
+interface CodeEditorProps {
+  onNavigate: (page: string) => void;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function CodeEditor({ onNavigate }: CodeEditorProps) {
   return (
-    <div className="space-y-4">
-      <div className="bg-slate-900 rounded-xl overflow-hidden">
-        <div className="bg-slate-800 px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          </div>
-          <span className="text-xs text-slate-400">main.py</span>
+    <div className="space-y-4 h-full flex flex-col">
+      {/* Toolbar */}
+      <div className="flex items-center justify-between bg-slate-800 text-white p-3 rounded-xl">
+        <div className="flex items-center gap-2">
+          <Code className="h-5 w-5" />
+          <span className="text-sm font-bold">main.py</span>
         </div>
-        <div className="p-4 font-mono text-sm text-green-400 overflow-x-auto">
-          <div className="text-slate-500"># 函数定义示例</div>
-          <div><span className="text-purple-400">def</span> <span className="text-blue-400">greet</span>(name):</div>
-          <div className="pl-4"><span className="text-purple-400">return</span> <span className="text-yellow-300">f&quot;你好, &#123;name&#125;!&quot;</span></div>
-          <div className="mt-2"></div>
-          <div><span className="text-slate-500"># 调用函数</span></div>
-          <div>message = <span className="text-blue-400">greet</span>(<span className="text-yellow-300">&quot;李明&quot;</span>)</div>
-          <div><span className="text-blue-400">print</span>(message)</div>
-          <div className="mt-2 text-slate-500 animate-pulse">|</div>
+        <div className="flex gap-2">
+          <motion.button whileTap={{ scale: 0.9 }} className="p-2 hover:bg-slate-700 rounded-lg">
+            <Save className="h-4 w-4" />
+          </motion.button>
+          <motion.button whileTap={{ scale: 0.9 }} className="bg-green-600 px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+            <Play className="h-3 w-3" /> 运行
+          </motion.button>
         </div>
       </div>
-      <div className="bg-white rounded-xl p-4 border">
-        <h5 className="font-bold text-sm mb-3">运行结果</h5>
-        <div className="bg-slate-100 rounded-lg p-3 font-mono text-sm">
-          <div className="text-green-600">你好, 李明!</div>
+
+      {/* Editor Area */}
+      <div className="flex-1 bg-slate-900 rounded-xl p-4 overflow-auto font-mono text-sm text-slate-300 border border-slate-700">
+        <pre>
+{`from machine import Pin
+import time
+
+led = Pin(2, Pin.OUT)
+
+while True:
+    led.value(1)
+    time.sleep(1)
+    led.value(0)
+    time.sleep(1)`}
+        </pre>
+      </div>
+
+      {/* Console Output */}
+      <div className="h-32 bg-black rounded-xl p-3 border border-slate-700">
+        <div className="text-[10px] text-slate-500 mb-1">Console Output:</div>
+        <div className="text-xs text-green-400 font-mono">
+          &gt; Program started...<br/>
+          &gt; LED toggling every 1s<br/>
+          &gt; _
         </div>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        <button className="py-3 bg-slate-100 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors">
-          💾 保存代码
-        </button>
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          className="py-3 bg-green-600 text-white rounded-xl font-bold text-sm hover:bg-green-700 transition-colors"
-        >
-          ▶️ 运行代码
-        </motion.button>
-      </div>
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-        <h5 className="font-bold text-sm text-blue-900 mb-2">💡 学习提示</h5>
-        <ul className="text-xs text-blue-800 space-y-1">
-          <li>• def 关键字用于定义函数</li>
-          <li>• 函数名后面要加括号和冒号</li>
-          <li>• 函数体需要缩进（通常4个空格）</li>
-          <li>• return 语句返回结果</li>
-        </ul>
       </div>
     </div>
   );

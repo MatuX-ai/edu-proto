@@ -8,10 +8,9 @@ interface DeviceFrameProps {
   mode: DeviceMode;
   children: React.ReactNode;
   statusBar?: React.ReactNode;
-  bottomNav?: React.ReactNode;
 }
 
-export function DeviceFrame({ mode, children, statusBar, bottomNav }: DeviceFrameProps) {
+export function DeviceFrame({ mode, children, statusBar }: DeviceFrameProps) {
   const isPhone = mode === 'phone';
 
   // 设备尺寸配置
@@ -79,13 +78,6 @@ export function DeviceFrame({ mode, children, statusBar, bottomNav }: DeviceFram
         <div className={`flex-1 ${isPhone ? 'bg-slate-50' : 'bg-gradient-to-br from-slate-50 to-slate-100'} overflow-y-auto no-scrollbar ${isPhone ? '' : 'p-8'}`}>
           {children}
         </div>
-        
-        {/* Bottom Navigation - 固定在底部，不在滚动区域内 */}
-        {bottomNav && (
-          <div className="absolute inset-x-0 bottom-0 z-50">
-            {bottomNav}
-          </div>
-        )}
       </div>
     </motion.div>
   );

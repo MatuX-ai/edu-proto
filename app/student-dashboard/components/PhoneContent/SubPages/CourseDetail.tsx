@@ -1,64 +1,79 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { PlayCircle, CheckCircle, Lock } from 'lucide-react';
 
 interface CourseDetailProps {
   onNavigate: (page: string) => void;
 }
 
-export function CourseDetail({ onNavigate }: CourseDetailProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function CourseDetail({ onNavigate }: CourseDetailProps) {
   return (
-    <div className="space-y-4">
-      <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white">
-        <div className="text-4xl mb-3">🐍</div>
-        <h4 className="text-xl font-bold mb-2">Python 编程基础</h4>
-        <p className="text-sm text-blue-100">掌握 Python 核心语法和编程思维</p>
-      </div>
-      <div className="bg-white rounded-xl p-4 border">
-        <h5 className="font-bold mb-3">课程进度</h5>
-        <div className="mb-2">
-          <div className="flex justify-between text-xs mb-1">
-            <span>总体进度</span>
-            <span className="font-semibold text-blue-600">75%</span>
-          </div>
-          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-            <div className="h-full bg-blue-600 rounded-full" style={{ width: '75%' }}></div>
-          </div>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="relative h-48 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl overflow-hidden flex items-center justify-center">
+        <PlayCircle className="h-16 w-16 text-white opacity-80" />
+        <div className="absolute bottom-4 left-4 text-white">
+          <h2 className="text-xl font-bold">Python 编程基础</h2>
+          <p className="text-xs opacity-90">第 3 章：循环与逻辑</p>
         </div>
-        <p className="text-xs text-slate-500">已完成 15/20 课时</p>
       </div>
-      <div className="space-y-2">
-        <h5 className="font-bold text-sm">课程章节</h5>
-        {[
-          { title: '变量与数据类型', duration: '15分钟', completed: true },
-          { title: '条件判断', duration: '20分钟', completed: true },
-          { title: '循环结构', duration: '25分钟', completed: true },
-          { title: '函数定义', duration: '30分钟', completed: false, current: true },
-          { title: '列表与字典', duration: '25分钟', completed: false }
-        ].map((chapter, i) => (
-          <motion.div
-            key={i}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => chapter.current && onNavigate('代码编辑器')}
-            className={`bg-white rounded-xl p-3 border flex items-center justify-between ${chapter.current ? 'border-blue-500 bg-blue-50 cursor-pointer' : ''}`}
-          >
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${chapter.completed ? 'bg-green-100 text-green-600' : chapter.current ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
-                {chapter.completed ? '✓' : i + 1}
+
+      {/* Progress */}
+      <div className="bg-white rounded-xl p-4 border shadow-sm">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm font-bold text-slate-900">学习进度</span>
+          <span className="text-xs text-blue-600 font-medium">75%</span>
+        </div>
+        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div className="h-full bg-blue-600 rounded-full" style={{ width: '75%' }}></div>
+        </div>
+      </div>
+
+      {/* Chapters */}
+      <div>
+        <h3 className="font-bold text-slate-900 mb-3">课程大纲</h3>
+        <div className="space-y-2">
+          {[
+            { title: '变量与数据类型', duration: '15:00', completed: true },
+            { title: '条件判断语句', duration: '20:00', completed: true },
+            { title: 'For 循环详解', duration: '25:00', completed: false, current: true },
+            { title: 'While 循环应用', duration: '18:00', completed: false },
+            { title: '综合练习：猜数字', duration: '30:00', completed: false, locked: true }
+          ].map((chapter, i) => (
+            <motion.div
+              key={i}
+              whileTap={{ scale: 0.98 }}
+              className={`bg-white rounded-xl p-3 border flex items-center gap-3 cursor-pointer hover:shadow-md transition-all ${
+                chapter.current ? 'border-blue-500 bg-blue-50' : ''
+              }`}
+            >
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                chapter.completed ? 'bg-green-100 text-green-600' : 
+                chapter.locked ? 'bg-slate-100 text-slate-400' : 'bg-blue-100 text-blue-600'
+              }`}>
+                {chapter.completed ? <CheckCircle className="h-4 w-4" /> : 
+                 chapter.locked ? <Lock className="h-4 w-4" /> : <PlayCircle className="h-4 w-4" />}
               </div>
-              <div>
-                <p className="text-xs font-medium">{chapter.title}</p>
+              <div className="flex-1">
+                <h4 className={`text-sm font-bold ${chapter.completed ? 'text-slate-500' : 'text-slate-900'}`}>
+                  {chapter.title}
+                </h4>
                 <p className="text-[10px] text-slate-500">{chapter.duration}</p>
               </div>
-            </div>
-            {chapter.current && <Play className="h-4 w-4 text-blue-600" />}
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
-      <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors">
-        继续学习
-      </button>
+
+      {/* AI Assistant Entry */}
+      <motion.button
+        whileTap={{ scale: 0.98 }}
+        className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"
+      >
+        <span>🤖</span> 向 AI 助教提问
+      </motion.button>
     </div>
   );
 }
