@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { User, Award } from 'lucide-react';
 import { DeviceMode } from '../../types';
 
@@ -35,8 +36,13 @@ export function CommunityPage({ mode }: CommunityPageProps) {
             className="bg-white rounded-xl border shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
           >
             <div className="h-28 bg-slate-100 relative overflow-hidden">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-              <div className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-2 py-0.5 rounded-full flex items-center">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill
+                className="object-cover"
+              />
+              <div className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-2 py-0.5 rounded-full flex items-center z-10">
                 <User className="h-2 w-2 mr-1" /> {project.author}
               </div>
             </div>
