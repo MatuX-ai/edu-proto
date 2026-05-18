@@ -6,7 +6,7 @@ import { Trophy, Calendar, Users, MapPin, ChevronRight } from 'lucide-react';
 interface Competition {
   id: string;
   name: string;
-  level: '市级' | '省级' | '国家级';
+  level: '市级' | '省级' | '国家级' | '区级';
   startDate: string;
   participants: number;
   status: '报名中' | '进行中' | '已结束';
