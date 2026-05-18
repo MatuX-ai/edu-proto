@@ -195,7 +195,7 @@ export default function InstitutionDashboardPage() {
         </div>
 
         {/* Main Dashboard Content */}
-        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 overflow-y-auto relative" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
+        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
           {/* Sidebar - Fixed inside the frame */}
           <motion.div
             initial={{ x: -80 }}
@@ -241,8 +241,8 @@ export default function InstitutionDashboardPage() {
             </div>
           </motion.div>
 
-          {/* Main Content */}
-          <div className="ml-20 p-6">
+          {/* Main Content - Scrollable */}
+          <div className="ml-20 h-full overflow-y-auto p-6">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex-1 max-w-md">
