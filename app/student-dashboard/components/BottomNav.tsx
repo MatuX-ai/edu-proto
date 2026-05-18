@@ -35,13 +35,13 @@ export function BottomNav({ mode, activeTab, onTabChange }: BottomNavProps) {
 
   if (isPhone) {
     return (
-      <div className="absolute bottom-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-end px-2 pb-2 shadow-2xl">
+      <div className="absolute bottom-0 w-full h-[96px] bg-white/95 backdrop-blur-lg border-t border-slate-200 flex justify-around items-center px-2 pb-2 shadow-2xl z-50">
         {tabs.map((tab) => (
           <motion.button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             whileTap={{ scale: 0.9 }}
-            className={`flex flex-col items-center gap-1 px-3 py-2 transition-all ${
+            className={`flex flex-col items-center gap-1.5 px-3 py-2 transition-all ${
               activeTab === tab.id ? 'bg-gradient-to-br from-blue-50 to-purple-50' : 'hover:bg-slate-50'
             }`}
           >

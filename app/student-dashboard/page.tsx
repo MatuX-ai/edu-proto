@@ -103,7 +103,7 @@ export default function StudentDashboard() {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 overflow-y-auto pb-16">
+            <div className="flex-1 overflow-y-auto pb-24 pr-1">
               {/* Sub Page Display */}
               <AnimatePresence>
                 {phoneSubPage && (
