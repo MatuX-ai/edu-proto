@@ -8,15 +8,13 @@ import {
   BarChart3, Settings, Bell, LogOut, ChevronRight, FileCheck, Video,
   Presentation, Users2, MessageSquare, LineChart, PieChart, Zap,
   Star, Search, Megaphone, ClipboardList, UserCheck, MessageCircle,
-  Monitor, Lightbulb, Target as TargetIcon, Award as AwardIcon
+  Monitor, Lightbulb, Target as TargetIcon, Award as AwardIcon, Wifi, Battery
 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function InstitutionDashboardPage() {
   const [activeTab, setActiveTab] = useState<'training' | 'k12' | 'vocational' | 'education-bureau'>('training');
   const [sidebarActive, setSidebarActive] = useState('dashboard');
-
-  // 侧边栏菜单项
   const sidebarItems = [
     { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
     { id: 'media', label: '媒体品牌', icon: Megaphone },
@@ -171,8 +169,34 @@ export default function InstitutionDashboardPage() {
   const currentData = institutionTypes[activeTab];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-yellow-50">
-      <div className="flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center py-8 px-4">
+      {/* Header */}
+      <div className="text-center mb-6">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-2">
+          MatuX 机构管理后台
+        </h1>
+        <p className="text-slate-600">全功能机构运营管理平台</p>
+      </div>
+
+      {/* Tablet Device Frame */}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="relative w-full max-w-[1280px] bg-black rounded-[2rem] shadow-2xl border-[12px] border-slate-800 overflow-hidden"
+      >
+        {/* Status Bar */}
+        <div className="h-8 w-full bg-slate-900 flex justify-between items-center px-6 text-xs font-medium text-white">
+          <span>{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
+          <div className="flex items-center space-x-2">
+            <Wifi className="h-3 w-3" />
+            <Battery className="h-3 w-3" />
+            <span>85%</span>
+          </div>
+        </div>
+
+        {/* Main Dashboard Content */}
+        <div className="w-full bg-gradient-to-br from-purple-50 via-white to-yellow-50 overflow-y-auto" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
+          <div className="flex">
         {/* Sidebar */}
         <motion.div
           initial={{ x: -80 }}
@@ -528,7 +552,9 @@ export default function InstitutionDashboardPage() {
             </div>
           </div>
         </div>
-      </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
