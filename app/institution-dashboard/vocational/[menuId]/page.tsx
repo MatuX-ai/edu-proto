@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
-import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
 import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import DigitalTwinLabPage from '../../components/pages/digital-twin-lab-page';

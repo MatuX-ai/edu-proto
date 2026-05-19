@@ -35,12 +35,6 @@ export interface InstitutionConfig {
   mockData?: Record<string, MockTableData>;
 }
 
-const commonSidebarItems: SidebarItem[] = [
-  { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
-  { id: 'reports', label: '数据报表', icon: BarChart3 },
-  { id: 'settings', label: '系统设置', icon: Settings },
-];
-
 export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   training: {
     type: 'training',
