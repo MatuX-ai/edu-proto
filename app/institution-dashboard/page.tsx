@@ -80,38 +80,45 @@ export default function InstitutionDashboardPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="grid grid-cols-4 gap-4">
+        {/* Institution Type Dock Navigation */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-xl rounded-2xl px-4 py-3 shadow-xl border border-white/30 flex gap-3 z-10">
           {institutionTypes.map((type, index) => {
             const Icon = type.icon;
+            const isActive = activeTab === type.key;
             return (
-              <motion.div
+              <motion.button
                 key={type.key}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.1, y: -6 }}
+                whileTap={{ scale: 1.05 }}
                 onClick={() => setActiveTab(type.key as typeof activeTab)}
-                className={`
-                  ${type.bgColor} ${type.borderColor} border-2 rounded-lg p-5 
-                  cursor-pointer hover:shadow-lg transition-all duration-300
-                  hover:scale-105 group
-                `}
+                className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors relative group ${
+                  isActive ? 'bg-blue-100' : 'hover:bg-slate-100'
+                }`}
               >
-                <div className="flex items-center justify-center mb-4">
-                  <div className={`
-                    w-12 h-12 rounded-lg bg-gradient-to-br ${type.color}
-                    flex items-center justify-center shadow-md
-                    group-hover:shadow-lg transition-shadow
-                  `}>
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
+                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center shadow-md`}>
+                  <Icon className="w-5 h-5 text-white" />
                 </div>
-              </motion.div>
+              </motion.button>
             );
           })}
         </div>
 
         {/* Dashboard Content - 显示在卡片下方 */}
-        <AnimatePresence mode="wait">
+        <div className="pb-24">
+          {/* Institution Name Header */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+              {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
+            </p>
+          </div>
+          
+          <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
@@ -142,6 +149,7 @@ export default function InstitutionDashboardPage() {
             )}
           </motion.div>
         </AnimatePresence>
+      </div>
 
         {/* Footer Info */}
         <div className="mt-12 text-center text-slate-500 text-sm">
