@@ -38,7 +38,7 @@ export interface InstitutionConfig {
 export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   training: {
     type: 'training',
-    title: '本地精品培训中心',
+    title: '星海机器人培训中心',
     subtitle: '专注本地化教育服务，打造高效能教学闭环',
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'blue',
@@ -108,7 +108,7 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   },
   k12: {
     type: 'k12',
-    title: 'K12 STEM 第二课堂平台',
+    title: '西溪实验小学',
     subtitle: '专注STEM兴趣培养，打造灵活多样的课外创新教育体系',
     bannerImage: '/images/stem-collaboration.jpg',
     themeColor: 'green',
@@ -216,7 +216,7 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   },
   vocational: {
     type: 'vocational',
-    title: '产教融合与创新创业中心',
+    title: '永安职业中学',
     subtitle: 'STEM辅修赋能，校企协同育人，孵化未来创客',
     bannerImage: '/images/tech-stack.jpg',
     themeColor: 'orange',
@@ -266,7 +266,7 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
   },
   bureau: {
     type: 'bureau',
-    title: '区域 STEM 教育治理中心',
+    title: '西溪县教育局',
     subtitle: '数据驱动教育决策，促进区域 STEM 教育优质均衡发展',
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'indigo',

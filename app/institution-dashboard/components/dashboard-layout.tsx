@@ -75,14 +75,28 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
               whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => window.location.href = '/institution-dashboard'}
-              className={`flex items-center justify-center bg-gray-800 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-all group ${
-                isCollapsed ? 'px-2 py-2' : 'px-4 py-3 w-full'
+              className={`flex items-center gap-3 bg-gray-800 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-all group ${
+                isCollapsed ? 'px-2 py-2 justify-center' : 'px-4 py-3 w-full'
               }`}
               title="返回首页"
             >
               <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-md shrink-0">
                 <Home className="h-5 w-5 text-white" />
               </div>
+              <AnimatePresence>
+                {!isCollapsed && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-left overflow-hidden"
+                  >
+                    <div className="text-white font-semibold text-sm whitespace-nowrap">{config.title}</div>
+                    <div className="text-gray-400 text-xs whitespace-nowrap">返回首页</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.button>
           </div>
 
