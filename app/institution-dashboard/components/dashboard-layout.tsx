@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Home, LogOut, Wifi, Battery, Search, Bell, Settings, ChevronRight
+  Home, LogOut, Wifi, Battery, Search, Bell, Settings, ChevronRight,
+  ChevronLeft, ChevronRight as ChevronRightIcon
 } from 'lucide-react';
 import { InstitutionConfig, SidebarItem } from '../config/institution-config';
 
@@ -16,6 +17,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ config, children, activeMenu }: DashboardLayoutProps) {
   const currentActive = activeMenu || 'dashboard';
   const [currentTime, setCurrentTime] = useState('00:00');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const updateTime = () => {
@@ -44,33 +46,63 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
 
       {/* Main Dashboard Content */}
       <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-        {/* Sidebar - Clean Professional Design */}
+        {/* Sidebar - High Contrast Professional Design with Drawer */}
         <motion.div
           initial={{ x: -80 }}
           animate={{ x: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="absolute w-64 bg-slate-900 h-full left-0 top-0 z-50 flex flex-col shadow-2xl border-r border-slate-700"
+          className={`absolute h-full left-0 top-0 z-50 flex flex-col shadow-2xl border-r border-gray-800 transition-all duration-300 ease-in-out ${
+            isCollapsed ? 'w-20 bg-gray-950' : 'w-64 bg-gray-950'
+          }`}
         >
+          {/* Collapse Toggle Button */}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="absolute -right-3 top-8 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors z-50"
+          >
+            {isCollapsed ? (
+              <ChevronRightIcon className="h-3 w-3 text-white" />
+            ) : (
+              <ChevronLeft className="h-3 w-3 text-white" />
+            )}
+          </button>
+
           {/* Header Section */}
-          <div className="p-5 border-b border-slate-700 bg-slate-800/50">
+          <div className={`p-5 border-b border-gray-800 bg-gray-900 transition-all duration-300 ${
+            isCollapsed ? 'px-3' : 'px-5'
+          }`}>
             <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: 'rgba(51, 65, 85, 0.8)' }}
+              whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center gap-3 px-4 py-3 bg-slate-800 rounded-xl border border-slate-600 shadow-lg hover:border-slate-500 transition-all group"
+              className={`flex items-center gap-3 bg-gray-800 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-all group ${
+                isCollapsed ? 'px-2 py-2 justify-center' : 'px-4 py-3 w-full'
+              }`}
             >
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-md shrink-0">
                 <Home className="h-5 w-5 text-white" />
               </div>
-              <div className="text-left">
-                <div className="text-white font-semibold text-sm">{config.title}</div>
-                <div className="text-slate-400 text-xs">返回首页</div>
-              </div>
+              <AnimatePresence>
+                {!isCollapsed && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-left overflow-hidden"
+                  >
+                    <div className="text-white font-semibold text-sm whitespace-nowrap">{config.title}</div>
+                    <div className="text-gray-400 text-xs whitespace-nowrap">返回首页</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.button>
           </div>
 
           {/* Navigation Menu */}
           <div className="flex-1 overflow-y-auto scrollbar-hide py-4">
-            <div className="px-3 space-y-1">
+            <div className={`space-y-1 transition-all duration-300 ${
+              isCollapsed ? 'px-2' : 'px-3'
+            }`}>
               {config.sidebarItems.map((item: SidebarItem, index) => {
                 const IconComponent = item.icon;
                 const isActive = currentActive === item.id;
@@ -80,49 +112,66 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    whileHover={{ scale: 1.02, x: 4 }}
+                    whileHover={{ scale: 1.02, x: isCollapsed ? 0 : 4 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
                       window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
                     }}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
+                    className={`flex items-center rounded-lg transition-all duration-200 group ${
                       isActive
-                        ? 'bg-blue-600 shadow-lg shadow-blue-900/50'
-                        : 'hover:bg-slate-800'
+                        ? 'bg-blue-600 shadow-lg'
+                        : 'hover:bg-gray-800'
+                    } ${
+                      isCollapsed ? 'justify-center p-2' : 'gap-3 px-4 py-3'
                     }`}
+                    title={isCollapsed ? item.label : undefined}
                   >
                     {/* Icon Container */}
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
+                    <div className={`rounded-lg flex items-center justify-center transition-all shrink-0 ${
                       isActive 
-                        ? 'bg-white/20' 
-                        : 'bg-slate-700/50 group-hover:bg-slate-700'
+                        ? 'bg-white/25' 
+                        : 'bg-gray-700 group-hover:bg-gray-600'
+                    } ${
+                      isCollapsed ? 'w-10 h-10' : 'w-9 h-9'
                     }`}>
-                      <IconComponent className={`h-5 w-5 transition-colors ${
-                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'
+                      <IconComponent className={`transition-colors ${
+                        isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                      } ${
+                        isCollapsed ? 'h-5 w-5' : 'h-5 w-5'
                       }`} />
                     </div>
                     
                     {/* Label */}
-                    <div className="flex-1 text-left">
-                      <div className={`font-medium text-sm transition-colors ${
-                        isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
-                      }`}>
-                        {item.label}
-                      </div>
-                      {item.pageType && (
-                        <div className={`text-xs mt-0.5 capitalize ${
-                          isActive ? 'text-blue-200' : 'text-slate-500'
-                        }`}>
-                          {item.pageType.replace('-', ' ')}
-                        </div>
+                    <AnimatePresence>
+                      {!isCollapsed && (
+                        <motion.div
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: 'auto' }}
+                          exit={{ opacity: 0, width: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="flex-1 text-left overflow-hidden"
+                        >
+                          <div className={`font-medium text-sm transition-colors whitespace-nowrap ${
+                            isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                          }`}>
+                            {item.label}
+                          </div>
+                          {item.pageType && (
+                            <div className={`text-xs mt-0.5 capitalize whitespace-nowrap ${
+                              isActive ? 'text-blue-100' : 'text-gray-500'
+                            }`}>
+                              {item.pageType.replace('-', ' ')}
+                            </div>
+                          )}
+                        </motion.div>
                       )}
-                    </div>
+                    </AnimatePresence>
                     
                     {/* Active Indicator */}
-                    {isActive && (
+                    {!isCollapsed && isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="w-1 h-8 bg-white rounded-full shadow-lg shadow-white/50"
+                        className="w-1 h-8 bg-white rounded-full"
                       />
                     )}
                   </motion.button>
@@ -132,43 +181,81 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
           </div>
 
           {/* Footer Actions */}
-          <div className="p-4 border-t border-slate-700 bg-slate-800/30 space-y-2">
+          <div className={`border-t border-gray-800 bg-gray-900 space-y-2 transition-all duration-300 ${
+            isCollapsed ? 'p-2' : 'p-4'
+          }`}>
             {/* Settings */}
             <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: 'rgba(51, 65, 85, 0.8)' }}
+              whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
                 window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
               }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-all border border-transparent hover:border-slate-600 group"
+              className={`flex items-center rounded-lg hover:bg-gray-800 transition-all border border-transparent hover:border-gray-700 group ${
+                isCollapsed ? 'justify-center p-2' : 'gap-3 px-4 py-3 w-full'
+              }`}
+              title={isCollapsed ? '系统设置' : undefined}
             >
-              <div className="w-9 h-9 rounded-lg bg-slate-700/50 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
-                <Settings className="h-5 w-5 text-slate-400 group-hover:text-slate-200" />
+              <div className={`rounded-lg flex items-center justify-center group-hover:bg-gray-600 transition-colors shrink-0 ${
+                isCollapsed ? 'w-10 h-10 bg-gray-700' : 'w-9 h-9 bg-gray-700'
+              }`}>
+                <Settings className={`text-gray-400 group-hover:text-white ${
+                  isCollapsed ? 'h-5 w-5' : 'h-5 w-5'
+                }`} />
               </div>
-              <div className="flex-1 text-left">
-                <div className="text-slate-300 group-hover:text-white font-medium text-sm">系统设置</div>
-              </div>
+              <AnimatePresence>
+                {!isCollapsed && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex-1 text-left overflow-hidden"
+                  >
+                    <div className="text-gray-300 group-hover:text-white font-medium text-sm whitespace-nowrap">系统设置</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.button>
             
             {/* Logout */}
             <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: 'rgba(127, 29, 29, 0.3)' }}
+              whileHover={{ scale: 1.02, backgroundColor: '#450a0a' }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-900/30 transition-all border border-transparent hover:border-red-700/50 group"
+              className={`flex items-center rounded-lg hover:bg-red-950 transition-all border border-transparent hover:border-red-900 group ${
+                isCollapsed ? 'justify-center p-2' : 'gap-3 px-4 py-3 w-full'
+              }`}
+              title={isCollapsed ? '退出登录' : undefined}
             >
-              <div className="w-9 h-9 rounded-lg bg-red-900/20 flex items-center justify-center group-hover:bg-red-900/40 transition-colors">
-                <LogOut className="h-5 w-5 text-red-400/70 group-hover:text-red-400" />
+              <div className={`rounded-lg flex items-center justify-center group-hover:bg-red-900/50 transition-colors shrink-0 ${
+                isCollapsed ? 'w-10 h-10 bg-red-950/50' : 'w-9 h-9 bg-red-950/50'
+              }`}>
+                <LogOut className={`group-hover:text-red-300 ${
+                  isCollapsed ? 'h-5 w-5 text-red-400' : 'h-5 w-5 text-red-400'
+                }`} />
               </div>
-              <div className="flex-1 text-left">
-                <div className="text-red-400/70 group-hover:text-red-400 font-medium text-sm">退出登录</div>
-              </div>
+              <AnimatePresence>
+                {!isCollapsed && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex-1 text-left overflow-hidden"
+                  >
+                    <div className="text-red-400 group-hover:text-red-300 font-medium text-sm whitespace-nowrap">退出登录</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.button>
           </div>
         </motion.div>
 
         {/* Main Content Area */}
         <motion.div 
-          className={`ml-64 h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50`}
+          className={`h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50 transition-all duration-300 ${
+            isCollapsed ? 'ml-20' : 'ml-64'
+          }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
