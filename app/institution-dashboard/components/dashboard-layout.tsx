@@ -92,7 +92,6 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     transition={{ duration: 0.2 }}
                     className="text-left overflow-hidden"
                   >
-                    <div className="text-white font-semibold text-sm whitespace-nowrap">{config.title}</div>
                     <div className="text-gray-400 text-xs whitespace-nowrap">返回首页</div>
                   </motion.div>
                 )}
