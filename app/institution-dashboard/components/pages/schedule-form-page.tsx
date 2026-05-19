@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, Users, BookOpen, Save, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, Save, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { InstitutionConfig } from '../../config/institution-config';
 
 interface ScheduleFormPageProps {

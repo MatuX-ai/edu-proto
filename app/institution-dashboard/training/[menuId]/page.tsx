@@ -41,7 +41,7 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
       ) : menuItem.pageType === 'live' ? (
         <LiveControlPage />
       ) : menuItem.pageType === 'form' && menuId === 'schedule' ? (
-        <ScheduleFormPage />
+        <ScheduleFormPage config={config} />
       ) : menuId === 'reports' ? (
         <ReportsPage institutionType="培训机构" />
       ) : menuId === 'settings' ? (
