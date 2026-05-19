@@ -89,7 +89,9 @@ export default function InstitutionDashboardPage() {
   useEffect(() => {
     const handleMenuChange = (event: CustomEvent) => {
       const { menuId, type } = event.detail;
-      if (type === activeTab) {
+      // 类型映射：将配置中的 'bureau' 映射到主页面的 'education-bureau'
+      const mappedType = type === 'bureau' ? 'education-bureau' : type;
+      if (mappedType === activeTab) {
         setActiveMenu(menuId);
       }
     };
