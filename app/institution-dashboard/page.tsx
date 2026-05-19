@@ -8,6 +8,41 @@ import TrainingDashboardPage from './components/pages/training-dashboard-page';
 import K12DashboardPage from './components/pages/k12-dashboard-page';
 import VocationalDashboardPage from './components/pages/vocational-dashboard-page';
 import BureauDashboardPage from './components/pages/bureau-dashboard-page';
+import DataTablePage from './components/pages/data-table-page';
+import ScheduleFormPage from './components/pages/schedule-form-page';
+import LiveControlPage from './components/pages/live-control-page';
+import StatsOverviewPage from './components/pages/stats-overview-page';
+import EnhancedStatsPage from './components/pages/enhanced-stats-page';
+import SettingsPage from './components/pages/settings-page';
+
+// K12 Pages
+import CourseManagementPage from './components/pages/course-management-page';
+import StudentParticipationPage from './components/pages/student-participation-page';
+import PortfolioGalleryPage from './components/pages/portfolio-gallery-page';
+import LearningCommunityPage from './components/pages/learning-community-page';
+import ParentInteractionPage from './components/pages/parent-interaction-page';
+import ResourceEquipmentPage from './components/pages/resource-equipment-page';
+import SecondClassroomPage from './components/pages/second-classroom-page';
+import AcademicManagementPage from './components/pages/academic-management-page';
+import GradeAnalysisPage from './components/pages/grade-analysis-page';
+
+// Vocational Pages
+import StemAuxiliaryPage from './components/pages/stem-auxiliary-page';
+import IndustryCoopPage from './components/pages/industry-coop-page';
+import IncubatorPage from './components/pages/incubator-page';
+import DigitalTwinLabPage from './components/pages/digital-twin-lab-page';
+import PatentsPage from './components/pages/patents-page';
+import ProjectWorkshopPage from './components/pages/project-workshop-page';
+import SkillWalletPage from './components/pages/skill-wallet-page';
+
+// Bureau Pages
+import StemCompetitionsPage from './components/pages/stem-competitions-page';
+import AwardsEvaluationPage from './components/pages/awards-evaluation-page';
+import QualityMonitoringPage from './components/pages/quality-monitoring-page';
+import SchoolManagementPage from './components/pages/school-management-page';
+import PolicyDraftPage from './components/pages/policy-draft-page';
+import CompetitionManagementPage from './components/pages/competition-management-page';
+import ProjectKanbanPage from './components/pages/project-kanban-page';
 import { institutionConfigs } from './config/institution-config';
 
 const institutionTypes = [
@@ -109,23 +144,83 @@ export default function InstitutionDashboardPage() {
       </div>
 
       {/* Dashboard Content */}
-      <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab]} activeMenu={activeMenu}>
+      <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : (activeTab as keyof typeof institutionConfigs)]} activeMenu={activeMenu}>
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeTab}
+            key={`${activeTab}-${activeMenu}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className="space-y-6"
           >
-            {activeTab === 'training' && <TrainingDashboardPage config={institutionConfigs['training']} />}
-            {activeTab === 'k12' && <K12DashboardPage config={institutionConfigs['k12']} />}
-            {activeTab === 'vocational' && <VocationalDashboardPage config={institutionConfigs['vocational']} />}
-            {activeTab === 'education-bureau' && <BureauDashboardPage config={institutionConfigs['bureau']} />}
+            {renderPageContent(activeTab, activeMenu)}
           </motion.div>
         </AnimatePresence>
       </DashboardLayout>
     </div>
   );
+}
+
+function renderPageContent(activeTab: string, activeMenu: string) {
+  const config = institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab as keyof typeof institutionConfigs];
+  
+  // Dashboard Home Pages
+  if (activeMenu === 'dashboard') {
+    if (activeTab === 'training') return <TrainingDashboardPage config={config} />;
+    if (activeTab === 'k12') return <K12DashboardPage config={config} />;
+    if (activeTab === 'vocational') return <VocationalDashboardPage config={config} />;
+    if (activeTab === 'education-bureau') return <BureauDashboardPage config={config} />;
+  }
+
+  // Dynamic Page Rendering based on pageType in config
+  const menuItem = config.sidebarItems.find(item => item.id === activeMenu);
+  if (!menuItem) return <SettingsPage />;
+
+  switch (menuItem.pageType) {
+    case 'table': {
+      const tableData = config.mockData?.[activeMenu];
+      return <DataTablePage 
+        title={tableData?.title || menuItem.label} 
+        columns={tableData?.columns || []} 
+        rows={tableData?.rows || []} 
+      />;
+    }
+    case 'form':
+      if (activeMenu === 'schedule') return <ScheduleFormPage />;
+      if (activeMenu === 'stem-courses') return <CourseManagementPage />;
+      if (activeMenu === 'learning-community') return <LearningCommunityPage />;
+      if (activeMenu === 'parent-interaction') return <ParentInteractionPage />;
+      if (activeMenu === 'incubator') return <IncubatorPage />;
+      if (activeMenu === 'awards-evaluation') return <AwardsEvaluationPage />;
+      if (activeMenu === 'policy-draft') return <PolicyDraftPage />;
+      return <ScheduleFormPage />; // Fallback for forms
+    case 'stats':
+      if (activeMenu === 'settlement') return <StatsOverviewPage title="课时结算" />;
+      if (activeMenu === 'student-participation') return <StudentParticipationPage />;
+      if (activeMenu === 'quality-monitoring') return <QualityMonitoringPage />;
+      if (activeMenu === 'resource-allocation') return <EnhancedStatsPage title="资源均衡配置" type="bar" />;
+      return <EnhancedStatsPage title={menuItem.label} type="bar" />;
+    case 'live':
+      return <LiveControlPage />;
+    case 'digital-twin':
+      return <DigitalTwinLabPage />;
+    case 'kanban':
+      if (activeMenu === 'industry-coop') return <IndustryCoopPage />;
+      if (activeMenu === 'stem-competitions') return <StemCompetitionsPage />;
+      return <ProjectKanbanPage />;
+    case 'skill-wallet':
+      return <SkillWalletPage />;
+    default:
+      // Specific Page Overrides
+      if (activeMenu === 'portfolio-gallery') return <PortfolioGalleryPage />;
+      if (activeMenu === 'competitions') return <CompetitionManagementPage />;
+      if (activeMenu === 'resources') return <ResourceEquipmentPage />;
+      if (activeMenu === 'stem-auxiliary') return <StemAuxiliaryPage />;
+      if (activeMenu === 'patents') return <PatentsPage />;
+      if (activeMenu === 'schools') return <SchoolManagementPage />;
+      if (activeMenu === 'reports') return <EnhancedStatsPage title="数据报表" type="bar" />;
+      if (activeMenu === 'settings') return <SettingsPage />;
+      return <DataTablePage title={menuItem.label} columns={[]} rows={[]} />;
+  }
 }
