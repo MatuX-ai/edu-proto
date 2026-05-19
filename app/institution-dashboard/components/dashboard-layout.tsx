@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Home, LogOut, Wifi, Battery, Search, Bell, Settings, ChevronRight,
-  ChevronLeft, ChevronRight as ChevronRightIcon
+  Home, LogOut, Wifi, Battery, Bell, Settings, ChevronLeft,
+  ChevronRight as ChevronRightIcon
 } from 'lucide-react';
 import { InstitutionConfig, SidebarItem } from '../config/institution-config';
 
