@@ -67,110 +67,45 @@ export default function InstitutionDashboardPage() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200 px-8 py-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-            MatuX 机构管理后台
-          </h1>
-          <p className="text-slate-500 mt-2">选择您的机构类型以进入管理系统</p>
-        </div>
-      </div>
-
+    <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab]} activeMenu={activeMenu}>
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-8 py-8">
-        {/* Institution Type Selection - Compact Grid */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          {institutionTypes.map((type, index) => {
-            const Icon = type.icon;
-            const isActive = activeTab === type.key;
-            return (
-              <motion.button
-                key={type.key}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveTab(type.key as typeof activeTab)}
-                className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                  isActive 
-                    ? `${type.bgColor} ${type.borderColor} shadow-lg` 
-                    : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
-                }`}
-              >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center shadow-md mb-2`}>
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">{type.title}</span>
-              </motion.button>
-            );
-          })}
-        </div>
-
-        {/* Dashboard Content - 显示在卡片下方 */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          {/* Institution Name Header */}
-          <div className="mb-6 pb-4 border-b border-gray-200">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-                {(() => {
-                  const typeConfig = institutionTypes.find(t => t.key === activeTab) || institutionTypes[0];
-                  const Icon = typeConfig.icon;
-                  return <Icon className="w-5 h-5 text-white" />;
-                })()}
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-gray-900">
-                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
-                </h2>
-                <p className="text-sm text-gray-500">
-                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
-                </p>
-              </div>
+      <div className="p-8">
+        {/* Institution Name Header */}
+        <div className="mb-8 pb-6 border-b border-gray-200">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+              {(() => {
+                const typeConfig = institutionTypes.find(t => t.key === activeTab) || institutionTypes[0];
+                const Icon = typeConfig.icon;
+                return <Icon className="w-6 h-6 text-white" />;
+              })()}
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
+              </h1>
+              <p className="text-sm text-gray-500 mt-1">
+                {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
+              </p>
             </div>
           </div>
-          
-          <AnimatePresence mode="wait">
+        </div>
+        
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="mt-8"
           >
-            {activeTab === 'training' && (
-              <DashboardLayout config={institutionConfigs['training']} activeMenu={activeMenu}>
-                <TrainingDashboardPage config={institutionConfigs['training']} />
-              </DashboardLayout>
-            )}
-            {activeTab === 'k12' && (
-              <DashboardLayout config={institutionConfigs['k12']} activeMenu={activeMenu}>
-                <K12DashboardPage config={institutionConfigs['k12']} />
-              </DashboardLayout>
-            )}
-            {activeTab === 'vocational' && (
-              <DashboardLayout config={institutionConfigs['vocational']} activeMenu={activeMenu}>
-                <VocationalDashboardPage config={institutionConfigs['vocational']} />
-              </DashboardLayout>
-            )}
-            {activeTab === 'education-bureau' && (
-              <DashboardLayout config={institutionConfigs['bureau']} activeMenu={activeMenu}>
-                <BureauDashboardPage config={institutionConfigs['bureau']} />
-              </DashboardLayout>
-            )}
+            {activeTab === 'training' && <TrainingDashboardPage config={institutionConfigs['training']} />}
+            {activeTab === 'k12' && <K12DashboardPage config={institutionConfigs['k12']} />}
+            {activeTab === 'vocational' && <VocationalDashboardPage config={institutionConfigs['vocational']} />}
+            {activeTab === 'education-bureau' && <BureauDashboardPage config={institutionConfigs['bureau']} />}
           </motion.div>
         </AnimatePresence>
       </div>
-
-        {/* Footer Info */}
-        <div className="mt-12 text-center text-slate-500 text-sm">
-          <p>MatuX STEM 教育平台 © 2026</p>
-          <p className="mt-2">支持培训机构、K12学校、职业学校、教育局四种机构类型</p>
-        </div>
-      </div>
-    </div>
+    </DashboardLayout>
   );
 }
