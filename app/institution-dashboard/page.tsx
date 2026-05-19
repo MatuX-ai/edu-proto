@@ -13,6 +13,7 @@ import LeadsPage from './components/pages/leads-page';
 import ScheduleFormPage from './components/pages/schedule-form-page';
 import LiveControlPage from './components/pages/live-control-page';
 import StatsOverviewPage from './components/pages/stats-overview-page';
+import SettlementPage from './components/pages/settlement-page';
 import EnhancedStatsPage from './components/pages/enhanced-stats-page';
 import SettingsPage from './components/pages/settings-page';
 
@@ -194,9 +195,9 @@ function renderPageContent(activeTab: string, activeMenu: string) {
       if (activeMenu === 'incubator') return <IncubatorPage />;
       if (activeMenu === 'awards-evaluation') return <AwardsEvaluationPage />;
       if (activeMenu === 'policy-draft') return <PolicyDraftPage />;
-      return <ScheduleFormPage />; // Fallback for forms
+      return <ScheduleFormPage config={config} />; // Fallback for forms
     case 'stats':
-      if (activeMenu === 'settlement') return <StatsOverviewPage title="课时结算" />;
+      if (activeMenu === 'settlement') return <SettlementPage config={config} />;
       if (activeMenu === 'student-participation') return <StudentParticipationPage />;
       if (activeMenu === 'quality-monitoring') return <QualityMonitoringPage />;
       if (activeMenu === 'resource-allocation') return <EnhancedStatsPage title="资源均衡配置" type="bar" />;
