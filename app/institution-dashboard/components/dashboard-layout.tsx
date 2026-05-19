@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter, usePathname } from 'next/navigation';
 import { 
   Home, LogOut, Wifi, Battery, Bell, Settings, ChevronLeft,
   ChevronRight as ChevronRightIcon
@@ -15,6 +16,8 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ config, children, activeMenu }: DashboardLayoutProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const currentActive = activeMenu || 'dashboard';
   const [currentTime, setCurrentTime] = useState('00:00');
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -107,7 +110,13 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     whileHover={{ scale: 1.02, x: isCollapsed ? 0 : 4 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
-                      window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
+                      // 如果当前在动态路由页面，使用路由跳转
+                      if (pathname.includes(`/${config.type}/`)) {
+                        router.push(`/institution-dashboard/${config.type}/${item.id}`);
+                      } else {
+                        // 否则触发事件（用于主页面）
+                        window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
+                      }
                     }}
                     className={`flex items-center rounded-lg transition-all duration-200 group ${
                       isActive
@@ -181,7 +190,13 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
               whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
-                window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
+                // 如果当前在动态路由页面，使用路由跳转
+                if (pathname.includes(`/${config.type}/`)) {
+                  router.push(`/institution-dashboard/${config.type}/settings`);
+                } else {
+                  // 否则触发事件（用于主页面）
+                  window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
+                }
               }}
               className={`flex items-center rounded-lg hover:bg-gray-800 transition-all border border-transparent hover:border-gray-700 group ${
                 isCollapsed ? 'justify-center p-2' : 'gap-3 px-4 py-3 w-full'
