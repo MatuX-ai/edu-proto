@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Briefcase, School, GraduationCap, Landmark } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DashboardLayout from './components/dashboard-layout';
@@ -48,6 +48,20 @@ const institutionTypes = [
 
 export default function InstitutionDashboardPage() {
   const [activeTab, setActiveTab] = useState<'training' | 'k12' | 'vocational' | 'education-bureau'>('training');
+  const [activeMenu, setActiveMenu] = useState('dashboard');
+
+  // 监听侧边栏菜单切换事件
+  useEffect(() => {
+    const handleMenuChange = (event: CustomEvent) => {
+      const { menuId, type } = event.detail;
+      if (type === activeTab) {
+        setActiveMenu(menuId);
+      }
+    };
+
+    window.addEventListener('menuChange', handleMenuChange as EventListener);
+    return () => window.removeEventListener('menuChange', handleMenuChange as EventListener);
+  }, [activeTab]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -117,7 +131,7 @@ export default function InstitutionDashboardPage() {
             className="mt-8"
           >
             {activeTab === 'training' && (
-              <DashboardLayout config={institutionConfigs['training']} activeMenu="dashboard">
+              <DashboardLayout config={institutionConfigs['training']} activeMenu={activeMenu}>
                 <TrainingDashboardPage config={institutionConfigs['training']} />
               </DashboardLayout>
             )}

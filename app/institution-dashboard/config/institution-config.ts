@@ -49,13 +49,13 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'blue',
     sidebarItems: [
-      ...commonSidebarItems.slice(0, 1),
       { id: 'dashboard', label: '仪表盘', icon: LayoutDashboard, pageType: 'dashboard' },
       { id: 'leads', label: '招生线索', icon: Users2, pageType: 'table' },
       { id: 'schedule', label: '智能排课', icon: Calendar, pageType: 'form' },
       { id: 'settlement', label: '课时结算', icon: DollarSign, pageType: 'stats' },
       { id: 'live', label: '直播授课', icon: Monitor, pageType: 'live' },
-      ...commonSidebarItems.slice(1),
+      { id: 'reports', label: '数据报表', icon: BarChart3 },
+      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       leads: {
@@ -120,7 +120,7 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/stem-collaboration.jpg',
     themeColor: 'green',
     sidebarItems: [
-      ...commonSidebarItems.slice(0, 1),
+      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-courses', label: '课程管理', icon: BookOpen, pageType: 'form' },
       { id: 'student-participation', label: '学生参与', icon: Users2, pageType: 'stats' },
       { id: 'portfolio-gallery', label: '作品库', icon: FileText, pageType: 'table' },
@@ -229,13 +229,14 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/tech-stack.jpg',
     themeColor: 'orange',
     sidebarItems: [
-      ...commonSidebarItems.slice(0, 1),
+      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-auxiliary', label: 'STEM辅修中心', icon: Cpu, pageType: 'skill-wallet' },
       { id: 'industry-coop', label: '产学研合作', icon: Briefcase, pageType: 'kanban' },
       { id: 'incubator', label: '创业孵化器', icon: Lightbulb, pageType: 'form' },
       { id: 'training-base', label: '实训基地', icon: Monitor, pageType: 'digital-twin' },
       { id: 'patents', label: '专利管理', icon: FileText, pageType: 'table' },
-      ...commonSidebarItems.slice(1),
+      { id: 'reports', label: '数据报表', icon: BarChart3 },
+      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       patents: {
@@ -279,13 +280,14 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'indigo',
     sidebarItems: [
-      ...commonSidebarItems.slice(0, 1),
+      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-competitions', label: 'STEM 赛事管理', icon: Trophy, pageType: 'kanban' },
       { id: 'awards-evaluation', label: '评选表彰系统', icon: AwardIcon, pageType: 'form' },
       { id: 'quality-monitoring', label: '质量监测大屏', icon: TrendingUp, pageType: 'stats' },
       { id: 'schools', label: '学校名录', icon: Building2, pageType: 'table' },
       { id: 'resource-allocation', label: '资源均衡配置', icon: MapPin, pageType: 'stats' },
-      ...commonSidebarItems.slice(1),
+      { id: 'reports', label: '数据报表', icon: BarChart3 },
+      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       schools: {
