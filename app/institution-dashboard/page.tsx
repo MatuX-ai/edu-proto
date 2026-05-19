@@ -80,7 +80,7 @@ export default function InstitutionDashboardPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {institutionTypes.map((type, index) => {
             const Icon = type.icon;
             return (
@@ -91,33 +91,20 @@ export default function InstitutionDashboardPage() {
                 transition={{ delay: index * 0.1 }}
                 onClick={() => setActiveTab(type.key as typeof activeTab)}
                 className={`
-                  ${type.bgColor} ${type.borderColor} border-2 rounded-xl p-8 
-                  cursor-pointer hover:shadow-xl transition-all duration-300
+                  ${type.bgColor} ${type.borderColor} border-2 rounded-lg p-5 
+                  cursor-pointer hover:shadow-lg transition-all duration-300
                   hover:scale-105 group
                 `}
               >
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center justify-center mb-4">
                   <div className={`
-                    w-16 h-16 rounded-xl bg-gradient-to-br ${type.color}
-                    flex items-center justify-center shadow-lg
-                    group-hover:shadow-xl transition-shadow
+                    w-12 h-12 rounded-lg bg-gradient-to-br ${type.color}
+                    flex items-center justify-center shadow-md
+                    group-hover:shadow-lg transition-shadow
                   `}>
-                    <Icon className="w-8 h-8 text-white" />
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    className="text-slate-400 group-hover:text-slate-600"
-                  >
-                    →
-                  </motion.div>
                 </div>
-                
-                <h2 className="text-2xl font-bold text-slate-800 mb-2">
-                  {type.title}
-                </h2>
-                <p className="text-slate-600">
-                  {type.subtitle}
-                </p>
               </motion.div>
             );
           })}
