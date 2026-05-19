@@ -14,6 +14,14 @@ import AwardsEvaluationPage from '../../components/pages/awards-evaluation-page'
 import QualityMonitoringPage from '../../components/pages/quality-monitoring-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
+// 生成静态参数，确保 Vercel 部署时路由正常工作
+export function generateStaticParams() {
+  const config = institutionConfigs['bureau'];
+  return config.sidebarItems.map((item) => ({
+    menuId: item.id,
+  }));
+}
+
 export default function BureauMenuPage({ params }: { params: { menuId: string } }) {
   const type: InstitutionType = 'bureau';
   const config = institutionConfigs[type];
