@@ -22,9 +22,6 @@ import PortfolioGalleryPage from './components/pages/portfolio-gallery-page';
 import LearningCommunityPage from './components/pages/learning-community-page';
 import ParentInteractionPage from './components/pages/parent-interaction-page';
 import ResourceEquipmentPage from './components/pages/resource-equipment-page';
-import SecondClassroomPage from './components/pages/second-classroom-page';
-import AcademicManagementPage from './components/pages/academic-management-page';
-import GradeAnalysisPage from './components/pages/grade-analysis-page';
 
 // Vocational Pages
 import StemAuxiliaryPage from './components/pages/stem-auxiliary-page';
@@ -32,7 +29,6 @@ import IndustryCoopPage from './components/pages/industry-coop-page';
 import IncubatorPage from './components/pages/incubator-page';
 import DigitalTwinLabPage from './components/pages/digital-twin-lab-page';
 import PatentsPage from './components/pages/patents-page';
-import ProjectWorkshopPage from './components/pages/project-workshop-page';
 import SkillWalletPage from './components/pages/skill-wallet-page';
 
 // Bureau Pages
