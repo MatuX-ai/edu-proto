@@ -70,6 +70,38 @@ export default function InstitutionDashboardPage() {
     <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab]} activeMenu={activeMenu}>
       {/* Main Content */}
       <div className="p-8">
+        {/* Institution Navigation Tabs */}
+        <div className="grid grid-cols-4 gap-3 mb-8">
+          {institutionTypes.map((type, index) => {
+            const Icon = type.icon;
+            const isActive = activeTab === type.key;
+            return (
+              <motion.button
+                key={type.key}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setActiveTab(type.key as typeof activeTab)}
+                className={`flex items-center gap-3 p-3 rounded-xl border-2 transition-all cursor-pointer ${
+                  isActive 
+                    ? `${type.bgColor} ${type.borderColor} shadow-lg` 
+                    : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
+                }`}
+              >
+                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center shadow-md shrink-0`}>
+                  <Icon className="w-5 h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-sm font-semibold text-gray-900">{type.title}</div>
+                  <div className="text-xs text-gray-500">{type.subtitle}</div>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+
         {/* Institution Name Header */}
         <div className="mb-8 pb-6 border-b border-gray-200">
           <div className="flex items-center gap-4">
