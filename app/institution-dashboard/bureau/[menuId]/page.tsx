@@ -39,6 +39,8 @@ export default function BureauMenuPage({ params }: { params: { menuId: string } 
         <QualityMonitoringPage />
       ) : menuId === 'schools' ? (
         <SchoolManagementPage />
+      ) : menuId === 'resource-allocation' ? (
+        <EnhancedStatsPage title="资源均衡配置" type="bar" />
       ) : menuItem.pageType === 'table' && mockData ? (
         <DataTablePage title={mockData.title} columns={mockData.columns} rows={mockData.rows} />
       ) : menuItem.pageType === 'stats' ? (
