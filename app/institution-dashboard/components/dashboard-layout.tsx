@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import { 
   Home, LogOut, Wifi, Battery, Search, Bell, Settings, ChevronRight
 } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { InstitutionConfig, SidebarItem } from '../config/institution-config';
 
 interface DashboardLayoutProps {
@@ -16,8 +14,7 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ config, children, activeMenu }: DashboardLayoutProps) {
-  const pathname = usePathname();
-  const currentActive = activeMenu || pathname?.split('/').pop() || 'dashboard';
+  const currentActive = activeMenu || 'dashboard';
   const [currentTime, setCurrentTime] = useState('00:00');
 
   useEffect(() => {
@@ -64,9 +61,12 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
               const IconComponent = item.icon;
               const isActive = currentActive === item.id;
               return (
-                <Link
+                <button
                   key={`${config.type}-${item.id}`}
-                  href={`/institution-dashboard/${config.type}/${item.id}`}
+                  onClick={() => {
+                    // 触发父组件的菜单切换
+                    window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
+                  }}
                   className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 group ${
                     isActive
                       ? 'bg-white/20 shadow-lg shadow-black/10 scale-105 border border-white/20'
@@ -77,7 +77,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                   {isActive && (
                     <div className="absolute -right-[22px] top-1/2 -translate-y-1/2 w-1.5 h-8 bg-white rounded-l-full" />
                   )}
-                </Link>
+                </button>
               );
             })}
           </div>
