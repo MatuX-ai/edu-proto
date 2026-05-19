@@ -12,7 +12,6 @@ import DataTablePage from './components/pages/data-table-page';
 import LeadsPage from './components/pages/leads-page';
 import ScheduleFormPage from './components/pages/schedule-form-page';
 import LiveControlPage from './components/pages/live-control-page';
-import StatsOverviewPage from './components/pages/stats-overview-page';
 import SettlementPage from './components/pages/settlement-page';
 import EnhancedStatsPage from './components/pages/enhanced-stats-page';
 import SettingsPage from './components/pages/settings-page';
