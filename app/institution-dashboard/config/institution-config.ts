@@ -49,7 +49,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
       { id: 'settlement', label: '课时结算', icon: DollarSign, pageType: 'stats' },
       { id: 'live', label: '直播授课', icon: Monitor, pageType: 'live' },
       { id: 'reports', label: '数据报表', icon: BarChart3 },
-      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       leads: {
@@ -123,7 +122,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
       { id: 'resources', label: '资源设备', icon: Monitor, pageType: 'table' },
       { id: 'parent-interaction', label: '家校互动', icon: Handshake, pageType: 'form' },
       { id: 'reports', label: '数据报表', icon: BarChart3 },
-      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       'stem-courses': {
@@ -230,7 +228,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
       { id: 'training-base', label: '实训基地', icon: Monitor, pageType: 'digital-twin' },
       { id: 'patents', label: '专利管理', icon: FileText, pageType: 'table' },
       { id: 'reports', label: '数据报表', icon: BarChart3 },
-      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       patents: {
@@ -281,7 +278,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
       { id: 'schools', label: '学校名录', icon: Building2, pageType: 'table' },
       { id: 'resource-allocation', label: '资源均衡配置', icon: MapPin, pageType: 'stats' },
       { id: 'reports', label: '数据报表', icon: BarChart3 },
-      { id: 'settings', label: '系统设置', icon: Settings },
     ],
     mockData: {
       schools: {
