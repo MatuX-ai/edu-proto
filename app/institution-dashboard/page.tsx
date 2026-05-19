@@ -9,6 +9,7 @@ import K12DashboardPage from './components/pages/k12-dashboard-page';
 import VocationalDashboardPage from './components/pages/vocational-dashboard-page';
 import BureauDashboardPage from './components/pages/bureau-dashboard-page';
 import DataTablePage from './components/pages/data-table-page';
+import LeadsPage from './components/pages/leads-page';
 import ScheduleFormPage from './components/pages/schedule-form-page';
 import LiveControlPage from './components/pages/live-control-page';
 import StatsOverviewPage from './components/pages/stats-overview-page';
@@ -178,6 +179,7 @@ function renderPageContent(activeTab: string, activeMenu: string) {
   switch (menuItem.pageType) {
     case 'table': {
       const tableData = config.mockData?.[activeMenu];
+      if (activeMenu === 'leads') return <LeadsPage config={config} />;
       return <DataTablePage 
         title={tableData?.title || menuItem.label} 
         columns={tableData?.columns || []} 
