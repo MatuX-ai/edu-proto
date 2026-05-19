@@ -65,7 +65,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
               const isActive = currentActive === item.id;
               return (
                 <Link
-                  key={item.id}
+                  key={`${config.type}-${item.id}`}
                   href={`/institution-dashboard/${config.type}/${item.id}`}
                   className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 group ${
                     isActive
