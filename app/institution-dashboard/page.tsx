@@ -5,6 +5,9 @@ import { Briefcase, School, GraduationCap, Landmark } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DashboardLayout from './components/dashboard-layout';
 import TrainingDashboardPage from './components/pages/training-dashboard-page';
+import K12DashboardPage from './components/pages/k12-dashboard-page';
+import VocationalDashboardPage from './components/pages/vocational-dashboard-page';
+import BureauDashboardPage from './components/pages/bureau-dashboard-page';
 import { institutionConfigs } from './config/institution-config';
 
 const institutionTypes = [
@@ -136,22 +139,19 @@ export default function InstitutionDashboardPage() {
               </DashboardLayout>
             )}
             {activeTab === 'k12' && (
-              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">K12 学校控制台</h3>
-                <p className="text-slate-600">K12 学校管理功能开发中...</p>
-              </div>
+              <DashboardLayout config={institutionConfigs['k12']} activeMenu={activeMenu}>
+                <K12DashboardPage config={institutionConfigs['k12']} />
+              </DashboardLayout>
             )}
             {activeTab === 'vocational' && (
-              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">职业学校控制台</h3>
-                <p className="text-slate-600">职业学校管理功能开发中...</p>
-              </div>
+              <DashboardLayout config={institutionConfigs['vocational']} activeMenu={activeMenu}>
+                <VocationalDashboardPage config={institutionConfigs['vocational']} />
+              </DashboardLayout>
             )}
             {activeTab === 'education-bureau' && (
-              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">教育局控制台</h3>
-                <p className="text-slate-600">教育局管理功能开发中...</p>
-              </div>
+              <DashboardLayout config={institutionConfigs['bureau']} activeMenu={activeMenu}>
+                <BureauDashboardPage config={institutionConfigs['bureau']} />
+              </DashboardLayout>
             )}
           </motion.div>
         </AnimatePresence>
