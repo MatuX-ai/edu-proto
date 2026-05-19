@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -29,13 +29,10 @@ const mockPieData = [
 ];
 
 export default function EnhancedStatsPage({ title, type = 'bar' }: StatsOverviewPageProps) {
-  const [currentTime, setCurrentTime] = useState('');
-  const [randomValues, setRandomValues] = useState<number[]>([]);
+  const [currentTime] = useState(() => new Date().toLocaleTimeString());
+  const [randomValues] = useState(() => [1, 2, 3].map(() => Math.floor(Math.random() * 100)));
 
-  useEffect(() => {
-    setCurrentTime(new Date().toLocaleTimeString());
-    setRandomValues([1, 2, 3].map(() => Math.floor(Math.random() * 100)));
-  }, []);
+  return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
