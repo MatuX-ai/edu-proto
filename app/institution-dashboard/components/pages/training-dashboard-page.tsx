@@ -2,7 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users2, Calendar, DollarSign, Monitor, BookOpen, Megaphone, BarChart3, FileText } from 'lucide-react';
+import { Calendar, Monitor, BookOpen, Megaphone, BarChart3 } from 'lucide-react';
 import type { InstitutionConfig } from '../../config/institution-config';
 
 interface TrainingDashboardPageProps {

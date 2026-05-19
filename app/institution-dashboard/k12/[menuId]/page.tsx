@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
-import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
 import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import StemCourseManagementPage from '../../components/pages/stem-course-management-page';
@@ -34,9 +33,7 @@ export default function K12MenuPage({ params }: { params: { menuId: string } }) 
 
   return (
     <DashboardLayout config={config} activeMenu={menuId}>
-      {menuId === 'dashboard' ? (
-        <DashboardContent config={config} />
-      ) : menuId === 'stem-courses' ? (
+      {menuId === 'stem-courses' ? (
         <StemCourseManagementPage />
       ) : menuId === 'student-participation' ? (
         <StudentParticipationPage />

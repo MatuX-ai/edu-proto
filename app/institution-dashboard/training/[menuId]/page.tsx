@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
 import DashboardLayout from '../../components/dashboard-layout';
-import DashboardContent from '../../components/dashboard-content';
 import DataTablePage from '../../components/pages/data-table-page';
 import EnhancedStatsPage from '../../components/pages/enhanced-stats-page';
 import LiveControlPage from '../../components/pages/live-control-page';
 import ScheduleFormPage from '../../components/pages/schedule-form-page';
 import ReportsPage from '../../components/pages/reports-page';
 import SettingsPage from '../../components/pages/settings-page';
-import TrainingDashboardPage from '../../components/pages/training-dashboard-page';
 import { institutionConfigs, InstitutionType } from '../../config/institution-config';
 
 // 生成静态参数，确保 Vercel 部署时路由正常工作
@@ -32,9 +30,7 @@ export default function TrainingMenuPage({ params }: { params: { menuId: string 
 
   return (
     <DashboardLayout config={config} activeMenu={menuId}>
-      {menuId === 'dashboard' ? (
-        <TrainingDashboardPage config={config} />
-      ) : menuItem.pageType === 'table' && mockData ? (
+      {menuItem.pageType === 'table' && mockData ? (
         <DataTablePage 
           title={mockData.title} 
           columns={mockData.columns} 

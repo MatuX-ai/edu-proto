@@ -36,9 +36,7 @@ export default function VocationalMenuPage({ params }: { params: { menuId: strin
 
   return (
     <DashboardLayout config={config} activeMenu={menuId}>
-      {menuId === 'dashboard' ? (
-        <DashboardContent config={config} />
-      ) : menuId === 'stem-auxiliary' ? (
+      {menuId === 'stem-auxiliary' ? (
         <StemAuxiliaryPage />
       ) : menuId === 'industry-coop' ? (
         <IndustryCoopPage />

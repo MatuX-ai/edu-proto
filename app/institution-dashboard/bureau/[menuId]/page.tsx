@@ -32,9 +32,7 @@ export default function BureauMenuPage({ params }: { params: { menuId: string } 
 
   return (
     <DashboardLayout config={config} activeMenu={menuId}>
-      {menuId === 'dashboard' ? (
-        <DashboardContent config={config} />
-      ) : menuId === 'stem-competitions' ? (
+      {menuId === 'stem-competitions' ? (
         <StemCompetitionsPage />
       ) : menuId === 'awards-evaluation' ? (
         <AwardsEvaluationPage />
