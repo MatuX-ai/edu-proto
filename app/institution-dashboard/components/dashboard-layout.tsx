@@ -44,48 +44,93 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
 
       {/* Main Dashboard Content */}
       <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-        {/* Sidebar - Glassmorphism */}
+        {/* Sidebar - Premium Glassmorphism Design */}
         <motion.div
           initial={{ x: -80 }}
           animate={{ x: 0 }}
-          className={`absolute w-24 bg-gradient-to-b from-${config.themeColor}-700 to-${config.themeColor}-900 h-full left-0 top-0 z-50 flex flex-col items-center py-8 shadow-2xl backdrop-blur-xl border-r border-white/10`}
+          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          className={`absolute w-24 bg-gradient-to-b from-${config.themeColor}-800 via-${config.themeColor}-900 to-${config.themeColor}-950 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl backdrop-blur-2xl border-r border-white/5`}
         >
-          <div className="mb-10">
-            <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-inner hover:bg-white/20 transition-all cursor-pointer">
-              <Home className="h-7 w-7 text-white" />
-            </div>
+          {/* Logo / Home Button */}
+          <div className="mb-8">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-14 h-14 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg hover:shadow-xl hover:border-white/20 transition-all group"
+            >
+              <Home className="h-6 w-6 text-white/90 group-hover:text-white transition-colors" />
+            </motion.button>
           </div>
 
-          <div className="flex-1 flex flex-col gap-4 w-full px-4">
-            {config.sidebarItems.map((item: SidebarItem) => {
+          {/* Navigation Items */}
+          <div className="flex-1 flex flex-col gap-3 w-full px-3 overflow-y-auto scrollbar-hide">
+            {config.sidebarItems.map((item: SidebarItem, index) => {
               const IconComponent = item.icon;
               const isActive = currentActive === item.id;
               return (
-                <button
+                <motion.button
                   key={`${config.type}-${item.id}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ scale: 1.08, x: 2 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    // 触发父组件的菜单切换
                     window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
                   }}
-                  className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 group ${
+                  className={`relative w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 group ${
                     isActive
-                      ? 'bg-white/20 shadow-lg shadow-black/10 scale-105 border border-white/20'
-                      : 'hover:bg-white/10 hover:scale-105'
+                      ? 'bg-gradient-to-br from-white/25 to-white/10 shadow-lg shadow-black/20 border border-white/20'
+                      : 'hover:bg-white/10 hover:border hover:border-white/10'
                   }`}
                 >
-                  <IconComponent className={`h-6 w-6 transition-colors ${isActive ? 'text-white' : 'text-white/60 group-hover:text-white'}`} />
+                  {/* Icon */}
+                  <IconComponent 
+                    className={`h-6 w-6 transition-all duration-300 ${
+                      isActive 
+                        ? 'text-white drop-shadow-lg' 
+                        : 'text-white/50 group-hover:text-white/80'
+                    }`} 
+                  />
+                  
+                  {/* Active Indicator */}
                   {isActive && (
-                    <div className="absolute -right-[22px] top-1/2 -translate-y-1/2 w-1.5 h-8 bg-white rounded-l-full" />
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute -right-[18px] top-1/2 -translate-y-1/2"
+                    >
+                      <div className="w-1 h-10 bg-gradient-to-b from-white via-white/90 to-white/70 rounded-full shadow-lg shadow-white/50" />
+                    </motion.div>
                   )}
-                </button>
+                  
+                  {/* Tooltip on Hover */}
+                  <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900/95 backdrop-blur-md text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl border border-white/10 z-50">
+                    {item.label}
+                  </div>
+                </motion.button>
               );
             })}
           </div>
 
-          <div className="mt-auto px-4 w-full">
-            <button className="w-full aspect-square rounded-2xl hover:bg-white/10 flex items-center justify-center transition-all border border-transparent hover:border-white/10">
-              <LogOut className="h-6 w-6 text-white/60 hover:text-white" />
-            </button>
+          {/* Bottom Actions */}
+          <div className="mt-auto px-3 w-full space-y-3 pb-2">
+            {/* Settings */}
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full aspect-square rounded-xl hover:bg-white/10 flex items-center justify-center transition-all border border-transparent hover:border-white/10 group"
+            >
+              <Settings className="h-6 w-6 text-white/50 group-hover:text-white/80 transition-colors" />
+            </motion.button>
+            
+            {/* Logout */}
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full aspect-square rounded-xl hover:bg-red-500/20 flex items-center justify-center transition-all border border-transparent hover:border-red-400/30 group"
+            >
+              <LogOut className="h-6 w-6 text-white/50 group-hover:text-red-400 transition-colors" />
+            </motion.button>
           </div>
         </motion.div>
 
