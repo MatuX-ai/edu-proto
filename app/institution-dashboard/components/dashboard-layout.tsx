@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Home, LogOut, Wifi, Battery, Search, Bell, Settings, ChevronRight
@@ -17,6 +18,16 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ config, children, activeMenu }: DashboardLayoutProps) {
   const pathname = usePathname();
   const currentActive = activeMenu || pathname?.split('/').pop() || 'dashboard';
+  const [currentTime, setCurrentTime] = useState('00:00');
+
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -26,7 +37,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
     >
       {/* Status Bar */}
       <div className="h-8 w-full bg-slate-900 flex justify-between items-center px-6 text-xs font-medium text-white">
-        <span>{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
+        <span>{currentTime}</span>
         <div className="flex items-center space-x-2">
           <Wifi className="h-3 w-3" />
           <Battery className="h-3 w-3" />
