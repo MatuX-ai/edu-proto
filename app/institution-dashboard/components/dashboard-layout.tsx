@@ -45,7 +45,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
       </div>
 
       {/* Main Dashboard Content */}
-      <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
+      <div className="w-full bg-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 32px)', minHeight: '700px' }}>
         {/* Sidebar - High Contrast Professional Design with Drawer */}
         <motion.div
           initial={{ x: -80 }}
@@ -254,31 +254,19 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
         >
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
-            <div className="flex-1 max-w-md">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="搜索功能、课程、教师..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white rounded-lg border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
-                />
-              </div>
-            </div>
+            <h2 className="text-xl font-bold text-gray-900">{config.title}</h2>
             
             <div className="flex items-center gap-4">
-              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+              <button className="relative p-2.5 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all shadow-sm">
                 <Settings className="h-5 w-5 text-gray-600" />
               </button>
-              <button className="relative p-2 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+              <button className="relative p-2.5 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-all shadow-sm">
                 <Bell className="h-5 w-5 text-gray-600" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+                <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>
-              <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-gray-200">
-                <div className={`w-8 h-8 bg-gradient-to-br from-${config.themeColor}-400 to-${config.themeColor}-600 rounded-full flex items-center justify-center`}>
-                  <span className="text-white text-xs font-bold">管</span>
-                </div>
+              <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors">
+                <div className={`w-8 h-8 bg-gradient-to-br from-${config.themeColor}-400 to-${config.themeColor}-600 rounded-full flex items-center justify-center`}>A</div>
                 <span className="text-sm font-medium text-gray-700">管理员</span>
-                <ChevronRight className="h-4 w-4 text-gray-400" />
               </div>
             </div>
           </div>

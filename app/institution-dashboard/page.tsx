@@ -67,81 +67,64 @@ export default function InstitutionDashboardPage() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Institution Navigation Tabs - Outside Device Frame */}
-      <div className="max-w-7xl mx-auto px-8 pt-8 pb-4">
-        <div className="grid grid-cols-4 gap-4">
-          {institutionTypes.map((type, index) => {
-            const Icon = type.icon;
-            const isActive = activeTab === type.key;
-            return (
-              <motion.button
-                key={type.key}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveTab(type.key as typeof activeTab)}
-                className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                  isActive 
-                    ? `${type.bgColor} ${type.borderColor} shadow-lg` 
-                    : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
-                }`}
-              >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center shadow-md shrink-0`}>
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-base font-bold text-gray-900">{type.title}</div>
-                  <div className="text-xs text-gray-500 mt-1">{type.subtitle}</div>
-                </div>
-              </motion.button>
-            );
-          })}
+    <div className="min-h-screen bg-slate-50">
+      {/* Institution Navigation Tabs - Integrated into Header */}
+      <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
+        <div className="max-w-[1280px] mx-auto px-6 py-4">
+          <div className="flex items-center justify-between gap-6">
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-md">
+                <Landmark className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-gray-900 leading-tight">机构管理驾驶舱</h1>
+                <p className="text-xs text-gray-500">Institution Management Cockpit</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
+              {institutionTypes.map((type) => {
+                const Icon = type.icon;
+                const isActive = activeTab === type.key;
+                return (
+                  <motion.button
+                    key={type.key}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setActiveTab(type.key as typeof activeTab)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all whitespace-nowrap ${
+                      isActive 
+                        ? 'bg-slate-900 text-white shadow-md' 
+                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-gray-400'}`} />
+                    <span className="text-sm font-medium">{type.title}</span>
+                  </motion.button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Dashboard Content */}
       <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab]} activeMenu={activeMenu}>
-        {/* Main Content */}
-        <div className="p-8">
-          {/* Institution Name Header */}
-          <div className="mb-8 pb-6 border-b border-gray-200">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                {(() => {
-                  const typeConfig = institutionTypes.find(t => t.key === activeTab) || institutionTypes[0];
-                  const Icon = typeConfig.icon;
-                  return <Icon className="w-6 h-6 text-white" />;
-                })()}
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
-                </h1>
-                <p className="text-sm text-gray-500 mt-1">
-                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              {activeTab === 'training' && <TrainingDashboardPage config={institutionConfigs['training']} />}
-              {activeTab === 'k12' && <K12DashboardPage config={institutionConfigs['k12']} />}
-              {activeTab === 'vocational' && <VocationalDashboardPage config={institutionConfigs['vocational']} />}
-              {activeTab === 'education-bureau' && <BureauDashboardPage config={institutionConfigs['bureau']} />}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-6"
+          >
+            {activeTab === 'training' && <TrainingDashboardPage config={institutionConfigs['training']} />}
+            {activeTab === 'k12' && <K12DashboardPage config={institutionConfigs['k12']} />}
+            {activeTab === 'vocational' && <VocationalDashboardPage config={institutionConfigs['vocational']} />}
+            {activeTab === 'education-bureau' && <BureauDashboardPage config={institutionConfigs['bureau']} />}
+          </motion.div>
+        </AnimatePresence>
       </DashboardLayout>
     </div>
   );
