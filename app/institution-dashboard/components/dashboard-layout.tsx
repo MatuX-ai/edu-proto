@@ -44,33 +44,33 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
 
       {/* Main Dashboard Content */}
       <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-        {/* Sidebar - Enhanced Professional Design */}
+        {/* Sidebar - Clean Professional Design */}
         <motion.div
           initial={{ x: -80 }}
           animate={{ x: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className={`absolute w-64 bg-gradient-to-b from-${config.themeColor}-800 via-${config.themeColor}-900 to-${config.themeColor}-950 h-full left-0 top-0 z-50 flex flex-col shadow-2xl backdrop-blur-2xl border-r border-white/10`}
+          className="absolute w-64 bg-slate-900 h-full left-0 top-0 z-50 flex flex-col shadow-2xl border-r border-slate-700"
         >
           {/* Header Section */}
-          <div className="p-6 border-b border-white/10">
+          <div className="p-5 border-b border-slate-700 bg-slate-800/50">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, backgroundColor: 'rgba(51, 65, 85, 0.8)' }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg hover:shadow-xl hover:border-white/20 transition-all group"
+              className="w-full flex items-center gap-3 px-4 py-3 bg-slate-800 rounded-xl border border-slate-600 shadow-lg hover:border-slate-500 transition-all group"
             >
-              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-md">
                 <Home className="h-5 w-5 text-white" />
               </div>
               <div className="text-left">
                 <div className="text-white font-semibold text-sm">{config.title}</div>
-                <div className="text-white/60 text-xs">返回首页</div>
+                <div className="text-slate-400 text-xs">返回首页</div>
               </div>
             </motion.button>
           </div>
 
           {/* Navigation Menu */}
           <div className="flex-1 overflow-y-auto scrollbar-hide py-4">
-            <div className="px-4 space-y-2">
+            <div className="px-3 space-y-1">
               {config.sidebarItems.map((item: SidebarItem, index) => {
                 const IconComponent = item.icon;
                 const isActive = currentActive === item.id;
@@ -85,32 +85,34 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     onClick={() => {
                       window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
                     }}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
                       isActive
-                        ? 'bg-gradient-to-r from-white/20 to-white/10 shadow-lg shadow-black/20 border border-white/20'
-                        : 'hover:bg-white/10 hover:border hover:border-white/10'
+                        ? 'bg-blue-600 shadow-lg shadow-blue-900/50'
+                        : 'hover:bg-slate-800'
                     }`}
                   >
                     {/* Icon Container */}
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
                       isActive 
-                        ? 'bg-white/20 shadow-md' 
-                        : 'bg-white/5 group-hover:bg-white/10'
+                        ? 'bg-white/20' 
+                        : 'bg-slate-700/50 group-hover:bg-slate-700'
                     }`}>
                       <IconComponent className={`h-5 w-5 transition-colors ${
-                        isActive ? 'text-white' : 'text-white/60 group-hover:text-white/90'
+                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'
                       }`} />
                     </div>
                     
                     {/* Label */}
                     <div className="flex-1 text-left">
                       <div className={`font-medium text-sm transition-colors ${
-                        isActive ? 'text-white' : 'text-white/70 group-hover:text-white/90'
+                        isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
                       }`}>
                         {item.label}
                       </div>
                       {item.pageType && (
-                        <div className="text-xs text-white/40 mt-0.5 capitalize">
+                        <div className={`text-xs mt-0.5 capitalize ${
+                          isActive ? 'text-blue-200' : 'text-slate-500'
+                        }`}>
                           {item.pageType.replace('-', ' ')}
                         </div>
                       )}
@@ -120,7 +122,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="w-1.5 h-8 bg-gradient-to-b from-white via-white/90 to-white/70 rounded-full shadow-lg shadow-white/50"
+                        className="w-1 h-8 bg-white rounded-full shadow-lg shadow-white/50"
                       />
                     )}
                   </motion.button>
@@ -130,31 +132,31 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
           </div>
 
           {/* Footer Actions */}
-          <div className="p-4 border-t border-white/10 space-y-2">
+          <div className="p-4 border-t border-slate-700 bg-slate-800/30 space-y-2">
             {/* Settings */}
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, backgroundColor: 'rgba(51, 65, 85, 0.8)' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
                 window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
               }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-all border border-transparent hover:border-white/10 group"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-all border border-transparent hover:border-slate-600 group"
             >
-              <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                <Settings className="h-5 w-5 text-white/60 group-hover:text-white/90" />
+              <div className="w-9 h-9 rounded-lg bg-slate-700/50 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                <Settings className="h-5 w-5 text-slate-400 group-hover:text-slate-200" />
               </div>
               <div className="flex-1 text-left">
-                <div className="text-white/70 group-hover:text-white/90 font-medium text-sm">系统设置</div>
+                <div className="text-slate-300 group-hover:text-white font-medium text-sm">系统设置</div>
               </div>
             </motion.button>
             
             {/* Logout */}
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, backgroundColor: 'rgba(127, 29, 29, 0.3)' }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/20 transition-all border border-transparent hover:border-red-400/30 group"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-900/30 transition-all border border-transparent hover:border-red-700/50 group"
             >
-              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-red-900/20 flex items-center justify-center group-hover:bg-red-900/40 transition-colors">
                 <LogOut className="h-5 w-5 text-red-400/70 group-hover:text-red-400" />
               </div>
               <div className="flex-1 text-left">
