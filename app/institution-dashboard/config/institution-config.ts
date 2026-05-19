@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { 
-  LayoutDashboard, Megaphone, BookOpen, Users2, DollarSign, 
-  BarChart3, Settings, Calendar, FileText, Monitor, Trophy, Handshake, 
+  Megaphone, BookOpen, Users2, DollarSign, 
+  BarChart3, Calendar, FileText, Monitor, Trophy, Handshake, 
   Target as TargetIcon, AwardIcon, Building2, Briefcase, Lightbulb, Cpu,
   MapPin, GraduationCap, TrendingUp
 } from 'lucide-react';
