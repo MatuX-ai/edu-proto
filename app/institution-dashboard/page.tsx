@@ -98,10 +98,10 @@ export default function InstitutionDashboardPage() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-100 flex flex-col items-center py-8">
       {/* Institution Navigation Tabs - Integrated into Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
-        <div className="max-w-[1280px] mx-auto px-6 py-4">
+      <div className="w-full max-w-[1280px] mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-4">
           <div className="flex items-center justify-between gap-6">
             <div className="flex items-center gap-3 shrink-0">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-md">
@@ -139,21 +139,23 @@ export default function InstitutionDashboardPage() {
         </div>
       </div>
 
-      {/* Dashboard Content */}
-      <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : (activeTab as keyof typeof institutionConfigs)]} activeMenu={activeMenu}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${activeTab}-${activeMenu}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-6"
-          >
-            {renderPageContent(activeTab, activeMenu)}
-          </motion.div>
-        </AnimatePresence>
-      </DashboardLayout>
+      {/* Dashboard Content - Simulated Device Frame */}
+      <div className="w-full max-w-[1280px]">
+        <DashboardLayout config={institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : (activeTab as keyof typeof institutionConfigs)]} activeMenu={activeMenu}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${activeTab}-${activeMenu}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-6"
+            >
+              {renderPageContent(activeTab, activeMenu)}
+            </motion.div>
+          </AnimatePresence>
+        </DashboardLayout>
+      </div>
     </div>
   );
 }
