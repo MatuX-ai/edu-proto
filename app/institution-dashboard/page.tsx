@@ -187,7 +187,7 @@ function renderPageContent(activeTab: string, activeMenu: string) {
       />;
     }
     case 'form':
-      if (activeMenu === 'schedule') return <ScheduleFormPage />;
+      if (activeMenu === 'schedule') return <ScheduleFormPage config={config} />;
       if (activeMenu === 'stem-courses') return <CourseManagementPage />;
       if (activeMenu === 'learning-community') return <LearningCommunityPage />;
       if (activeMenu === 'parent-interaction') return <ParentInteractionPage />;

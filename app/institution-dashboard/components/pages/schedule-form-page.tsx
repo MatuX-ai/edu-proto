@@ -1,104 +1,155 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, Users, BookOpen, Save } from 'lucide-react';
+import { Calendar, Clock, Users, BookOpen, Save, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { InstitutionConfig } from '../../config/institution-config';
 
-export default function ScheduleFormPage() {
+interface ScheduleFormPageProps {
+  config: InstitutionConfig;
+}
+
+export default function ScheduleFormPage({ config }: ScheduleFormPageProps) {
+  const scheduleData = config.mockData?.schedule?.rows || [];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-4xl mx-auto"
+      className="space-y-6"
     >
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">智能排课系统</h2>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-          <Save className="h-4 w-4" />
-          <span>保存排课</span>
-        </button>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">智能排课系统</h2>
+          <p className="text-sm text-gray-500 mt-1">可视化周课表管理，自动检测教室与教师冲突</p>
+        </div>
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
+            <Calendar className="h-4 w-4" />
+            <span>本周</span>
+          </button>
+          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md shadow-blue-200">
+            <Save className="h-4 w-4" />
+            <span>保存排课</span>
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Form Section */}
-        <div className="md:col-span-2 bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">课程名称</label>
-              <div className="relative">
-                <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input type="text" className="w-full pl-9 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-100 outline-none" placeholder="例如：Python 进阶班" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">授课教师</label>
-              <select className="w-full px-3 py-2 border rounded-lg outline-none">
-                <option>张老师</option>
-                <option>李老师</option>
-                <option>王老师</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">上课日期</label>
-              <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input type="date" className="w-full pl-9 pr-3 py-2 border rounded-lg outline-none" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">时间段</label>
-              <div className="relative">
-                <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <select className="w-full pl-9 pr-3 py-2 border rounded-lg outline-none">
-                  <option>09:00 - 10:30</option>
-                  <option>10:45 - 12:15</option>
-                  <option>14:00 - 15:30</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
+      {/* Stats & Conflict Detection */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">教室选择</label>
-            <div className="grid grid-cols-3 gap-3">
-              {['A-101 (多媒体)', 'B-205 (实验室)', 'C-301 (画室)'].map((room) => (
-                <button key={room} className="px-3 py-2 border rounded-lg text-sm hover:border-blue-400 hover:bg-blue-50 transition-all">
-                  {room}
-                </button>
-              ))}
-            </div>
+            <p className="text-xs text-gray-500">本周总课时</p>
+            <p className="text-xl font-bold text-gray-900 mt-1">42 节</p>
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">备注说明</label>
-            <textarea rows={3} className="w-full px-3 py-2 border rounded-lg outline-none resize-none" placeholder="请输入排课备注..." />
+          <div className="p-2 rounded-lg bg-blue-50">
+            <Clock className="h-5 w-5 text-blue-600" />
           </div>
         </div>
-
-        {/* Sidebar Info */}
-        <div className="space-y-6">
-          <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
-            <h3 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              冲突检测
-            </h3>
-            <p className="text-sm text-blue-600">当前时间段教室与教师均无冲突，可以安排。</p>
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-xs text-gray-500">教室利用率</p>
+            <p className="text-xl font-bold text-gray-900 mt-1">85%</p>
           </div>
-          
-          <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <h3 className="font-semibold text-gray-800 mb-3">本周已排课时</h3>
-            <div className="space-y-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="text-xs p-2 bg-gray-50 rounded border-l-2 border-blue-400">
-                  <div className="font-medium">周六 09:00</div>
-                  <div className="text-gray-500">Python 基础班 - A-101</div>
-                </div>
-              ))}
-            </div>
+          <div className="p-2 rounded-lg bg-green-50">
+            <CheckCircle2 className="h-5 w-5 text-green-600" />
           </div>
         </div>
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-xs text-gray-500">冲突预警</p>
+            <p className="text-xl font-bold text-orange-600 mt-1">0 个</p>
+          </div>
+          <div className="p-2 rounded-lg bg-orange-50">
+            <AlertCircle className="h-5 w-5 text-orange-600" />
+          </div>
+        </div>
+      </div>
+
+      {/* Weekly Schedule Grid (Visual Mockup) */}
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+          <h3 className="font-semibold text-gray-900">周课表视图</h3>
+          <div className="flex gap-2">
+            <button className="p-1 hover:bg-gray-100 rounded"><ChevronLeft className="h-4 w-4 text-gray-500" /></button>
+            <button className="p-1 hover:bg-gray-100 rounded"><ChevronRight className="h-4 w-4 text-gray-500" /></button>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[800px]">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-3 text-xs font-medium text-gray-500 text-left w-20">时间</th>
+                {['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(day => (
+                  <th key={day} className="px-4 py-3 text-xs font-medium text-gray-500 text-center">{day}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {['09:00', '10:30', '14:00', '15:30', '17:00'].map((time, i) => (
+                <tr key={time} className="hover:bg-gray-50/30">
+                  <td className="px-4 py-3 text-xs text-gray-500 font-mono text-center border-r border-gray-100">{time}</td>
+                  {[...Array(7)].map((_, j) => (
+                    <td key={j} className="p-1 h-16 align-top border-r border-gray-50 relative group">
+                      {/* Simulated Class Block */}
+                      {i === 0 && j === 5 && (
+                        <div className="absolute inset-1 bg-blue-100 border-l-4 border-blue-500 rounded p-1.5 cursor-pointer hover:shadow-md transition-shadow">
+                          <div className="text-[10px] font-bold text-blue-900 truncate">Python基础班</div>
+                          <div className="text-[9px] text-blue-600 truncate">张老师 | A-101</div>
+                        </div>
+                      )}
+                      {i === 2 && j === 2 && (
+                        <div className="absolute inset-1 bg-purple-100 border-l-4 border-purple-500 rounded p-1.5 cursor-pointer hover:shadow-md transition-shadow">
+                          <div className="text-[10px] font-bold text-purple-900 truncate">创意美术</div>
+                          <div className="text-[9px] text-purple-600 truncate">李老师 | B-205</div>
+                        </div>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Detailed List View */}
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-gray-100">
+          <h3 className="font-semibold text-gray-900">详细课程列表</h3>
+        </div>
+        <table className="w-full text-left">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase">课程名称</th>
+              <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase">授课教师</th>
+              <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase">上课时间</th>
+              <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase">教室</th>
+              <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase">报名情况</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {scheduleData.map((row, idx) => (
+              <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">{row[0]}</td>
+                <td className="px-6 py-4 text-sm text-gray-600">{row[1]}</td>
+                <td className="px-6 py-4 text-sm text-gray-600">{row[2]}</td>
+                <td className="px-6 py-4 text-sm text-gray-600">{row[3]}</td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-blue-500 rounded-full" 
+                        style={{ width: `${(parseInt(row[4].split('/')[0]) / parseInt(row[4].split('/')[1])) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs text-gray-500">{row[4]}</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </motion.div>
   );
