@@ -1,8 +1,11 @@
 ﻿'use client';
 
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { Briefcase, School, GraduationCap, Landmark } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import DashboardLayout from './components/dashboard-layout';
+import TrainingDashboardPage from './components/pages/training-dashboard-page';
+import { institutionConfigs } from './config/institution-config';
 
 const institutionTypes = [
   {
@@ -44,7 +47,7 @@ const institutionTypes = [
 ];
 
 export default function InstitutionDashboardPage() {
-  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<'training' | 'k12' | 'vocational' | 'education-bureau'>('training');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -69,7 +72,7 @@ export default function InstitutionDashboardPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => router.push(`/institution-dashboard/${type.key}/dashboard`)}
+                onClick={() => setActiveTab(type.key as typeof activeTab)}
                 className={`
                   ${type.bgColor} ${type.borderColor} border-2 rounded-xl p-8 
                   cursor-pointer hover:shadow-xl transition-all duration-300
@@ -102,6 +105,42 @@ export default function InstitutionDashboardPage() {
             );
           })}
         </div>
+
+        {/* Dashboard Content - 显示在卡片下方 */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-8"
+          >
+            {activeTab === 'training' && (
+              <DashboardLayout config={institutionConfigs['training']} activeMenu="dashboard">
+                <TrainingDashboardPage config={institutionConfigs['training']} />
+              </DashboardLayout>
+            )}
+            {activeTab === 'k12' && (
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
+                <h3 className="text-2xl font-bold text-slate-800 mb-4">K12 学校控制台</h3>
+                <p className="text-slate-600">K12 学校管理功能开发中...</p>
+              </div>
+            )}
+            {activeTab === 'vocational' && (
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
+                <h3 className="text-2xl font-bold text-slate-800 mb-4">职业学校控制台</h3>
+                <p className="text-slate-600">职业学校管理功能开发中...</p>
+              </div>
+            )}
+            {activeTab === 'education-bureau' && (
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
+                <h3 className="text-2xl font-bold text-slate-800 mb-4">教育局控制台</h3>
+                <p className="text-slate-600">教育局管理功能开发中...</p>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Footer Info */}
         <div className="mt-12 text-center text-slate-500 text-sm">
