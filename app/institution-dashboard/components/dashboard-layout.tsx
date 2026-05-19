@@ -110,11 +110,16 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
                     whileHover={{ scale: 1.02, x: isCollapsed ? 0 : 4 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
-                      // 如果当前在动态路由页面，使用路由跳转
-                      if (pathname.includes(`/${config.type}/`)) {
+                      console.log('Menu clicked:', item.id, 'Current pathname:', pathname, 'Config type:', config.type);
+                      // 检查当前是否在具体的菜单页面（而不是机构首页）
+                      const isInDynamicRoute = pathname !== `/institution-dashboard/${config.type}` && pathname.startsWith(`/institution-dashboard/${config.type}/`);
+                      
+                      if (isInDynamicRoute) {
+                        console.log('Using router.push to:', `/institution-dashboard/${config.type}/${item.id}`);
                         router.push(`/institution-dashboard/${config.type}/${item.id}`);
                       } else {
-                        // 否则触发事件（用于主页面）
+                        // 在机构首页，触发事件
+                        console.log('Dispatching event for menuChange');
                         window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
                       }
                     }}
@@ -190,11 +195,15 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
               whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
-                // 如果当前在动态路由页面，使用路由跳转
-                if (pathname.includes(`/${config.type}/`)) {
+                // 检查当前是否在具体的菜单页面（而不是机构首页）
+                const isInDynamicRoute = pathname !== `/institution-dashboard/${config.type}` && pathname.startsWith(`/institution-dashboard/${config.type}/`);
+                
+                if (isInDynamicRoute) {
+                  console.log('Using router.push to settings');
                   router.push(`/institution-dashboard/${config.type}/settings`);
                 } else {
-                  // 否则触发事件（用于主页面）
+                  // 在机构首页，触发事件
+                  console.log('Dispatching event for settings');
                   window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
                 }
               }}
