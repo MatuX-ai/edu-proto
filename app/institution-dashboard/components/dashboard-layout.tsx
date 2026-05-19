@@ -44,99 +44,129 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
 
       {/* Main Dashboard Content */}
       <div className="w-full bg-gradient-to-br from-blue-50 via-white to-slate-50 relative overflow-hidden" style={{ height: 'calc(100vh - 200px)', minHeight: '700px' }}>
-        {/* Sidebar - Premium Glassmorphism Design */}
+        {/* Sidebar - Enhanced Professional Design */}
         <motion.div
           initial={{ x: -80 }}
           animate={{ x: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className={`absolute w-24 bg-gradient-to-b from-${config.themeColor}-800 via-${config.themeColor}-900 to-${config.themeColor}-950 h-full left-0 top-0 z-50 flex flex-col items-center py-6 shadow-2xl backdrop-blur-2xl border-r border-white/5`}
+          className={`absolute w-64 bg-gradient-to-b from-${config.themeColor}-800 via-${config.themeColor}-900 to-${config.themeColor}-950 h-full left-0 top-0 z-50 flex flex-col shadow-2xl backdrop-blur-2xl border-r border-white/10`}
         >
-          {/* Logo / Home Button */}
-          <div className="mb-8">
+          {/* Header Section */}
+          <div className="p-6 border-b border-white/10">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-14 h-14 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg hover:shadow-xl hover:border-white/20 transition-all group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg hover:shadow-xl hover:border-white/20 transition-all group"
             >
-              <Home className="h-6 w-6 text-white/90 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <Home className="h-5 w-5 text-white" />
+              </div>
+              <div className="text-left">
+                <div className="text-white font-semibold text-sm">{config.title}</div>
+                <div className="text-white/60 text-xs">返回首页</div>
+              </div>
             </motion.button>
           </div>
 
-          {/* Navigation Items */}
-          <div className="flex-1 flex flex-col gap-3 w-full px-3 overflow-y-auto scrollbar-hide">
-            {config.sidebarItems.map((item: SidebarItem, index) => {
-              const IconComponent = item.icon;
-              const isActive = currentActive === item.id;
-              return (
-                <motion.button
-                  key={`${config.type}-${item.id}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.08, x: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
-                  }}
-                  className={`relative w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 group ${
-                    isActive
-                      ? 'bg-gradient-to-br from-white/25 to-white/10 shadow-lg shadow-black/20 border border-white/20'
-                      : 'hover:bg-white/10 hover:border hover:border-white/10'
-                  }`}
-                >
-                  {/* Icon */}
-                  <IconComponent 
-                    className={`h-6 w-6 transition-all duration-300 ${
+          {/* Navigation Menu */}
+          <div className="flex-1 overflow-y-auto scrollbar-hide py-4">
+            <div className="px-4 space-y-2">
+              {config.sidebarItems.map((item: SidebarItem, index) => {
+                const IconComponent = item.icon;
+                const isActive = currentActive === item.id;
+                return (
+                  <motion.button
+                    key={`${config.type}-${item.id}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    whileHover={{ scale: 1.02, x: 4 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: item.id, type: config.type } }));
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group ${
+                      isActive
+                        ? 'bg-gradient-to-r from-white/20 to-white/10 shadow-lg shadow-black/20 border border-white/20'
+                        : 'hover:bg-white/10 hover:border hover:border-white/10'
+                    }`}
+                  >
+                    {/* Icon Container */}
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
                       isActive 
-                        ? 'text-white drop-shadow-lg' 
-                        : 'text-white/50 group-hover:text-white/80'
-                    }`} 
-                  />
-                  
-                  {/* Active Indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute -right-[18px] top-1/2 -translate-y-1/2"
-                    >
-                      <div className="w-1 h-10 bg-gradient-to-b from-white via-white/90 to-white/70 rounded-full shadow-lg shadow-white/50" />
-                    </motion.div>
-                  )}
-                  
-                  {/* Tooltip on Hover */}
-                  <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900/95 backdrop-blur-md text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl border border-white/10 z-50">
-                    {item.label}
-                  </div>
-                </motion.button>
-              );
-            })}
+                        ? 'bg-white/20 shadow-md' 
+                        : 'bg-white/5 group-hover:bg-white/10'
+                    }`}>
+                      <IconComponent className={`h-5 w-5 transition-colors ${
+                        isActive ? 'text-white' : 'text-white/60 group-hover:text-white/90'
+                      }`} />
+                    </div>
+                    
+                    {/* Label */}
+                    <div className="flex-1 text-left">
+                      <div className={`font-medium text-sm transition-colors ${
+                        isActive ? 'text-white' : 'text-white/70 group-hover:text-white/90'
+                      }`}>
+                        {item.label}
+                      </div>
+                      {item.pageType && (
+                        <div className="text-xs text-white/40 mt-0.5 capitalize">
+                          {item.pageType.replace('-', ' ')}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Active Indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="w-1.5 h-8 bg-gradient-to-b from-white via-white/90 to-white/70 rounded-full shadow-lg shadow-white/50"
+                      />
+                    )}
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Bottom Actions */}
-          <div className="mt-auto px-3 w-full space-y-3 pb-2">
+          {/* Footer Actions */}
+          <div className="p-4 border-t border-white/10 space-y-2">
             {/* Settings */}
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full aspect-square rounded-xl hover:bg-white/10 flex items-center justify-center transition-all border border-transparent hover:border-white/10 group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('menuChange', { detail: { menuId: 'settings', type: config.type } }));
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-all border border-transparent hover:border-white/10 group"
             >
-              <Settings className="h-6 w-6 text-white/50 group-hover:text-white/80 transition-colors" />
+              <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                <Settings className="h-5 w-5 text-white/60 group-hover:text-white/90" />
+              </div>
+              <div className="flex-1 text-left">
+                <div className="text-white/70 group-hover:text-white/90 font-medium text-sm">系统设置</div>
+              </div>
             </motion.button>
             
             {/* Logout */}
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full aspect-square rounded-xl hover:bg-red-500/20 flex items-center justify-center transition-all border border-transparent hover:border-red-400/30 group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/20 transition-all border border-transparent hover:border-red-400/30 group"
             >
-              <LogOut className="h-6 w-6 text-white/50 group-hover:text-red-400 transition-colors" />
+              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+                <LogOut className="h-5 w-5 text-red-400/70 group-hover:text-red-400" />
+              </div>
+              <div className="flex-1 text-left">
+                <div className="text-red-400/70 group-hover:text-red-400 font-medium text-sm">退出登录</div>
+              </div>
             </motion.button>
           </div>
         </motion.div>
 
         {/* Main Content Area */}
         <motion.div 
-          className={`ml-24 h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50`}
+          className={`ml-64 h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
