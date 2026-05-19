@@ -52,7 +52,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
           animate={{ x: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className={`absolute h-full left-0 top-0 z-50 flex flex-col shadow-2xl border-r border-gray-800 transition-all duration-300 ease-in-out ${
-            isCollapsed ? 'w-20 bg-gray-950' : 'w-64 bg-gray-950'
+            isCollapsed ? 'w-16 bg-gray-950' : 'w-56 bg-gray-950'
           }`}
         >
           {/* Collapse Toggle Button */}
@@ -255,7 +255,7 @@ export default function DashboardLayout({ config, children, activeMenu }: Dashbo
         {/* Main Content Area */}
         <motion.div 
           className={`h-full overflow-y-auto p-8 bg-gradient-to-br from-${config.themeColor}-50/40 via-white to-slate-50/50 transition-all duration-300 ${
-            isCollapsed ? 'ml-20' : 'ml-64'
+            isCollapsed ? 'ml-16' : 'ml-56'
           }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
