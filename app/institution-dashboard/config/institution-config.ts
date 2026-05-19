@@ -43,7 +43,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'blue',
     sidebarItems: [
-      { id: 'dashboard', label: '仪表盘', icon: LayoutDashboard, pageType: 'dashboard' },
       { id: 'leads', label: '招生线索', icon: Users2, pageType: 'table' },
       { id: 'schedule', label: '智能排课', icon: Calendar, pageType: 'form' },
       { id: 'settlement', label: '课时结算', icon: DollarSign, pageType: 'stats' },
@@ -113,7 +112,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/stem-collaboration.jpg',
     themeColor: 'green',
     sidebarItems: [
-      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-courses', label: '课程管理', icon: BookOpen, pageType: 'form' },
       { id: 'student-participation', label: '学生参与', icon: Users2, pageType: 'stats' },
       { id: 'portfolio-gallery', label: '作品库', icon: FileText, pageType: 'table' },
@@ -221,7 +219,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/tech-stack.jpg',
     themeColor: 'orange',
     sidebarItems: [
-      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-auxiliary', label: 'STEM辅修中心', icon: Cpu, pageType: 'skill-wallet' },
       { id: 'industry-coop', label: '产学研合作', icon: Briefcase, pageType: 'kanban' },
       { id: 'incubator', label: '创业孵化器', icon: Lightbulb, pageType: 'form' },
@@ -271,7 +268,6 @@ export const institutionConfigs: Record<InstitutionType, InstitutionConfig> = {
     bannerImage: '/images/hero-bg.jpg',
     themeColor: 'indigo',
     sidebarItems: [
-      { id: 'dashboard', label: '控制台', icon: LayoutDashboard },
       { id: 'stem-competitions', label: 'STEM 赛事管理', icon: Trophy, pageType: 'kanban' },
       { id: 'awards-evaluation', label: '评选表彰系统', icon: AwardIcon, pageType: 'form' },
       { id: 'quality-monitoring', label: '质量监测大屏', icon: TrendingUp, pageType: 'stats' },
