@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Settings, Bell, Shield, Palette, Globe, Save } from 'lucide-react';
+import { Settings, Bell, Shield, Palette, Save } from 'lucide-react';
 
 export default function SettingsPage() {
   return (

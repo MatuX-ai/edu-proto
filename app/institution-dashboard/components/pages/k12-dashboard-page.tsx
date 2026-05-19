@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Users2, Trophy, Monitor } from 'lucide-react';
 import type { InstitutionConfig } from '../../config/institution-config';
 
 interface K12DashboardPageProps {

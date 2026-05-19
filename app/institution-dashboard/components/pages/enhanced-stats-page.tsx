@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -28,7 +29,13 @@ const mockPieData = [
 ];
 
 export default function EnhancedStatsPage({ title, type = 'bar' }: StatsOverviewPageProps) {
-  return (
+  const [currentTime, setCurrentTime] = useState('');
+  const [randomValues, setRandomValues] = useState<number[]>([]);
+
+  useEffect(() => {
+    setCurrentTime(new Date().toLocaleTimeString());
+    setRandomValues([1, 2, 3].map(() => Math.floor(Math.random() * 100)));
+  }, []);
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -86,12 +93,12 @@ export default function EnhancedStatsPage({ title, type = 'bar' }: StatsOverview
                   <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-blue-500' : i === 2 ? 'bg-green-500' : 'bg-orange-500'}`} />
                   <span className="text-sm text-gray-600">指标项目 {i}</span>
                 </div>
-                <span className="font-bold text-gray-800">{Math.floor(Math.random() * 100)}%</span>
+                <span className="font-bold text-gray-800">{randomValues[i - 1] || 0}%</span>
               </div>
             ))}
           </div>
           <div className="mt-6 pt-6 border-t border-gray-100">
-            <p className="text-sm text-gray-500">数据更新于: {new Date().toLocaleTimeString()}</p>
+            <p className="text-sm text-gray-500">数据更新于: {currentTime}</p>
           </div>
         </div>
       </div>
