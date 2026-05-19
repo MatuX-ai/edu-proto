@@ -110,15 +110,26 @@ export default function InstitutionDashboardPage() {
         </div>
 
         {/* Dashboard Content - 显示在卡片下方 */}
-        <div>
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           {/* Institution Name Header */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">
-              {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
-            </p>
+          <div className="mb-6 pb-4 border-b border-gray-200">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                {(() => {
+                  const typeConfig = institutionTypes.find(t => t.key === activeTab) || institutionTypes[0];
+                  const Icon = typeConfig.icon;
+                  return <Icon className="w-5 h-5 text-white" />;
+                })()}
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">
+                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].title}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  {institutionConfigs[activeTab === 'education-bureau' ? 'bureau' : activeTab].subtitle}
+                </p>
+              </div>
+            </div>
           </div>
           
           <AnimatePresence mode="wait">
